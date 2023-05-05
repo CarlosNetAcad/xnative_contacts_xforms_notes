@@ -10,7 +10,11 @@ using Google.Android.Material.Snackbar;
 
 namespace _00_Activities
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(
+        Label           = "@string/app_name",
+        Theme           = "@style/AppTheme.NoActionBar",
+        MainLauncher    = false
+    )]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
