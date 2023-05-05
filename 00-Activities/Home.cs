@@ -61,8 +61,8 @@ namespace _00_Activities
 			_txtViewUI			= FindViewById<TextView>( Resource.Id.lblResultUI );
 
 			//->Trigering events
-			_btnIncrementClickUI.Click	+= incrementingClicks;
-			_btnResetCountUI.Click		+= resetingCount;
+			_btnIncrementClickUI.Click	+= IncrementingClicks;
+			_btnResetCountUI.Click		+= ResetingCount;
 
         }
 
@@ -71,11 +71,11 @@ namespace _00_Activities
 		 * @param {object} sender
 		 * @param {EventArgs} e
 		 */
-		private void incrementingClicks( object sender, EventArgs e)
+		private void IncrementingClicks( object sender, EventArgs e)
 		{
 			_clicksAccumulator++;
 
-			printingResult();
+			PrintingResult();
 		}
 
         /**
@@ -83,18 +83,18 @@ namespace _00_Activities
 		 * @param {object} sender
 		 * @param {EventArgs} e
 		 */
-        private void resetingCount( object sender, EventArgs e)
+        private void ResetingCount( object sender, EventArgs e)
 		{
 			_clicksAccumulator = 0;
 
-			printingResult();
+			PrintingResult();
 		}
 
         /**
 		 * @method print the current _clicksAccumulator value 
 		 * in the textView UI element
 		 */
-        private void printingResult()
+        private void PrintingResult()
 		{
             _txtViewUI.Text = $"Clicks count = {_clicksAccumulator}";
         }
