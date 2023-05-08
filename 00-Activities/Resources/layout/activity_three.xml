@@ -19,7 +19,7 @@
          android:layout_height="wrap_content"/>
 
     <Button
-       android:id="@+id/btn_goHome_ui"
+       android:id="@+id/btn_goHomeThree_ui"
        android:text="Go Home"
        android:textAllCaps="false"
        android:textSize="20sp"

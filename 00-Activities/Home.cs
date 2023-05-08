@@ -20,7 +20,7 @@ namespace _00_Activities
 	public class Home : Activity
 	{
 
-		public const int ACTIVITY_ID = 0;
+		public const int ACTIVITY_ID = 100;
 		/**
 		* Text View Element 
 		*/
@@ -70,7 +70,7 @@ namespace _00_Activities
             _txtViewUI			 = FindViewById<TextView>( Resource.Id.lblResultUI );
 			_txtMessageUI        = FindViewById<EditText>( Resource.Id.txt_message_ui );
 
-			//->Trigering events
+			//->Events binding
 			_btnIncrementClickUI.Click	+= IncrementingClicks;
 			_btnResetCountUI.Click		+= ResetingCount;
 			_btnGoSecondViewUI.Click    += GoSecondViewHandler;
@@ -139,7 +139,7 @@ namespace _00_Activities
             navigate.PutExtra("message", _txtMessageUI.Text);
             navigate.PutExtra("clickCounts", _clicksAccumulator);
 
-            StartActivity(navigate);
+            StartActivityForResult(navigate, Home.ACTIVITY_ID);
         }
 
         /**
@@ -154,17 +154,21 @@ namespace _00_Activities
             navigate.PutExtra("message", _txtMessageUI.Text);
             navigate.PutExtra("clickCounts", _clicksAccumulator);
 
-            StartActivity(navigate);
+            StartActivityForResult(navigate, Home.ACTIVITY_ID);
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             //base.OnActivityResult(requestCode, resultCode, data);
 
+            Console.WriteLine( requestCode );
+
             if (requestCode == Home.ACTIVITY_ID &&
                 resultCode == Result.Ok)
             {
-                _txtViewUI.Text = data.GetStringExtra("message");
+				string message = ( string ) data.GetStringExtra("message");
+
+                _txtViewUI.Text = message;
             }
         }
     }

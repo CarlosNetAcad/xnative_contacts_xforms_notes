@@ -13,7 +13,9 @@ using Android.Widget;
 
 namespace _00_Activities
 {
-	[Activity (Label = "ActivityThree")]			
+	[Activity (
+        Label = "ActivityThree"
+    )]			
 	public class ActivityThree : Activity
 	{
         EditText _editText = null;
@@ -25,19 +27,24 @@ namespace _00_Activities
             //->Layout to render
             SetContentView(Resource.Layout.activity_three);
 
-            //result
-            var btnGoHomeUI = FindViewById<Button>( Resource.Id.btn_goHome_ui );
-            _editText = FindViewById<EditText>(Resource.Id.txt_response_ui);
+            //-> UI binding
+            var btnGoHomeUI = FindViewById<Button>( Resource.Id.btn_goHomeThree_ui );
+            _editText       = FindViewById<EditText>(Resource.Id.txt_response_ui);
 
+            //-> Events binding
             btnGoHomeUI.Click += GoHomeHandler;
         }
 
         private void GoHomeHandler(object sender, EventArgs e)
         {
             var message = _editText.Text + " Activity 3";
+
             var intent = new Intent();
+
             intent.PutExtra("message", message);
+
             SetResult(Result.Ok, intent);
+
             Finish();
         }
     }
