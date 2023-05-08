@@ -43,5 +43,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+       android:id="@+id/btn_goActivityTwo_ui"
+       android:text="Go Activity 2"
+       android:textAllCaps="false"
+       android:textSize="20sp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_goActivityThree_ui"
+        android:text="Go Activity 3"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
 

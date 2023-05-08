@@ -19,6 +19,8 @@ namespace _00_Activities
 	)]			
 	public class Home : Activity
 	{
+
+		public const int ACTIVITY_ID = 0;
 		/**
 		* Text View Element 
 		*/
@@ -29,7 +31,9 @@ namespace _00_Activities
 		**/ 
 		Button _btnIncrementClickUI,
 			_btnResetCountUI,
-			_btnGoSecondViewUI;
+			_btnGoSecondViewUI,
+			_btnGoActivityTwoUI,
+			_btnGoActivityThreeUI;
 
         /**
 		 * EditText Elements 
@@ -58,16 +62,20 @@ namespace _00_Activities
             SetContentView(Resource.Layout.home);
 
 			//->Binding UI elements
-            _btnIncrementClickUI= FindViewById<Button>( Resource.Id.btnIncrementClickUI );
-			_btnResetCountUI	= FindViewById<Button>( Resource.Id.btn_reset_UI );
-			_btnGoSecondViewUI  = FindViewById<Button>( Resource.Id.btn_goSecondActivity_ui );
-			_txtViewUI			= FindViewById<TextView>( Resource.Id.lblResultUI );
-			_txtMessageUI       = FindViewById<EditText>( Resource.Id.txt_message_ui );
+            _btnIncrementClickUI = FindViewById<Button>( Resource.Id.btnIncrementClickUI );
+			_btnResetCountUI	 = FindViewById<Button>( Resource.Id.btn_reset_UI );
+			_btnGoSecondViewUI   = FindViewById<Button>( Resource.Id.btn_goSecondActivity_ui );
+            _btnGoActivityTwoUI  = FindViewById<Button>( Resource.Id.btn_goActivityTwo_ui);
+            _btnGoActivityThreeUI= FindViewById<Button>( Resource.Id.btn_goActivityThree_ui);
+            _txtViewUI			 = FindViewById<TextView>( Resource.Id.lblResultUI );
+			_txtMessageUI        = FindViewById<EditText>( Resource.Id.txt_message_ui );
 
 			//->Trigering events
 			_btnIncrementClickUI.Click	+= IncrementingClicks;
 			_btnResetCountUI.Click		+= ResetingCount;
 			_btnGoSecondViewUI.Click    += GoSecondViewHandler;
+			_btnGoActivityTwoUI.Click   += GoActivityTwoHandler;
+            _btnGoActivityThreeUI.Click += GoActivityThreeHandler;
 
         }
 
@@ -117,6 +125,47 @@ namespace _00_Activities
 			navigate.PutExtra("clickCounts", _clicksAccumulator);
 
 			StartActivity( navigate );
+        }
+
+        /**
+        * @method to navigate to the second view
+        * @param {object} sender
+        * @param {EventArgs} e
+        */
+        private void GoActivityTwoHandler(object sender, EventArgs e)
+        {
+            var navigate = new Intent(this, typeof( ActivityTwo	));
+
+            navigate.PutExtra("message", _txtMessageUI.Text);
+            navigate.PutExtra("clickCounts", _clicksAccumulator);
+
+            StartActivity(navigate);
+        }
+
+        /**
+        * @method to navigate to the second view
+        * @param {object} sender
+        * @param {EventArgs} e
+        */
+        private void GoActivityThreeHandler(object sender, EventArgs e)
+        {
+            var navigate = new Intent(this, typeof( ActivityThree ));
+
+            navigate.PutExtra("message", _txtMessageUI.Text);
+            navigate.PutExtra("clickCounts", _clicksAccumulator);
+
+            StartActivity(navigate);
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            //base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == Home.ACTIVITY_ID &&
+                resultCode == Result.Ok)
+            {
+                _txtViewUI.Text = data.GetStringExtra("message");
+            }
         }
     }
 }
