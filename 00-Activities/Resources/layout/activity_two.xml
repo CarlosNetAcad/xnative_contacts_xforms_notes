@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+     <TextView
+        android:id="@+id/lblResultUI"
+        android:textSize="20sp"
+        android:text="Activity two"
+        android:textAllCaps="false"
+        android:layout_width    = "match_parent"
+        android:layout_height   = "wrap_content"/>
+
+    <EditText
+         android:id="@+id/txt_response_ui"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"/>
+
+    <Button
+       android:id="@+id/btn_goHome_ui"
+       android:text="Go Home"
+       android:textAllCaps="false"
+       android:textSize="20sp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
