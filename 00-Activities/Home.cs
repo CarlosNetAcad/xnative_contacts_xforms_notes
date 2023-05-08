@@ -25,20 +25,22 @@ namespace _00_Activities
 		TextView _txtViewUI;
 
 		/**
-		 * Button Element 
+		 * Button Elements 
 		**/ 
-		Button _btnIncrementClickUI;
+		Button _btnIncrementClickUI,
+			_btnResetCountUI,
+			_btnGoSecondViewUI;
 
         /**
-		 * Button Element 
+		 * EditText Elements 
 		**/
-        Button _btnResetCountUI;
+        EditText _txtMessageUI;
 
-		/** 
+        /** 
 		 * @summary To acummulate number of clicks
 		 * @attribute int   
 		*/
-		private int _clicksAccumulator = 0;
+        private int _clicksAccumulator = 0;
 
 
 		/**
@@ -57,12 +59,15 @@ namespace _00_Activities
 
 			//->Binding UI elements
             _btnIncrementClickUI= FindViewById<Button>( Resource.Id.btnIncrementClickUI );
-			_btnResetCountUI	= FindViewById<Button>( Resource.Id.btn_reset_UI);
+			_btnResetCountUI	= FindViewById<Button>( Resource.Id.btn_reset_UI );
+			_btnGoSecondViewUI  = FindViewById<Button>( Resource.Id.btn_goSecondActivity_ui );
 			_txtViewUI			= FindViewById<TextView>( Resource.Id.lblResultUI );
+			_txtMessageUI       = FindViewById<EditText>( Resource.Id.txt_message_ui );
 
 			//->Trigering events
 			_btnIncrementClickUI.Click	+= IncrementingClicks;
 			_btnResetCountUI.Click		+= ResetingCount;
+			_btnGoSecondViewUI.Click    += GoSecondViewHandler;
 
         }
 
@@ -98,6 +103,21 @@ namespace _00_Activities
 		{
             _txtViewUI.Text = $"Clicks count = {_clicksAccumulator}";
         }
-	}
+
+        /**
+		 * @method to navigate to the second view
+		 * @param {object} sender
+		 * @param {EventArgs} e
+		 */
+        private void GoSecondViewHandler(object sender, EventArgs e)
+        {
+			var navigate = new Intent( this, typeof(NavigationByExplicitIntent) );
+
+			navigate.PutExtra("message", _txtMessageUI.Text );
+			navigate.PutExtra("clickCounts", _clicksAccumulator);
+
+			StartActivity( navigate );
+        }
+    }
 }
 
