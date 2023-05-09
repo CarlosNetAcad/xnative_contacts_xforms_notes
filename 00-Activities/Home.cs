@@ -15,7 +15,7 @@ namespace _00_Activities
 {
 	[Activity (
 		Label			= "Home",
-		MainLauncher	= true
+		MainLauncher	= false
 	)]			
 	public class Home : Activity
 	{
