@@ -66,11 +66,11 @@
     <Compile Include="NavigationByExplicitIntent.cs" />
     <Compile Include="ActivityTwo.cs" />
     <Compile Include="ActivityThree.cs" />
-    <Compile Include="src\Contact\App\Presenter\ContactDetailActivity.cs" />
-    <Compile Include="src\Contact\App\Presenter\ContactActivity.cs" />
-    <Compile Include="src\Contact\App\Presenter\ViewHolder\ContactVH.cs" />
-    <Compile Include="src\Contact\Domain\Service\ContactAdapter.cs" />
-    <Compile Include="src\Contact\Domain\Entity\Contact.cs" />
+    <Compile Include="src\Contacts\App\Presenter\ContactDetailActivity.cs" />
+    <Compile Include="src\Contacts\App\Presenter\ContactActivity.cs" />
+    <Compile Include="src\Contacts\App\Presenter\ViewHolder\ContactVH.cs" />
+    <Compile Include="src\Contacts\Domain\Service\ContactAdapter.cs" />
+    <Compile Include="src\Contacts\Domain\Entity\Contact.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -123,7 +123,7 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ContactListComponent.xml">
+    <AndroidResource Include="Resources\layout\contact_list_component.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -139,14 +139,14 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="src\" />
-    <Folder Include="src\Contact\" />
-    <Folder Include="src\Contact\App\" />
-    <Folder Include="src\Contact\Domain\" />
-    <Folder Include="src\Contact\Infraestructure\" />
-    <Folder Include="src\Contact\App\useCases\" />
-    <Folder Include="src\Contact\App\Presenter\ViewHolder\" />
-    <Folder Include="src\Contact\Domain\Service\" />
-    <Folder Include="src\Contact\Domain\Entity\" />
+    <Folder Include="src\Contacts\" />
+    <Folder Include="src\Contacts\App\" />
+    <Folder Include="src\Contacts\Domain\" />
+    <Folder Include="src\Contacts\Infraestructure\" />
+    <Folder Include="src\Contacts\App\useCases\" />
+    <Folder Include="src\Contacts\App\Presenter\ViewHolder\" />
+    <Folder Include="src\Contacts\Domain\Service\" />
+    <Folder Include="src\Contacts\Domain\Entity\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.1" />
