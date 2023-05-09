@@ -4,5 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+    <EditText
+        android:id="@+id/txt_contactFullName_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+     <EditText
+        android:id="@+id/txt_contactPhone_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
 
