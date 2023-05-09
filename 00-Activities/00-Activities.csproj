@@ -123,7 +123,7 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\contact_list_component.xml">
+    <AndroidResource Include="Resources\layout\_contact_index_list.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

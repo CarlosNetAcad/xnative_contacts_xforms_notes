@@ -31,7 +31,7 @@ namespace _00_Activities.src.Contacts.Domain.Service
 
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType )
 		{
-			View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.contact_list_component, parent, false );
+			View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout._contact_index_list, parent, false );
 
 			var holder    = new ContactVH( itemView );
 
