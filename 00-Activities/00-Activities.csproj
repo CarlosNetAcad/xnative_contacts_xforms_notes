@@ -66,6 +66,11 @@
     <Compile Include="NavigationByExplicitIntent.cs" />
     <Compile Include="ActivityTwo.cs" />
     <Compile Include="ActivityThree.cs" />
+    <Compile Include="src\Contact\App\Presenter\ContactDetailActivity.cs" />
+    <Compile Include="src\Contact\App\Presenter\ContactActivity.cs" />
+    <Compile Include="src\Contact\App\Presenter\ViewHolder\ContactVH.cs" />
+    <Compile Include="src\Contact\Domain\Service\ContactAdapter.cs" />
+    <Compile Include="src\Contact\Domain\Entity\Contact.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -118,15 +123,39 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ContactListComponent.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\contact_detail_layout.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\contact_index_layout.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="src\" />
+    <Folder Include="src\Contact\" />
+    <Folder Include="src\Contact\App\" />
+    <Folder Include="src\Contact\Domain\" />
+    <Folder Include="src\Contact\Infraestructure\" />
+    <Folder Include="src\Contact\App\useCases\" />
+    <Folder Include="src\Contact\App\Presenter\ViewHolder\" />
+    <Folder Include="src\Contact\Domain\Service\" />
+    <Folder Include="src\Contact\Domain\Entity\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.8.0.1" />
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.7.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView">
+      <Version>1.3.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
