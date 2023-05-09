@@ -14,7 +14,7 @@ using AndroidX.RecyclerView.Widget;
 using _00_Activities.src.Contacts.Domain.Entity;
 using _00_Activities.src.Contacts.Domain.Service;
 
-namespace _00_Activities
+namespace _00_Activities.src.Contacts.App.Presenter
 {
 	[Activity (
 		Label = "ContactsActivity",
