@@ -10,6 +10,8 @@ namespace _00_Activities.src.Contacts.Domain.Service
 {
 	public class ContactAdapter : RecyclerView.Adapter
 	{
+		public Action<int> ItemClicked;
+
 		private IList<Contact> _contactList = new List<Contact>();
 
 		public ContactAdapter( IList<Contact> contacts)
@@ -29,15 +31,22 @@ namespace _00_Activities.src.Contacts.Domain.Service
 			contactViewHolder.Phone.Text = currentContact.Phone;
         }
 
-		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType )
+        private void OnItemClicked( int position )
+        {
+            if (ItemClicked != null)
+            {
+                ItemClicked(position);
+            }
+        }
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType )
 		{
 			View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout._contact_index_list, parent, false );
 
-			var holder    = new ContactVH( itemView );
+			var holder    = new ContactVH( itemView.RootView, OnItemClicked  );
 
 			return holder;
 		}
-
     }
 }
 
