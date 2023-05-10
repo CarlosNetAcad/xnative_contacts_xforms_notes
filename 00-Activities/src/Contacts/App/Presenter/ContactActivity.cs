@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -16,9 +17,11 @@ using AndroidX.AppCompat.Widget;
 using SQLite;
 using static Android.Icu.Text.Transliterator;
 using Environment = System.Environment;
+using Google.Android.Material.FloatingActionButton;
+
 using _00_Activities.src.Contacts.Domain.Entity;
 using _00_Activities.src.Contacts.Domain.Service;
-using Google.Android.Material.FloatingActionButton;
+using _00_Activities.src.Contacts.Domain.Repository;
 
 namespace _00_Activities.src.Contacts.App.Presenter
 {
@@ -43,48 +46,19 @@ namespace _00_Activities.src.Contacts.App.Presenter
 			//-> Render the layout
 			SetContentView( Resource.Layout.contact_index_layout );
 
-            //-> Database connection
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var path = Path.Combine(folderPath, DatabaseName);
-
-            _database = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite);
-
-            var tables = new Type[]
-            {
-                typeof(Contact),
-                typeof(Profile)
-            };
-
-            _database.CreateTables( CreateFlags.None, tables );
-            //database.CreateTables(CreateFlags.None, typeof(Contact), typeof(Profile));
-
             var btnAddContact = FindViewById<FloatingActionButton>( Resource.Id.fab_contacts);
             var recyclerView  = FindViewById<RecyclerView>( Resource.Id.contacts_recyclerView );
-            //var toolBar       = FindViewById<Toolbar>( Resource.Id.toolbar );
             var layoutManager = new LinearLayoutManager(this);
 
 			recyclerView.AddItemDecoration( new DividerItemDecoration( this, DividerItemDecoration.Horizontal ) );
 			recyclerView.SetLayoutManager( layoutManager );
 
-            //SetSupportActionBar(toolBar);
+            _contacts               = Connection.Instance.Table<Contact>().ToList();
 
-            _contacts = _database.Table<Contact>().ToList();
+            _adapter			    = new ContactAdapter( _contacts );
 
-            /*
-            _contacts = new List<Contact>(); 
-            for (var i = 0; i < 100; i++)
-            {
-                _contacts.Add(new Contact
-                {
-                    FullName = $"Carlos Test {i}",
-                    Phone    = $"982-233-33-3{i}"
-                });
-            }
-            */
-
-            _adapter			 = new ContactAdapter( _contacts );
-
-			_adapter.ItemClicked += OnItemClicked;
+			_adapter.ItemClicked   += OnItemClicked;
+            btnAddContact.Click += GoToDetailActivity;
 
 			recyclerView.SetAdapter( _adapter );
 
@@ -94,7 +68,7 @@ namespace _00_Activities.src.Contacts.App.Presenter
         {
             base.OnResume();
 
-            _contacts = _database.Table<Contact>().ToList();
+            _contacts = Connection.Instance.Table<Contact>().ToList();
 
             if(_contacts != null)
                 _adapter.SetData( _contacts );
@@ -131,6 +105,12 @@ namespace _00_Activities.src.Contacts.App.Presenter
             intent.PutExtra("contact_json", json);
 
             StartActivity(intent);
+        }
+
+        private void GoToDetailActivity( object sender, EventArgs e )
+        {
+            var intent = new Intent( this, typeof( ContactDetailActivity ) );
+            StartActivity( intent );
         }
     }
 }

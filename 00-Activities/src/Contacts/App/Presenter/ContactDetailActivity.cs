@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using SQLite;
 using AndroidX.AppCompat.App;
 using _00_Activities.src.Contacts.Domain.Entity;
+using _00_Activities.src.Contacts.Domain.Repository;
 
 
 namespace _00_Activities
@@ -58,7 +59,10 @@ namespace _00_Activities
 			string contactJSON = Intent?.GetStringExtra( "contact_json" );
 
             if (contactJSON != null)
+            {
                 _contact = JsonConvert.DeserializeObject<Contact>(contactJSON);
+                exist = true;
+            }
             else
                 _contact = new Contact();
 
@@ -97,11 +101,21 @@ namespace _00_Activities
         {
             try
             {
-                _database.Insert(new Contact()
+                if( exist )
                 {
-                    FullName = _txtContactFullNameUI.Text,
-                    Phone = _txtContactPhoneUI.Text,
-                });
+                    _contact.FullName   = _txtContactFullNameUI.Text;
+                    _contact.Phone      = _txtContactPhoneUI.Text;
+
+                    Connection.Instance.Update( _contact );
+                }
+                else
+                {
+                    Connection.Instance.Insert(new Contact()
+                    {
+                        FullName        = _txtContactFullNameUI.Text,
+                        Phone           = _txtContactPhoneUI.Text,
+                    });
+                }
 
                 OnBackPressed();
             }
@@ -122,36 +136,10 @@ namespace _00_Activities
         {
             try
             {
-                _database.Insert(new Contact()
-                {
-                    FullName = _txtContactFullNameUI.Text,
-                    Phone = _txtContactPhoneUI.Text,
-                });
+                if (!exist)
+                    throw new Exception("Cannot find the contact to delete it.");
 
-                OnBackPressed();
-            }
-            catch (SQLite.SQLiteException sql)
-            {
-                if (sql.Message.Contains("UNIQUE"))
-                {
-                    Toast.MakeText(this, "Contact Phone already exists", ToastLength.Long).Show();
-                }
-            }
-            catch (Exception ex)
-            {
-                Toast.MakeText(this, $"Ops something went wrong {ex.Message}", ToastLength.Long).Show();
-            }
-        }
-
-        private void UpdateContact()
-        {
-            try
-            {
-                _database.Insert(new Contact()
-                {
-                    FullName = _txtContactFullNameUI.Text,
-                    Phone = _txtContactPhoneUI.Text,
-                });
+                Connection.Instance.Delete( _contact );
 
                 OnBackPressed();
             }
