@@ -20,8 +20,8 @@ namespace _00_Activities
 	)]			
 	public class ContactDetailActivity : Activity
 	{
-		private EditText txtContactFullNameUI,
-						txtContactPhoneUI;
+		private EditText _txtContactFullNameUI,
+						_txtContactPhoneUI;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -29,15 +29,15 @@ namespace _00_Activities
 
 			SetContentView( Resource.Layout.contact_detail_layout );
 
-			txtContactFullNameUI  = FindViewById<EditText>( Resource.Id.txt_contactFullName_ui );
-			txtContactPhoneUI     = FindViewById<EditText>( Resource.Id.txt_contactPhone_ui );
+			_txtContactFullNameUI  = FindViewById<EditText>( Resource.Id.txt_contactFullName_ui );
+			_txtContactPhoneUI     = FindViewById<EditText>( Resource.Id.txt_contactPhone_ui );
 
-			string contactJSON = Intent.GetStringExtra( "contact_json" );
-			Console.WriteLine( contactJSON );
-			//var contact        =JsonConvert.DeserializeObject<Contact>( contactJSON );
+			string contactJSON = Intent?.GetStringExtra( "contact_json" );
+			
+			var contact        =JsonConvert.DeserializeObject<Contact>( contactJSON );
 
-			//txtContactFullNameUI.Text = contact?.FullName.ToString();
-			//txtContactPhoneUI.Text    = contact?.Phone.ToString();
+			_txtContactFullNameUI.Text = contact?.FullName.ToString();
+			_txtContactPhoneUI.Text    = contact?.Phone.ToString();
 		}
 	}
 }

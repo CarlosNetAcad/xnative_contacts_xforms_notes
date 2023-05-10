@@ -69,7 +69,7 @@ namespace _00_Activities.src.Contacts.App.Presenter
             var json			= JsonConvert.SerializeObject( contactSelected );
             var intent			= new Intent( this, typeof( ContactDetailActivity ) );
 
-            Intent.PutExtra( "contact_json", json );
+            intent.PutExtra( "contact_json", json );
 
 			StartActivity( intent );
         }
