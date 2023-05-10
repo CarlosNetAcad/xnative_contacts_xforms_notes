@@ -31,14 +31,6 @@ namespace _00_Activities.src.Contacts.Domain.Service
 			contactViewHolder.Phone.Text = currentContact.Phone;
         }
 
-        private void OnItemClicked( int position )
-        {
-            if (ItemClicked != null)
-            {
-                ItemClicked(position);
-            }
-        }
-
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType )
 		{
 			View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout._contact_index_list, parent, false );
@@ -47,6 +39,22 @@ namespace _00_Activities.src.Contacts.Domain.Service
 
 			return holder;
 		}
+
+		public void SetData( IList<Contact> contacts )
+		{
+
+			_contactList = contacts;
+
+			this.NotifyDataSetChanged();
+		}
+
+		private void OnItemClicked(int position)
+        {
+            if (ItemClicked != null)
+            {
+                ItemClicked(position);
+            }
+        }
     }
 }
 
