@@ -73,6 +73,24 @@ namespace _00_Activities.src.Contacts.App.Presenter
 
 			StartActivity( intent );
         }
-	}
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.action_new)
+            {
+                var intent = new Intent(this, typeof(ContactDetailActivity));
+                StartActivity(intent);
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+    }
 }
 
