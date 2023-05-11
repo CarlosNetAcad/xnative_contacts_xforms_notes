@@ -116,10 +116,18 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Resources\" />
+        <Folder Include="src\" />
+        <Folder Include="src\Contacts\" />
+        <Folder Include="src\Contacts\Views\" />
+        <Folder Include="src\Contacts\Models\" />
+        <Folder Include="src\Contacts\Controllers\" />
+        <Folder Include="src\Utils\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
+        <InterfaceDefinition Include="src\Contacts\Views\Contact.xib" />
+        <InterfaceDefinition Include="src\Contacts\Views\ThirdOne.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -132,6 +140,14 @@
         <Compile Include="ViewController.cs" />
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="src\Contacts\Views\Contact.cs" />
+        <Compile Include="src\Contacts\Views\Contact.designer.cs">
+          <DependentUpon>Contact.cs</DependentUpon>
+        </Compile>
+        <Compile Include="src\Contacts\Views\ThirdOne.cs" />
+        <Compile Include="src\Contacts\Views\ThirdOne.designer.cs">
+          <DependentUpon>ThirdOne.cs</DependentUpon>
         </Compile>
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
