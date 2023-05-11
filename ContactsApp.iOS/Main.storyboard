@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Say Hello!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAe-oH-yKR">
+                                <rect key="frame" x="36" y="113" width="330" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="50C-64-dqz"/>
+                                    <constraint firstAttribute="width" constant="330" id="l1m-9c-Wgx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qx-bh-c3f">
+                                <rect key="frame" x="152" y="492" width="110" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="LRG-6t-n9X"/>
+                                    <constraint firstAttribute="width" constant="110" id="gcz-tO-aTA"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Click Me!"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pPI-Ot-Shg">
+                                <rect key="frame" x="42" y="431" width="330" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="330" id="X00-of-15V"/>
+                                    <constraint firstAttribute="height" constant="54" id="wfa-UI-y49"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Qx-bh-c3f" firstAttribute="top" secondItem="pPI-Ot-Shg" secondAttribute="bottom" constant="20" id="SfU-aI-Hbg"/>
+                            <constraint firstItem="0Qx-bh-c3f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="132" id="WWC-p8-rTk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MAe-oH-yKR" secondAttribute="trailing" constant="16" id="XXF-Il-EgF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pPI-Ot-Shg" secondAttribute="trailing" constant="16" id="ZSE-7M-419"/>
+                            <constraint firstItem="MAe-oH-yKR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="gBd-a3-cVQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0Qx-bh-c3f" secondAttribute="trailing" constant="132" id="k1l-4u-gWo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnShowMessage" destination="0Qx-bh-c3f" id="Ogr-2B-fdL"/>
+                        <outlet property="lblText" destination="MAe-oH-yKR" id="bKy-XF-96x"/>
+                        <outlet property="txtMessage" destination="pPI-Ot-Shg" id="8wl-mg-5Sc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1.4492753623188408" y="0.0"/>
+        </scene>
+    </scenes>
+</document>

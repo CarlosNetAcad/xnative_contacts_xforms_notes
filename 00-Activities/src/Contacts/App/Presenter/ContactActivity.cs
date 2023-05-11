@@ -46,10 +46,11 @@ namespace _00_Activities.src.Contacts.App.Presenter
 			//-> Render the layout
 			SetContentView( Resource.Layout.contact_index_layout );
 
+            //-> Binding UI elements
             var btnAddContact = FindViewById<FloatingActionButton>( Resource.Id.fab_contacts);
             var recyclerView  = FindViewById<RecyclerView>( Resource.Id.contacts_recyclerView );
-            var layoutManager = new LinearLayoutManager(this);
 
+            var layoutManager = new LinearLayoutManager(this);
 			recyclerView.AddItemDecoration( new DividerItemDecoration( this, DividerItemDecoration.Horizontal ) );
 			recyclerView.SetLayoutManager( layoutManager );
 
@@ -58,6 +59,7 @@ namespace _00_Activities.src.Contacts.App.Presenter
             _adapter			    = new ContactAdapter( _contacts );
 
 			_adapter.ItemClicked   += OnItemClicked;
+
             btnAddContact.Click += GoToDetailActivity;
 
 			recyclerView.SetAdapter( _adapter );
@@ -96,11 +98,8 @@ namespace _00_Activities.src.Contacts.App.Presenter
         {
             var contactSelected = _contacts[position];
 
-            Console.WriteLine($"Contact FN: {contactSelected?.FullName}");
-            Console.WriteLine($"Contact PH: {contactSelected?.Phone}");
-
-            var json = JsonConvert.SerializeObject(contactSelected);
-            var intent = new Intent(this, typeof(ContactDetailActivity));
+            var json    = JsonConvert.SerializeObject(contactSelected);
+            var intent  = new Intent(this, typeof(ContactDetailActivity));
 
             intent.PutExtra("contact_json", json);
 
