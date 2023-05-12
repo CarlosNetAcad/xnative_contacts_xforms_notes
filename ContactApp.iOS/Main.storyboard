@@ -92,9 +92,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="K7h-t8-LG2">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="List" id="AQt-L4-HZt">
+                                    <barButtonItem key="rightBarButtonItem" title="Add" id="FkM-Xh-thM"/>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rLe-Cg-qaC">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="94" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rLe-Cg-qaC" id="EXd-4q-7bG">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
@@ -107,14 +116,34 @@
                             <outlet property="delegate" destination="GY9-Fs-huj" id="rAa-Mx-FH3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="IQY-eR-0qH"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bbiAddContact" destination="FkM-Xh-thM" id="11s-cP-fS8"/>
                         <outlet property="dgvContacts" destination="Gus-Up-NFu" id="vTG-J5-WjI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ras-1X-PxY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="271" y="-39"/>
+        </scene>
+        <!--Contact ShowVC-->
+        <scene sceneID="q7O-qf-Ne0">
+            <objects>
+                <viewController storyboardIdentifier="ContactShowVC" id="wE1-Ar-Kqt" customClass="ContactShowVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wno-xo-3EX"/>
+                        <viewControllerLayoutGuide type="bottom" id="e1F-CC-jyI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pOh-Al-ZcX">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hqo-oJ-vEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1705" y="-28"/>
         </scene>
         <!--Contact DetailVC-->
         <scene sceneID="rAg-E9-yep">
@@ -140,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84G-A2-ekf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="839" y="653"/>
+            <point key="canvasLocation" x="982" y="-39"/>
         </scene>
     </scenes>
     <resources>

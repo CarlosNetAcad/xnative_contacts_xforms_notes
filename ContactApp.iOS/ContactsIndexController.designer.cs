@@ -13,6 +13,9 @@ namespace ContactApp.iOS
 	partial class ContactsIndexController
 	{
 		[Outlet]
+		UIKit.UIBarButtonItem bbiAddContact { get; set; }
+
+		[Outlet]
 		UIKit.UITableView dgvContacts { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -20,6 +23,11 @@ namespace ContactApp.iOS
 			if (dgvContacts != null) {
 				dgvContacts.Dispose ();
 				dgvContacts = null;
+			}
+
+			if (bbiAddContact != null) {
+				bbiAddContact.Dispose ();
+				bbiAddContact = null;
 			}
 		}
 	}

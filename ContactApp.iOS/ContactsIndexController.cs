@@ -32,6 +32,14 @@ namespace ContactApp.iOS
 
             dgvContacts.Source = new ContactDS( contactList,this );
 
+            bbiAddContact.Clicked += RenderContactDetailVC;
+
+        }
+
+        private void RenderContactDetailVC(object sender, EventArgs e)
+        {
+            var contactDetailVC = (ContactDetailVC) Storyboard.InstantiateViewController("ContactDetailVC");
+            this.NavigationController.PushViewController( contactDetailVC, true );
         }
     }
 }
