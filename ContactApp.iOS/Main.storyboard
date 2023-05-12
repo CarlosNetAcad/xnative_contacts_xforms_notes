@@ -108,6 +108,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="IQY-eR-0qH"/>
+                    <connections>
+                        <outlet property="dgvContacts" destination="Gus-Up-NFu" id="vTG-J5-WjI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ras-1X-PxY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

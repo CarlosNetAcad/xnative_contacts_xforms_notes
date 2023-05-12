@@ -12,9 +12,15 @@ namespace ContactApp.iOS
 	[Register ("ContactsIndexController")]
 	partial class ContactsIndexController
 	{
+		[Outlet]
+		UIKit.UITableView dgvContacts { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (dgvContacts != null) {
+				dgvContacts.Dispose ();
+				dgvContacts = null;
+			}
 		}
 	}
 }
