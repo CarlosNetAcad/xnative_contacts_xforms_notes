@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "00-Activities", "00-Activit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.iOS", "ContactApp.iOS\ContactApp.iOS.csproj", "{D7CC3E9D-D01D-400E-8854-7CA104DBFF60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Core", "ContactApp.Core\ContactApp.Core.csproj", "{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{D7CC3E9D-D01D-400E-8854-7CA104DBFF60}.Debug|iPhone.Build.0 = Debug|iPhone
 		{D7CC3E9D-D01D-400E-8854-7CA104DBFF60}.Release|iPhone.ActiveCfg = Release|iPhone
 		{D7CC3E9D-D01D-400E-8854-7CA104DBFF60}.Release|iPhone.Build.0 = Release|iPhone
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
