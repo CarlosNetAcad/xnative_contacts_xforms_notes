@@ -13,6 +13,9 @@ namespace ContactApp.iOS
 	partial class ContactDetailVC
 	{
 		[Outlet]
+		UIKit.UIButton btnDeleteContactUI { get; set; }
+
+		[Outlet]
 		UIKit.UIButton btnSaveContactUI { get; set; }
 
 		[Outlet]
@@ -23,6 +26,11 @@ namespace ContactApp.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnSaveContactUI != null) {
+				btnSaveContactUI.Dispose ();
+				btnSaveContactUI = null;
+			}
+
 			if (txtContactFullNameUI != null) {
 				txtContactFullNameUI.Dispose ();
 				txtContactFullNameUI = null;
@@ -33,9 +41,9 @@ namespace ContactApp.iOS
 				txtContactPhoneUI = null;
 			}
 
-			if (btnSaveContactUI != null) {
-				btnSaveContactUI.Dispose ();
-				btnSaveContactUI = null;
+			if (btnDeleteContactUI != null) {
+				btnDeleteContactUI.Dispose ();
+				btnDeleteContactUI = null;
 			}
 		}
 	}

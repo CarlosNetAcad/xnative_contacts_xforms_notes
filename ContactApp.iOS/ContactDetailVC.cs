@@ -23,12 +23,13 @@ namespace ContactApp.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            btnSaveContactUI.TouchUpInside += UpsertContactHandler;
 
             txtContactFullNameUI.Text   = Contact?.FullName;
             txtContactPhoneUI.Text      = Contact?.Phone;
 
-            //Console.WriteLine($"Contact Exist: {ExistContact}");
+            Console.WriteLine($"Contact Exist: {ExistContact}");
+            btnSaveContactUI.TouchUpInside += UpsertContactHandler;
+            btnDeleteContactUI.TouchUpInside += DeleteContactHandler;
         }
 
         private void CloseModalHandler( object sender, EventArgs e )
@@ -40,18 +41,18 @@ namespace ContactApp.iOS
         {
             try
             {
-                int saved;
+                int affected;
 
                 if (ExistContact == true)
                 {
                     Contact.FullName    = txtContactFullNameUI.Text;
                     Contact.Phone       = txtContactPhoneUI.Text;
 
-                    saved = Connection.Instance.Update( Contact );
+                    affected = Connection.Instance.Update( Contact );
                 }
                 else
                 {
-                    saved = Connection.Instance.Insert(new Contact
+                    affected = Connection.Instance.Insert(new Contact
                     {
                         FullName = txtContactFullNameUI.Text,
                         Phone = txtContactPhoneUI.Text
@@ -59,7 +60,7 @@ namespace ContactApp.iOS
                 }
                    
 
-                Console.WriteLine($"Row affected: {saved}");
+                Console.WriteLine($"Row affected: {affected}");
 
                 /*var alertVC = UIAlertController.Create("Success","Contact saved correctly!",UIAlertControllerStyle.Alert);
                 alertVC.DismissModalViewController(true);
@@ -67,7 +68,7 @@ namespace ContactApp.iOS
 
                 GoBackNavigation();
             }
-            catch ( SQLite.SQLiteException sqlE )
+            catch ( SQLite.SQLiteException sqlEx )
             {
             }
             catch( Exception ex )
@@ -85,5 +86,23 @@ namespace ContactApp.iOS
             NavigationController.PopViewController(true);
         }
 
+        private void DeleteContactHandler(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ExistContact == true)
+                {
+                   int affected =  Connection.Instance.Delete(Contact);
+
+                    Console.WriteLine($"Row affected: {affected}");
+                }
+            }
+            catch (SQLite.SQLiteException sqlEx)
+            {
+                Console.WriteLine( sqlEx.Message );
+            }
+
+            GoBackNavigation();
+        }
     }
 }
