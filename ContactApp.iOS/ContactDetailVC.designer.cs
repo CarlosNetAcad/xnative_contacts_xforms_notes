@@ -12,9 +12,31 @@ namespace ContactApp.iOS
 	[Register ("ContactDetailVC")]
 	partial class ContactDetailVC
 	{
+		[Outlet]
+		UIKit.UIButton btnSaveContactUI { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txtContactFullNameUI { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txtContactPhoneUI { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (txtContactFullNameUI != null) {
+				txtContactFullNameUI.Dispose ();
+				txtContactFullNameUI = null;
+			}
+
+			if (txtContactPhoneUI != null) {
+				txtContactPhoneUI.Dispose ();
+				txtContactPhoneUI = null;
+			}
+
+			if (btnSaveContactUI != null) {
+				btnSaveContactUI.Dispose ();
+				btnSaveContactUI = null;
+			}
 		}
 	}
 }

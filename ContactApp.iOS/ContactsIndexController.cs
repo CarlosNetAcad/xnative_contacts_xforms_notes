@@ -38,7 +38,12 @@ namespace ContactApp.iOS
 
         private void RenderContactDetailVC(object sender, EventArgs e)
         {
+
             var contactDetailVC = (ContactDetailVC) Storyboard.InstantiateViewController("ContactDetailVC");
+            contactDetailVC.Contact = new Contact {
+                /*FullName    = null,
+                Phone       = null  */
+            };
             this.NavigationController.PushViewController( contactDetailVC, true );
         }
     }

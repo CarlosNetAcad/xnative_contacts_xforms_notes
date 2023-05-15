@@ -146,10 +146,6 @@
           <DependentUpon>ContactsIndexController.cs</DependentUpon>
         </Compile>
         <Compile Include="DataSources\ContactDS.cs" />
-        <Compile Include="ContactShowVC.cs" />
-        <Compile Include="ContactShowVC.designer.cs">
-          <DependentUpon>ContactShowVC.cs</DependentUpon>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ContactApp.Core\ContactApp.Core.csproj">

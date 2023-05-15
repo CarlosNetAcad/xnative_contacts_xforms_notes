@@ -4,13 +4,32 @@ using System;
 
 using Foundation;
 using UIKit;
+using ContactApp.Core.Entities;
 
 namespace ContactApp.iOS
 {
 	public partial class ContactDetailVC : UIViewController
 	{
-		public ContactDetailVC (IntPtr handle) : base (handle)
-		{
+        public Contact Contact { get; set; }
+
+        public ContactDetailVC (IntPtr handle) : base (handle)
+		{         
 		}
-	}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            btnSaveContactUI.TouchUpInside += CloseModal;
+
+            txtContactFullNameUI.Text   = Contact?.FullName;
+            txtContactPhoneUI.Text      = Contact?.Phone;
+        }
+
+        private void CloseModal( object sender, EventArgs e )
+        {
+            //DismissModalViewController(true);
+
+            NavigationController.PopViewController( true );
+        }
+    }
 }
