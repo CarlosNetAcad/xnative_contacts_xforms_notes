@@ -46,6 +46,7 @@ namespace ContactApp.iOS
                 /*FullName    = null,
                 Phone       = null  */
             };
+            
             this.NavigationController.PushViewController( contactDetailVC, true );
         }
 

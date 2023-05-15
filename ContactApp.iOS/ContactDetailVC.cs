@@ -14,6 +14,8 @@ namespace ContactApp.iOS
 	{
         public Contact Contact { get; set; }
 
+        public bool ExistContact { get; set; } = false;
+
         public ContactDetailVC (IntPtr handle) : base (handle)
 		{         
 		}
@@ -21,10 +23,12 @@ namespace ContactApp.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            btnSaveContactUI.TouchUpInside += saveContactHandler;
+            btnSaveContactUI.TouchUpInside += UpsertContactHandler;
 
             txtContactFullNameUI.Text   = Contact?.FullName;
             txtContactPhoneUI.Text      = Contact?.Phone;
+
+            //Console.WriteLine($"Contact Exist: {ExistContact}");
         }
 
         private void CloseModalHandler( object sender, EventArgs e )
@@ -32,20 +36,30 @@ namespace ContactApp.iOS
             GoBackNavigation();
         }
 
-        private void saveContactHandler( object sender, EventArgs e)
+        private void UpsertContactHandler( object sender, EventArgs e)
         {
             try
             {
-                //var contacts = Connection.Instance.Table<Contact>().
-                var contact = new Contact
+                int saved;
+
+                if (ExistContact == true)
                 {
-                    FullName= txtContactFullNameUI.Text,
-                    Phone   = txtContactPhoneUI.Text
-                };
+                    Contact.FullName    = txtContactFullNameUI.Text;
+                    Contact.Phone       = txtContactPhoneUI.Text;
 
-                int saved = Connection.Instance.Insert( contact );
+                    saved = Connection.Instance.Update( Contact );
+                }
+                else
+                {
+                    saved = Connection.Instance.Insert(new Contact
+                    {
+                        FullName = txtContactFullNameUI.Text,
+                        Phone = txtContactPhoneUI.Text
+                    });
+                }
+                   
 
-                Console.WriteLine($"Rows affected {saved}");
+                Console.WriteLine($"Row affected: {saved}");
 
                 /*var alertVC = UIAlertController.Create("Success","Contact saved correctly!",UIAlertControllerStyle.Alert);
                 alertVC.DismissModalViewController(true);

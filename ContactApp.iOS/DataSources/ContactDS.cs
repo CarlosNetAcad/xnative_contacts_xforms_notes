@@ -39,6 +39,18 @@ namespace ContactApp.iOS.DataSources
         {
             return _contactsList.Count;
         }
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            //base.RowSelected(tableView, indexPath);
+
+            var contact = _contactsList[ indexPath.Row ];
+
+            var contactDetailVC     = (ContactDetailVC)_parent.Storyboard.InstantiateViewController( "ContactDetailVC" ) ;
+            contactDetailVC.Contact = contact;
+            contactDetailVC.ExistContact = true;
+            _parent.NavigationController.PushViewController( contactDetailVC, true );
+        }
     }
 }
 
