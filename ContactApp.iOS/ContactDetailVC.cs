@@ -5,6 +5,8 @@ using System;
 using Foundation;
 using UIKit;
 using ContactApp.Core.Entities;
+using ContactApp.Core.Repository.SQLite;
+using ContactApp.iOS.DataSources;
 
 namespace ContactApp.iOS
 {
@@ -19,17 +21,55 @@ namespace ContactApp.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            btnSaveContactUI.TouchUpInside += CloseModal;
+            btnSaveContactUI.TouchUpInside += saveContactHandler;
 
             txtContactFullNameUI.Text   = Contact?.FullName;
             txtContactPhoneUI.Text      = Contact?.Phone;
         }
 
-        private void CloseModal( object sender, EventArgs e )
+        private void CloseModalHandler( object sender, EventArgs e )
         {
+            GoBackNavigation();
+        }
+
+        private void saveContactHandler( object sender, EventArgs e)
+        {
+            try
+            {
+                //var contacts = Connection.Instance.Table<Contact>().
+                var contact = new Contact
+                {
+                    FullName= txtContactFullNameUI.Text,
+                    Phone   = txtContactPhoneUI.Text
+                };
+
+                int saved = Connection.Instance.Insert( contact );
+
+                Console.WriteLine($"Rows affected {saved}");
+
+                /*var alertVC = UIAlertController.Create("Success","Contact saved correctly!",UIAlertControllerStyle.Alert);
+                alertVC.DismissModalViewController(true);
+                PresentViewController(alertVC,true, null);*/
+
+                GoBackNavigation();
+            }
+            catch ( SQLite.SQLiteException sqlE )
+            {
+            }
+            catch( Exception ex )
+            {
+
+            }
+        }
+
+        private void GoBackNavigation()
+        {
+            //-> Close modal navigation
             //DismissModalViewController(true);
 
-            NavigationController.PopViewController( true );
+            //-> Close stack navigation
+            NavigationController.PopViewController(true);
         }
+
     }
 }

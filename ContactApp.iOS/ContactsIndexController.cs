@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using ContactApp.Core.Entities;
+using ContactApp.Core.Repository.SQLite;
 using ContactApp.iOS.DataSources;
 
 namespace ContactApp.iOS
 {
 	public partial class ContactsIndexController : UITableViewController
 	{
+        private List<Contact> contactList;
+
 		public ContactsIndexController (IntPtr handle) : base (handle)
 		{
 		}
@@ -19,18 +22,17 @@ namespace ContactApp.iOS
         {
             base.ViewDidLoad();
 
-            var contactList = new List<Contact>();
+            //var contactList = new List<Contact>();
 
-            /*for( var i = 0; i < 100; i++ )
+            try
             {
-                contactList.Add(new Contact
-                {
-                    FullName    = $"Contact Factory {i}",
-                    Phone       = $"Phone factory {i}"
-                });
-            }*/
-
-            dgvContacts.Source = new ContactDS( contactList,this );
+                contactList         = Connection.Instance.Table<Contact>().ToList();
+                dgvContacts.Source  = new ContactDS(contactList, this);
+            }
+            catch (Exception Ex)
+            {
+                
+            }
 
             bbiAddContact.Clicked += RenderContactDetailVC;
 
@@ -45,6 +47,28 @@ namespace ContactApp.iOS
                 Phone       = null  */
             };
             this.NavigationController.PushViewController( contactDetailVC, true );
+        }
+
+        private void ReloadContactsTable()
+        {
+            try
+            {
+                contactList = Connection.Instance.Table<Contact>().ToList();
+                dgvContacts.Source = new ContactDS(contactList, this);
+                dgvContacts.ReloadData();
+            }
+            catch (Exception Ex)
+            {
+
+            }
+          
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            ReloadContactsTable();
         }
     }
 }
