@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Contact">
+            <connections>
+                <outlet property="btnContactAction" destination="aOS-Yt-HQS" id="BJn-d9-noR"/>
+                <outlet property="txtContactName" destination="hkl-mq-d5M" id="2fh-zW-nms"/>
+                <outlet property="txtContactPhone" destination="oDa-oo-K87" id="yCb-qb-Nml"/>
+                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkl-mq-d5M">
+                    <rect key="frame" x="16" y="60" width="361" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDa-oo-K87">
+                    <rect key="frame" x="122.66666666666669" y="195" width="148" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOS-Yt-HQS">
+                    <rect key="frame" x="166" y="264" width="61" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Save"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hkl-mq-d5M" firstAttribute="top" secondItem="2" secondAttribute="top" constant="60" id="H1r-EF-njK"/>
+                <constraint firstItem="aOS-Yt-HQS" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="NOU-j9-eKc"/>
+                <constraint firstItem="hkl-mq-d5M" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="16" id="O5W-uF-VEt"/>
+                <constraint firstItem="oDa-oo-K87" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="cx2-Nv-ZAq"/>
+                <constraint firstItem="hkl-mq-d5M" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="tRP-F8-zjK"/>
+                <constraint firstAttribute="trailing" secondItem="hkl-mq-d5M" secondAttribute="trailing" constant="16" id="uSO-15-9DC"/>
+            </constraints>
+            <point key="canvasLocation" x="8.3969465648854964" y="-53.521126760563384"/>
+        </view>
+    </objects>
+</document>

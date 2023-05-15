@@ -3,12 +3,12 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-        <ProjectGuid>{84603D2F-B6B7-4997-8260-3A8A8BAD1A9E}</ProjectGuid>
+        <ProjectGuid>{D7CC3E9D-D01D-400E-8854-7CA104DBFF60}</ProjectGuid>
         <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
         <OutputType>Exe</OutputType>
-        <RootNamespace>ContactsApp.iOS</RootNamespace>
-        <AssemblyName>ContactsApp.iOS</AssemblyName>
+        <RootNamespace>ContactApp.iOS</RootNamespace>
+        <AssemblyName>ContactApp.iOS</AssemblyName>
         <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
         <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
         <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
@@ -69,6 +69,9 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+      <PackageReference Include="sqlite-net-pcl">
+        <Version>1.8.116</Version>
+      </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -116,18 +119,11 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Resources\" />
-        <Folder Include="src\" />
-        <Folder Include="src\Contacts\" />
-        <Folder Include="src\Contacts\Views\" />
-        <Folder Include="src\Contacts\Models\" />
-        <Folder Include="src\Contacts\Controllers\" />
-        <Folder Include="src\Utils\" />
+        <Folder Include="DataSources\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
-        <InterfaceDefinition Include="src\Contacts\Views\Contact.xib" />
-        <InterfaceDefinition Include="src\Contacts\Views\ThirdOne.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -141,14 +137,24 @@
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="src\Contacts\Views\Contact.cs" />
-        <Compile Include="src\Contacts\Views\Contact.designer.cs">
-          <DependentUpon>Contact.cs</DependentUpon>
+        <Compile Include="ContactDetailVC.cs" />
+        <Compile Include="ContactDetailVC.designer.cs">
+          <DependentUpon>ContactDetailVC.cs</DependentUpon>
         </Compile>
-        <Compile Include="src\Contacts\Views\ThirdOne.cs" />
-        <Compile Include="src\Contacts\Views\ThirdOne.designer.cs">
-          <DependentUpon>ThirdOne.cs</DependentUpon>
+        <Compile Include="ContactsIndexController.cs" />
+        <Compile Include="ContactsIndexController.designer.cs">
+          <DependentUpon>ContactsIndexController.cs</DependentUpon>
         </Compile>
+        <Compile Include="DataSources\ContactDS.cs" />
+        <Compile Include="ContactShowVC.cs" />
+        <Compile Include="ContactShowVC.designer.cs">
+          <DependentUpon>ContactShowVC.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ContactApp.Core\ContactApp.Core.csproj">
+        <Name>ContactApp.Core</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
