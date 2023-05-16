@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using NotesForms;
 namespace NotesForms
 {
     public partial class App : Application
@@ -10,7 +10,7 @@ namespace NotesForms
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MenuTabbedPage();
         }
 
         protected override void OnStart ()

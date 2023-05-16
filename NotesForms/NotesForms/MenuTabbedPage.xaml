@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:NotesForms.Pages"
+    xmlns:root="clr-namespace:NotesForms"
+    x:Class="NotesForms.MenuTabbedPage"
+>
+    <pages:NotesPage/>
+    <pages:ProfilesPage/>
+
+    <NavigationPage Title="Main">
+        <x:Arguments>
+            <root:MainPage/>
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>
