@@ -27,7 +27,7 @@ namespace _00_Activities.src.Contacts.App.Presenter
 {
 	[Activity (
 		Label        = "ContactsActivity",
-		MainLauncher = true
+		MainLauncher = false
     )]			
 	public class ContactsActivity : AppCompatActivity
 	{
