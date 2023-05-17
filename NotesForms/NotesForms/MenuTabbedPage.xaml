@@ -6,12 +6,28 @@
     xmlns:root="clr-namespace:NotesForms"
     x:Class="NotesForms.MenuTabbedPage"
 >
-    <pages:NotesPage/>
-    <pages:ProfilesPage/>
+    <NavigationPage Title="Notes">
+        <x:Arguments>
+            <pages:NotesPage/>
+        </x:Arguments>
+    </NavigationPage>
 
+    <NavigationPage Title="Profile">
+        <x:Arguments>
+            <pages:ProfilesPage/>
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="Settings">
+        <x:Arguments>
+            <pages:SettingsPage />
+        </x:Arguments>
+    </NavigationPage>
+    <!--
     <NavigationPage Title="Main">
         <x:Arguments>
             <root:MainPage/>
         </x:Arguments>
     </NavigationPage>
+    -->
 </TabbedPage>

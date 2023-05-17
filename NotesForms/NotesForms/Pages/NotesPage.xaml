@@ -6,9 +6,59 @@
     ios:Page.UseSafeArea="True"
     x:Class="NotesForms.Pages.NotesPage"
     Title="Notes"
+    x:Name="this"
 >
-    <ContentPage.Content>
-        <Label Text="Notes"/>
-    </ContentPage.Content>
+  <ListView
+        ItemTapped="listView_ItemTapped"
+        ItemSelected="listView_ItemSelected"
+        IsPullToRefreshEnabled="True"
+        Refreshing="listView_Refreshing"
+        HasUnevenRows="True"
+        x:Name="listView">
+
+        <ListView.ItemTemplate>
+
+            <DataTemplate>
+                
+                <TextCell
+                    Text="{Binding Title}"
+                    Detail="{Binding CreateAt}">
+
+                    <TextCell.ContextActions>
+
+                        <MenuItem
+                            CommandParameter="{Binding .}"
+                            Text="Show"
+                            Clicked="MenuItem_Clicked" />
+                        <MenuItem
+                            CommandParameter="{Binding .}"
+                            IsDestructive="True"
+                            Text="Delete"
+                            Clicked="MenuItem_Clicked_1" />
+
+                    </TextCell.ContextActions>
+
+                </TextCell>
+                
+                <!--
+                <ImageCell
+                    Text="{Binding Title}"
+                    Detail="{Binding CreateAt}"
+                    ImageSource="https://images.immediate.co.uk/production/volatile/sites/3/2023/03/goku-dragon-ball-guru-824x490-11b2006.jpg" />
+                -->
+                <!--
+                <ViewCell>
+
+                    <views:MyCellView />
+                    
+
+                </ViewCell>
+                -->
+            </DataTemplate>
+
+        </ListView.ItemTemplate>
+
+    </ListView>
+
 </ContentPage>
 
