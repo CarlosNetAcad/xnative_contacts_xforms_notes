@@ -8,6 +8,25 @@ namespace NotesForms
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// The <c>isLoggedIn</c> is ised to know the logged user state and the data persist on the app
+        /// ID string
+        /// </summary>
+        /// <param  name="isLoggedIn"></param>
+        void SetIsLogin(bool isLoggedIn)
+        {
+            if (this.Properties.ContainsKey("isLoggedIn"))
+            {
+                this.Properties["isLoggedIn"] = isLoggedIn;
+            }
+            else
+            {
+                this.Properties.Add("isLoggedIn", isLoggedIn);
+            }
+        }
+        /// <summary>
+        /// ID string generated is "M:NotesForms.App.#ctor"
+        /// </summary>
         public App ()
         {
             InitializeComponent();
@@ -15,6 +34,10 @@ namespace NotesForms
             MainPage = new NavigationPage( new SignInPage() );
         }
 
+        /// <summary>
+        /// App lifecycle, used when the app starts.
+        /// ID string generated is "M:NotesForms.App.OnStart"
+        /// </summary>
         protected override void OnStart ()
         {
             if (this.Properties.ContainsKey("isLoggedIn"))
@@ -30,24 +53,20 @@ namespace NotesForms
                 SignOut();
         }
 
+        /// <summary>
+        /// App lifecycle, used when the app go to the background.
+        /// ID string generated is "M:NotesForms.App.OnSleep"
+        /// </summary>
         protected override void OnSleep ()
         {
         }
 
-        protected override void OnResume ()
+        /// <summary>
+        /// App lifecycle, used when the app return from de background
+        /// ID string generated is "M:NotesForms.App.OnResume"
+        /// </summary>
+        protected override void OnResume()
         {
-        }
-
-        void SetIsLogin( bool isLoggedIn)
-        {
-            if (this.Properties.ContainsKey("isLoggedIn"))
-            {
-                this.Properties["isLoggedIn"] = isLoggedIn;
-            }
-            else
-            {
-                this.Properties.Add("isLoggedIn", isLoggedIn);
-            }
         }
 
         public void SetUsername(string username)

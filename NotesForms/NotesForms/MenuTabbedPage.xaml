@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:NotesForms.Pages"
     xmlns:root="clr-namespace:NotesForms"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+android:TabbedPage.ToolbarPlacement="Bottom"
     x:Class="NotesForms.MenuTabbedPage"
 >
     <NavigationPage Title="Notes">
