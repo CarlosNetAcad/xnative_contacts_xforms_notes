@@ -10,7 +10,11 @@ namespace NotesForms.Droid
     [Activity(
         Theme = "@style/MainTheme",
         MainLauncher = false,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize
+        ConfigurationChanges = ConfigChanges.ScreenSize |
+            ConfigChanges.Orientation |
+            ConfigChanges.UiMode      |
+            ConfigChanges.ScreenLayout|
+            ConfigChanges.SmallestScreenSize
     )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

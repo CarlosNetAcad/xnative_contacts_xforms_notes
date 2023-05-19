@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using ContactApp.Core.Entities;
 using Xamarin.Forms;
@@ -19,7 +20,7 @@ namespace NotesForms.Pages
 
 			Notes = new ObservableCollection<Note>();
 
-			for( int i = 0; i < 20; i++)
+			for( int i = 0; i < 2; i++)
 			{
                 Notes.Add(new Note
                 {
@@ -29,7 +30,11 @@ namespace NotesForms.Pages
                 });
             }
 
-			listView.ItemsSource = Notes;
+            listView.ItemsSource = Notes;
+
+            MessagingCenter.Instance.Subscribe<NoteDetailPage, Note>( this, "store", StoreNote );
+            MessagingCenter.Instance.Subscribe<NoteDetailPage, Note>( this, "delete", DeleteNote );
+            MessagingCenter.Instance.Subscribe<NoteDetailPage, Note>( this, "update", UpdateNote );
 		}
 
         async void listView_Refreshing(System.Object sender, System.EventArgs e)
@@ -75,7 +80,34 @@ namespace NotesForms.Pages
             Console.WriteLine($"item selected: {item.Title}");
 
             //this.DisplayAlert("Selected", $"Item: {item.Title}", "OK");
+        }
 
+        void CreateNoteHandler( System.Object sender, System.EventArgs e )
+        {
+            //var noteDetailPage = new NoteDetailPage( null );
+
+            Navigation.PushAsync( new NoteDetailPage( null ) );
+        }
+
+        void StoreNote( NoteDetailPage sender, Note note)
+        {
+            Notes.Add( note );
+        }
+
+        void DeleteNote( NoteDetailPage sender,Note note)
+        {
+            Notes.Remove( note );
+        }
+
+        void UpdateNote( NoteDetailPage sender, Note note)
+        {
+            var currentNote = Notes.FirstOrDefault( i => i.ID == note.ID );
+
+            if( currentNote != null)
+            {
+                currentNote.Title   = note.Title.ToString();
+                currentNote.Content = note.Content.ToString();
+            }
         }
     }
 }

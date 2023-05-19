@@ -6,8 +6,11 @@
     ios:Page.UseSafeArea="True"
     x:Class="NotesForms.Pages.NotesPage"
     Title="Notes"
-    x:Name="this"
->
+    x:Name="this">
+  <ContentPage.ToolbarItems>
+      <ToolbarItem Text="New" Clicked="CreateNoteHandler"/>
+  </ContentPage.ToolbarItems>
+
   <ListView
         ItemTapped="listView_ItemTapped"
         ItemSelected="listView_ItemSelected"
