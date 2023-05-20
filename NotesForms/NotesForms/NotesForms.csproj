@@ -14,4 +14,15 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\" />
+    <None Remove="ContentViews\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="ContentViews\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />
+  </ItemGroup>
 </Project>

@@ -69,7 +69,8 @@ namespace ContactApp.Core.Repository.SQLite
                 var tables = new Type[]
                 {
                     typeof(Contact),
-                    typeof(Profile)
+                    typeof(Profile),
+                    typeof(Note)
                 };
 
                 dataBase.CreateTables(CreateFlags.None, tables);

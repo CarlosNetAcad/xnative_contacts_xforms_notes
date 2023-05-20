@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NotesForms.Pages.ProfilesPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="True"
+    Title="Profile"
+>
+      <StackLayout>
+            <Label x:Name="lblProfile" Text="Profile"/>
+            <Button Text="Back" Clicked="OnBack" />
+            <Button Text="Sign Out" Clicked="OnSignOut" />
+        </StackLayout>
+</ContentPage>
+
