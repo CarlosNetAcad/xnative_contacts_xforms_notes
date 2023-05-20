@@ -13,7 +13,7 @@ namespace NotesForms.Pages
 
 			var app = App.Current as App;
 
-			lblProfile.Text = app.GetUsername();
+			lblProfile.Text = $"Welcome {app.GetUsername()}";
 		}
 
         void OnBack(System.Object sender, System.EventArgs e)

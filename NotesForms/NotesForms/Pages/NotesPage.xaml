@@ -25,7 +25,7 @@
                 
                 <TextCell
                     Text="{Binding Title}"
-                    Detail="{Binding CreateAt}">
+                    Detail="{Binding Content}">
 
                     <TextCell.ContextActions>
 

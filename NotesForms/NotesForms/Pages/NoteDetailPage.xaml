@@ -5,13 +5,18 @@
     x:Class="NotesForms.Pages.NoteDetailPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="StoreNoteHandler"/>
+        <!--
         <ToolbarItem Text="Update" Clicked="UpdateNoteHandler"/>
+        -->
         <ToolbarItem Text="Delete" Clicked="DeleteNoteHandler"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="16">
         <Entry x:Name="titleEntry" Placeholder="Title" />
         <Editor x:Name="contentEditor" Placeholder="Content" />
+
+        <!--
         <Button Text="Delete" Clicked="DeleteNoteHandler"/>
+        -->
     </StackLayout>
 </ContentPage>
 

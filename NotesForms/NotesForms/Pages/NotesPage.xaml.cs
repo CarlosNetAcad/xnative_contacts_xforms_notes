@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using ContactApp.Core.Entities;
+using ContactApp.Core.Repository.SQLite;
 using Xamarin.Forms;
 
 namespace NotesForms.Pages
@@ -18,9 +19,11 @@ namespace NotesForms.Pages
 		{
 			InitializeComponent ();
 
-			Notes = new ObservableCollection<Note>();
+            var dsNotes = Connection.Instance.Table<Note>().ToList();
 
-			for( int i = 0; i < 2; i++)
+			Notes = new ObservableCollection<Note>( dsNotes );
+
+			/*for( int i = 0; i < 2; i++)
 			{
                 Notes.Add(new Note
                 {
@@ -28,7 +31,7 @@ namespace NotesForms.Pages
                     Content = $"Content {i}",
                     CreatedAt = DateTime.Now.AddDays(-i)
                 });
-            }
+            }*/
 
             listView.ItemsSource = Notes;
 
@@ -91,22 +94,57 @@ namespace NotesForms.Pages
 
         void StoreNote( NoteDetailPage sender, Note note)
         {
-            Notes.Add( note );
+            try
+            {
+                Notes.Add( note );
+                Connection.Instance.Insert( note );
+            }
+            catch (SQLite.SQLiteException SQLiteEx)
+            {
+                Console.WriteLine( SQLiteEx.Message );
+            }
+           
         }
 
         void DeleteNote( NoteDetailPage sender,Note note)
         {
-            Notes.Remove( note );
+            try
+            {
+                Notes.Remove(note);
+                Connection.Instance.Delete( note );
+            }
+            catch ( SQLite.SQLiteException SQLiteEx)
+            {
+                Console.WriteLine(SQLiteEx.Message);
+            }
+            
         }
 
         void UpdateNote( NoteDetailPage sender, Note note)
         {
-            var currentNote = Notes.FirstOrDefault( i => i.ID == note.ID );
-
-            if( currentNote != null)
+            try
             {
-                currentNote.Title   = note.Title.ToString();
-                currentNote.Content = note.Content.ToString();
+                if (note        == null) throw new Exception( "Note is missing" );
+
+                var currentNote = Notes.FirstOrDefault( i => i.ID == note.ID );
+
+                if (currentNote == null) throw new Exception( "Note not found to update." );
+                
+                var index = Notes.IndexOf( currentNote );
+
+                
+
+                Notes[index] = note;
+
+                Connection.Instance.Update( note );
+            }
+            catch (SQLite.SQLiteException SQLiteEx)
+            {
+                Console.WriteLine(SQLiteEx.Message);
+            }
+            catch ( Exception Ex )
+            {
+                Console.WriteLine( Ex.Message );
             }
         }
     }

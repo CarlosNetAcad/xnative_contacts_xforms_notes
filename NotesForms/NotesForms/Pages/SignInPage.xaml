@@ -3,7 +3,14 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="NotesForms.Pages.SignInPage">
-    <StackLayout Margin="20">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="MyColor">purple</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="20" BackgroundColor="{StaticResource MyColor}">
         <Entry x:Name="usernameEntry" Placeholder="Username" />
         <Entry Placeholder="Password" />
         <Button Text="Sign In" Clicked="SignInHandler"/>
