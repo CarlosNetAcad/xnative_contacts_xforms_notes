@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using ContactApp.Core.Entities;
 using ContactApp.Core.Repository.SQLite;
+using NotesForms.ViewModels;
 
 namespace NotesForms.Pages
 {	
 	public partial class SignInPage : ContentPage
-	{	
+	{
+        SignInVM _viewModel;
+
 		public SignInPage ()
 		{
             InitializeComponent();
+
+            _viewModel = new SignInVM();
+            BindingContext = _viewModel;
 
             MessagingCenter.Instance.Subscribe<SignUpPage, User>(this, "storeUser", storeUser);
 

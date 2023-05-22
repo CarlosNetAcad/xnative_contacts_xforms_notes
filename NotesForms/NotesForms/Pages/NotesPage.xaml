@@ -8,14 +8,15 @@
     Title="Notes"
     x:Name="this">
   <ContentPage.ToolbarItems>
-      <ToolbarItem Text="New" Clicked="CreateNoteHandler"/>
+      <ToolbarItem Text="New" Clicked="{Binding CmdCreate}"/>
   </ContentPage.ToolbarItems>
 
   <ListView
-        ItemTapped="listView_ItemTapped"
-        ItemSelected="listView_ItemSelected"
+        ItemsSource="{Binding Note}"
+        ItemTapped="OnNoteTapped"
+        RefreshCommand="{Binding CmdRefresh}"
         IsPullToRefreshEnabled="True"
-        Refreshing="listView_Refreshing"
+        IsRefreshing="{Binding IsRefreshing}"
         HasUnevenRows="True"
         x:Name="listView">
 
@@ -32,12 +33,12 @@
                         <MenuItem
                             CommandParameter="{Binding .}"
                             Text="Show"
-                            Clicked="MenuItem_Clicked" />
+                            Command="{Binding Source={x:AppThemeBinding:Reference this}, Path=BindingContext.CmdShow}" />
                         <MenuItem
                             CommandParameter="{Binding .}"
                             IsDestructive="True"
                             Text="Delete"
-                            Clicked="MenuItem_Clicked_1" />
+                            Command="{Binding Source={x:Reference this}, Path=BindingContext.CmdDelete}" />
 
                     </TextCell.ContextActions>
 
