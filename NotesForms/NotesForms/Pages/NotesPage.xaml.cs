@@ -72,7 +72,7 @@ namespace NotesForms.Pages
             var note = e.Item as Note;
             //Console.WriteLine($"item tapped: {item.Title}");
             //this.DisplayAlert("Selected", $"Item: {item.Title}", "OK");
-            var noteDetailPage = new NoteDetailPage(note);
+            var noteDetailPage = new NoteDetailPage( note, true);
             //noteDetailPage.NoteSelected = note;
             Navigation.PushAsync(noteDetailPage);
         }
@@ -146,6 +146,11 @@ namespace NotesForms.Pages
             {
                 Console.WriteLine( Ex.Message );
             }
+        }
+
+        void UpsertNote( NoteDetailPage sender, Note note )
+        {
+            Console.WriteLine($"Exist:");
         }
     }
 }

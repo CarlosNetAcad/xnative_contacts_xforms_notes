@@ -70,7 +70,8 @@ namespace ContactApp.Core.Repository.SQLite
                 {
                     typeof(Contact),
                     typeof(Profile),
-                    typeof(Note)
+                    typeof(Note),
+                    typeof(User)
                 };
 
                 dataBase.CreateTables(CreateFlags.None, tables);

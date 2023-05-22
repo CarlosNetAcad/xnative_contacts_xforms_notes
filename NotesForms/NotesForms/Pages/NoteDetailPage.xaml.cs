@@ -9,13 +9,16 @@ namespace NotesForms.Pages
 	{
         public Note NoteSelected { get; set; }
 
-        public NoteDetailPage (ContactApp.Core.Entities.Note note)
+        public bool Exist { get; set; } = false;
+
+        public NoteDetailPage ( Note note, bool exist = false)
 		{
 			InitializeComponent ();
 
-            NoteSelected = note;
-            titleEntry.Text = NoteSelected?.Title;
-            contentEditor.Text = NoteSelected?.Content;
+            NoteSelected        = note;
+            Exist               = exist;
+            titleEntry.Text     = NoteSelected?.Title;
+            contentEditor.Text  = NoteSelected?.Content;
         }
 
         void UpdateNoteHandler( System.Object sender, System.EventArgs e )
@@ -59,6 +62,22 @@ namespace NotesForms.Pages
 
                 MessagingCenter.Instance.Send(this, "store", NoteSelected);
 
+                Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        void UpsertNoteHandler(System.Object sender, System.EventArgs e)
+        {
+            try
+            {
+                LoadEntity();
+
+                MessagingCenter.Instance.Send( this, "upsert", NoteSelected );
+                
                 Navigation.PopAsync();
             }
             catch (Exception ex)

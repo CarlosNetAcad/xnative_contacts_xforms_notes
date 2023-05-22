@@ -10,7 +10,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Margin="20" BackgroundColor="{StaticResource MyColor}">
+    <StackLayout Margin="20">
         <Entry x:Name="usernameEntry" Placeholder="Username" />
         <Entry Placeholder="Password" />
         <Button Text="Sign In" Clicked="SignInHandler"/>
