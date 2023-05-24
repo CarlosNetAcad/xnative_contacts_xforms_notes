@@ -7,19 +7,18 @@ using ContactApp.Core.Entities;
 using ContactApp.Core.Repository.SQLite;
 using NotesForms.Pages;
 using NotesForms.ViewModels.Base;
+using NotesForms.Services;
 using Xamarin.Forms;
 
 namespace NotesForms.ViewModels
 {
 	public class NoteVM :BaseVM
 	{
+        readonly INoteService _noteService;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Note> OCNotes { get; private set; }
-
-        private string _title;
-
-        private string _content;
 
         public ICommand CmdStore    { get; private set; }
         public ICommand CmdCreate   { get; private set; }
@@ -27,9 +26,15 @@ namespace NotesForms.ViewModels
         public ICommand CmdShow     { get; private set; }
         public ICommand CmdDelete   { get; private set; }
 
-        public NoteVM()
+        /// <summary>
+        /// This is the constructor
+        /// </summary>
+        /// <param name="noteService"></param>
+        public NoteVM( INoteService noteService )
 		{
-            var notes   = Connection.Instance.Table<Note>().ToList();
+            _noteService = noteService;
+
+            var notes   = _noteService.GetNotes();
 
             OCNotes = new ObservableCollection<Note>( notes );
 

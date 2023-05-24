@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NotesForms.Services;
 using Xamarin.Forms;
 
 namespace NotesForms.ViewModels.Base
 {
 	public class BaseVM : INotifyPropertyChanged
 	{
-
+        
         bool _isRefreshing;
 
         public event PropertyChangedEventHandler PropertyChanged;

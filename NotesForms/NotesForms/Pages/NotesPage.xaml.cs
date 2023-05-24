@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using ContactApp.Core.Entities;
-using ContactApp.Core.Repository.SQLite;
+
+using NotesForms.Repository;
+using NotesForms.Services;
 using NotesForms.ViewModels;
 using Xamarin.Forms;
 
@@ -18,7 +19,9 @@ namespace NotesForms.Pages
 		{
 			InitializeComponent();
 
-			BindingContext = _vMNote = new NoteVM();
+			var noteService = DependencyService.Resolve<INoteService>();
+
+			BindingContext = _vMNote = new NoteVM( noteService );
 		}
 
         void OnNoteTapped( System.Object sender, Xamarin.Forms.ItemTappedEventArgs e )

@@ -4,15 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="NotesForms.Pages.NoteDetailPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Clicked="StoreNoteHandler"/>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}"/>
         <!--
         <ToolbarItem Text="Update" Clicked="UpdateNoteHandler"/>
         -->
-        <ToolbarItem Text="Delete" Clicked="DeleteNoteHandler"/>
+        <ToolbarItem Text="Delete" Command="{Binding  DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="16">
-        <Entry x:Name="titleEntry" Placeholder="Title" />
-        <Editor x:Name="contentEditor" Placeholder="Content" />
+        <Entry x:Name="titleEntry" Placeholder="{Binding Title}" />
+        <Editor x:Name="contentEditor" Placeholder="{Binding Content}" />
 
         <!--
         <Button Text="Delete" Clicked="DeleteNoteHandler"/>

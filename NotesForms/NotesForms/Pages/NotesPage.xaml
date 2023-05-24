@@ -12,7 +12,7 @@
   </ContentPage.ToolbarItems>
 
   <ListView
-        ItemsSource="{Binding Note}"
+        ItemsSource="{Binding OCNotes}"
         ItemTapped="OnNoteTapped"
         RefreshCommand="{Binding CmdRefresh}"
         IsPullToRefreshEnabled="True"

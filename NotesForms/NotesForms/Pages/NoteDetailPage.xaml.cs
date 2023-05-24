@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ContactApp.Core.Entities;
+using NotesForms.Services;
+using NotesForms.ViewModels;
 using Xamarin.Forms;
 
 namespace NotesForms.Pages
@@ -15,13 +17,18 @@ namespace NotesForms.Pages
 		{
 			InitializeComponent ();
 
-            NoteSelected        = note;
+            //->Resolve Dependency
+            var noteService = DependencyService.Resolve<INoteService>();
+
+            BindingContext = new NoteDetailViewModel( note, noteService);
+
+            /*NoteSelected        = note;
             Exist               = exist;
             titleEntry.Text     = NoteSelected?.Title;
-            contentEditor.Text  = NoteSelected?.Content;
+            contentEditor.Text  = NoteSelected?.Content;*/
         }
 
-        void UpdateNoteHandler( System.Object sender, System.EventArgs e )
+        /*void UpdateNoteHandler( System.Object sender, System.EventArgs e )
         {
             try
             {
@@ -92,6 +99,6 @@ namespace NotesForms.Pages
 
             NoteSelected.Title = titleEntry.Text;
             NoteSelected.Content = contentEditor.Text;
-        }
+        }*/
 	}
 }

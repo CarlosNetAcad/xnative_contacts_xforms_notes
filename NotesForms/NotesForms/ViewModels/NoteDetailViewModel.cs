@@ -1,0 +1,81 @@
+﻿using System;
+using System.Windows.Input;
+using ContactApp.Core.Entities;
+using NotesForms.Services;
+using NotesForms.ViewModels.Base;
+using Xamarin.Forms;
+
+namespace NotesForms.ViewModels
+{
+	public class NoteDetailViewModel:BaseVM
+	{
+        #region constructor
+        public NoteDetailViewModel(Note note, INoteService noteService)
+		{
+            _noteService = noteService;
+
+            NoteSelected = note;
+
+            SaveCommand = new Command( OnSaveCommand ); 
+		}
+        #endregion constructor
+
+        #region -methods
+        void OnSaveCommand()
+        {
+            NoteSelected = NoteSelected ?? new Note();
+
+            NoteSelected.Title      = Title;
+            NoteSelected.Content    = Content;
+
+            _noteService.SaveNote( NoteSelected );
+        }
+
+        void OnDeleteCommand()
+        {
+            _noteService.DeleteNote( NoteSelected );
+        }
+
+
+        #endregion -methods
+
+        #region #methods
+
+        #endregion #methods
+
+        #region +methods
+
+        #endregion +methods
+
+        #region properties
+
+        public Note NoteSelected { get; set; }
+
+        public ICommand SaveCommand { get; private set; }
+
+        public ICommand DeleteCommand { get; private set; }
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty( ref _title, value );
+        }
+
+        public string Content
+        {
+            get => _content;
+            set => SetProperty(ref _content, value);
+        }
+
+        #endregion properties
+
+        #region attributes;
+        string _title;
+
+        string _content;
+
+        readonly INoteService _noteService;
+        #endregion attributes
+    }
+}
+
