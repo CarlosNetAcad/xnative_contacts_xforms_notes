@@ -6,9 +6,9 @@
     ios:Page.UseSafeArea="True"
     x:Class="NotesForms.Pages.NotesPage"
     Title="Notes"
-    x:Name="this">
+    x:Name="page">
   <ContentPage.ToolbarItems>
-      <ToolbarItem Text="New" Clicked="{Binding CmdCreate}"/>
+      <ToolbarItem Text="New" Command="{Binding CmdCreate}"/>
   </ContentPage.ToolbarItems>
 
   <ListView
@@ -33,12 +33,12 @@
                         <MenuItem
                             CommandParameter="{Binding .}"
                             Text="Show"
-                            Command="{Binding Source={x:AppThemeBinding:Reference this}, Path=BindingContext.CmdShow}" />
+                            Command="{Binding Source={x:Reference page}, Path=BindingContext.CmdShow}" />
                         <MenuItem
                             CommandParameter="{Binding .}"
                             IsDestructive="True"
                             Text="Delete"
-                            Command="{Binding Source={x:Reference this}, Path=BindingContext.CmdDelete}" />
+                            Command="{Binding Source={x:Reference page}, Path=BindingContext.CmdDelete}" />
 
                     </TextCell.ContextActions>
 
