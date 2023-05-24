@@ -10,10 +10,21 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Margin="20" BackgroundColor="{StaticResource MyColor}">
-        <Entry x:Name="usernameEntry" Placeholder="Username" />
-        <Entry Placeholder="Password" />
-        <Button Text="Sign In" Clicked="SignInHandler"/>
+    <StackLayout Margin="20">
+        <Entry
+            x:Name="usernameEntry"
+            Text="{Binding Username}"
+            Placeholder="Username" />
+
+        <Entry
+            Text="{Binding Password}"
+            Placeholder="Password" />
+
+        <Button
+            Text    ="Sign In"
+            Command ="{Binding SignInCommand}"/>
+
+
         <Button Text="Sign Up" Clicked="SignUpHandler"/>
     </StackLayout>
 </ContentPage>

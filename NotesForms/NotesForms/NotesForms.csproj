@@ -17,10 +17,18 @@
   <ItemGroup>
     <None Remove="Pages\" />
     <None Remove="ContentViews\" />
+    <None Remove="ViewModels\" />
+    <None Remove="ViewModels\Base\" />
+    <None Remove="Services\" />
+    <None Remove="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="ContentViews\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="Services\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />

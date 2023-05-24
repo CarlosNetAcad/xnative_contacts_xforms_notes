@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ContactApp.Core.Entities;
+using NotesForms.Services;
+using NotesForms.ViewModels;
 using Xamarin.Forms;
 
 namespace NotesForms.Pages
@@ -9,70 +11,16 @@ namespace NotesForms.Pages
 	{
         public Note NoteSelected { get; set; }
 
-        public NoteDetailPage (ContactApp.Core.Entities.Note note)
+        public bool Exist { get; set; } = false;
+
+        public NoteDetailPage ( Note note, bool exist = false)
 		{
 			InitializeComponent ();
 
-            NoteSelected = note;
-            titleEntry.Text = NoteSelected?.Title;
-            contentEditor.Text = NoteSelected?.Content;
-        }
+            //->Resolve Dependency
+            var noteService = DependencyService.Resolve<INoteService>();
 
-        void UpdateNoteHandler( System.Object sender, System.EventArgs e )
-        {
-            try
-            {
-                LoadEntity();
-
-                MessagingCenter.Instance.Send( this, "update", NoteSelected );
-
-                Navigation.PopAsync();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-        }
-
-        void DeleteNoteHandler( System.Object sender, System.EventArgs e )
-        {
-            try
-            {
-                if (NoteSelected == null)
-                    throw new Exception( "Sorry, we cannot find the Note to delete." );
-
-                MessagingCenter.Instance.Send(this, "delete", NoteSelected);
-                Navigation.PopAsync();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine( ex.Message );
-            }
-        }
-
-        void StoreNoteHandler(System.Object sender, System.EventArgs e)
-        {
-            try
-            {
-                LoadEntity();
-
-                MessagingCenter.Instance.Send(this, "store", NoteSelected);
-
-                Navigation.PopAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        void LoadEntity()
-        {
-            NoteSelected = NoteSelected ?? new Note();
-
-            NoteSelected.Title = titleEntry.Text;
-            NoteSelected.Content = contentEditor.Text;
+            BindingContext = new NoteDetailViewModel( note, noteService, Navigation );
         }
 	}
 }

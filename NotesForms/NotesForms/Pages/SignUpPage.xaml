@@ -3,8 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="NotesForms.Pages.SignUpPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+    <StackLayout>
+        <Entry x:Name="txtUserName"  Placeholder="Username" />
+        <Entry x:Name="txtPassword"  Placeholder="Password" />
+        <Entry x:Name="txtFullName"  Placeholder="Fullname" />
+        <Button x:Name="btnStoreUser" Text="Create" Clicked="StoreUserHandler"/>
+    </StackLayout>
 </ContentPage>
 
