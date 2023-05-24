@@ -10,13 +10,17 @@ namespace NotesForms.ViewModels
 	public class NoteDetailViewModel:BaseVM
 	{
         #region constructor
-        public NoteDetailViewModel(Note note, INoteService noteService)
+        public NoteDetailViewModel(Note note, INoteService noteService, INavigation navigation)
 		{
-            _noteService = noteService;
+            _noteService    = noteService;
+            _navigation     = navigation;
+            NoteSelected    = note;
 
-            NoteSelected = note;
+            Console.WriteLine($"Title {note.Title}");
+            Console.WriteLine($"Content {note.Content}");
 
-            SaveCommand = new Command( OnSaveCommand ); 
+            SaveCommand     = new Command( OnSaveCommand );
+            DeleteCommand   = new Command( OnDeleteCommand );
 		}
         #endregion constructor
 
@@ -29,11 +33,13 @@ namespace NotesForms.ViewModels
             NoteSelected.Content    = Content;
 
             _noteService.SaveNote( NoteSelected );
+            _navigation.PopAsync();
         }
 
         void OnDeleteCommand()
         {
             _noteService.DeleteNote( NoteSelected );
+            _navigation.PopAsync();
         }
 
 
@@ -75,6 +81,8 @@ namespace NotesForms.ViewModels
         string _content;
 
         readonly INoteService _noteService;
+
+        readonly INavigation _navigation;
         #endregion attributes
     }
 }

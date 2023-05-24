@@ -21,9 +21,10 @@ namespace NotesForms.Repository
 
             for ( int i = 0; i<11; i++)
             {
-                _notes.Add( new Note
+                _notes.Add(new Note
                 {
-                    Title = $"Note {i}"
+                    Title = $"Note {i}",
+                    Content = $"Content {i}"
                 });
             }
 

@@ -16,6 +16,8 @@ namespace NotesForms.ViewModels
 	{
         readonly INoteService _noteService;
 
+        readonly INavigation _navigation;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Note> OCNotes { get; private set; }
@@ -30,9 +32,11 @@ namespace NotesForms.ViewModels
         /// This is the constructor
         /// </summary>
         /// <param name="noteService"></param>
-        public NoteVM( INoteService noteService )
+        public NoteVM( INoteService noteService, INavigation navigation )
 		{
             _noteService = noteService;
+
+            _navigation = navigation;
 
             var notes   = _noteService.GetNotes();
 
@@ -48,15 +52,19 @@ namespace NotesForms.ViewModels
 
         private void OnCreateHandler()
         {
-            Console.WriteLine($"OnCreating...");
+            //Console.WriteLine($"OnCreating...");
 
             var noteDetailPage = new NoteDetailPage( null );
+
+            _navigation.PushAsync( noteDetailPage );
         }
 
         private void OnSelectHandler( Note note )
         {
-            Console.WriteLine( $"Selecting..." );
+            //Console.WriteLine( $"Selecting..." );
             var noteDetailPage = new NoteDetailPage( note, true );
+
+            _navigation.PushAsync( noteDetailPage );
         }
 
         private void OnDeleteHandler( Note note )

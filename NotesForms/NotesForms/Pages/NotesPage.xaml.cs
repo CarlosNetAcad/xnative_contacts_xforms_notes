@@ -20,8 +20,8 @@ namespace NotesForms.Pages
 			InitializeComponent();
 
 			var noteService = DependencyService.Resolve<INoteService>();
-
-			BindingContext = _vMNote = new NoteVM( noteService );
+			
+			BindingContext = _vMNote = new NoteVM( noteService, Navigation );
 		}
 
         void OnNoteTapped( System.Object sender, Xamarin.Forms.ItemTappedEventArgs e )

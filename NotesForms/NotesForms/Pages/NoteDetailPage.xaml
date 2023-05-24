@@ -10,6 +10,7 @@
         -->
         <ToolbarItem Text="Delete" Command="{Binding  DeleteCommand}"/>
     </ContentPage.ToolbarItems>
+    <!--FIXME: Does not show the note select-->
     <StackLayout Margin="16">
         <Entry x:Name="titleEntry" Placeholder="{Binding Title}" />
         <Editor x:Name="contentEditor" Placeholder="{Binding Content}" />
