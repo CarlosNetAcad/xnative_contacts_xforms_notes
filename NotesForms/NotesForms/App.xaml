@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotesForms.App"
              xmlns:converters="clr-namespace:NotesForms.Converters"
+             xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
              >
     <Application.Resources>
         <!-- converters -->
