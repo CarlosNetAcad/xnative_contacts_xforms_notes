@@ -2,6 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
     x:Class="NotesForms.Pages.SignInPage"
     Title="Home"
     >
@@ -16,11 +17,18 @@
         <Entry
             x:Name="usernameEntry"
             Text="{Binding Username}"
-            Placeholder="Username" />
+            Placeholder="Username">
+            <Entry.Behaviors>
+                <behaviors:EmailValidationBehavior/>
+            </Entry.Behaviors>
+        </Entry>
 
         <Entry
+            IsPassword="True"
             Text="{Binding Password}"
-            Placeholder="Password" />
+            Placeholder="Password">
+
+        </Entry>
 
         <Button
             Text    ="Sign In"
