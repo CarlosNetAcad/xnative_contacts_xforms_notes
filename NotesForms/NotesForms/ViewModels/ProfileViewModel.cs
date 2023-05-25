@@ -15,6 +15,9 @@ namespace NotesForms.ViewModels
         string _text;
         string _phoneNumber;
         readonly IPhoneDialer _phoneDialer;
+        readonly ISMS _sMS;
+        readonly IEmail _eMail;
+
         #endregion attributes
 
         #region Properties
@@ -23,6 +26,10 @@ namespace NotesForms.ViewModels
         public ICommand MakeCallCommand { get; private set; }
 
         public ICommand ReadAndSpeakCommand { get; private set; }
+
+        public ICommand SendSMSCommand { get; private set; }
+
+        public ICommand SendEmailCommand { get; private set; }
 
         public string Username
         {
@@ -44,9 +51,16 @@ namespace NotesForms.ViewModels
         #endregion Properties
 
         #region constructor
-        public ProfileViewModel( IPhoneDialer phoneDialer )
+        public ProfileViewModel(
+            IPhoneDialer phoneDialer,
+            ISMS sMS,
+            IEmail eMail
+        )
 		{
             _phoneDialer = phoneDialer;
+            _sMS = sMS;
+            _eMail = eMail;
+
             SignOutCommand = new Command( OnSignOutCommand );
             MakeCallCommand = new Command( OnMakeCallCommand );
             ReadAndSpeakCommand = new Command(async () => await OnSpeakCommand());
@@ -73,6 +87,21 @@ namespace NotesForms.ViewModels
         {
             await TextToSpeech.SpeakAsync(Text);
         }
+
+        void SendingSMS()
+        {
+            try
+            {
+                string message = Text;
+                string phoneNumber = PhoneNumber;
+
+                _sMS.SendSMSAsync( message, phoneNumber );
+                
+            }
+            catch( FeatureNotSupportedException FNSex) { }
+            catch( Exception ex ) { }
+        }
+
         #endregion private methods
 
 

@@ -15,8 +15,10 @@ namespace NotesForms.Pages
 			var app = App.Current as App;
 
             var phoneDialer = DependencyService.Resolve<IPhoneDialer>();
+            var sMS         = DependencyService.Resolve<ISMS>();
+            var eMail       = DependencyService.Resolve<IEmail>();
 
-            BindingContext = new ProfileViewModel( phoneDialer );
+            BindingContext  = new ProfileViewModel( phoneDialer,sMS,eMail );
             //lblProfile.Text = $"Welcome {app.GetUsername()}";
 		}
 

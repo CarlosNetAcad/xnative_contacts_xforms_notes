@@ -9,13 +9,11 @@
 >
       <StackLayout>
             <Label x:Name="lblProfile" Text="Profile"/>
-            <Button Text="Back" Clicked="OnBack" />
 
             <Entry Text="{Binding Text}" />
             <Button Text="Speak" Command="{Binding ReadAndSpeakCommand}" />
 
-            <Button Text="Sign Out" Command="{Binding SignOutCommand}"/>
-
+            
             <Entry
                 Text="{Binding PhoneNumber}"
                 Placeholder="Phone number"
@@ -40,6 +38,8 @@
                     </Button.IsVisible>
 
             </Button>
+            <Button Text="Back" Clicked="OnBack" />
+            <Button Text="Sign Out" Command="{Binding SignOutCommand}"/>
         </StackLayout>
 </ContentPage>
 

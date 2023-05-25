@@ -4,6 +4,10 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Xamarin.Forms;
+using NotesForms.Droid.Services;
+using NotesForms.Services;
+using Xamarin.Essentials;
 
 namespace NotesForms.Droid
 {
@@ -22,10 +26,20 @@ namespace NotesForms.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            var dialer = new PhoneDialerService();
+            var smsSender = new SMSService();
+
+            dialer.Context      = this;
+            smsSender.Context   = this;
+
+            DependencyService.RegisterSingleton<IPhoneDialer>(dialer);
+            DependencyService.RegisterSingleton<ISMS>(smsSender);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
