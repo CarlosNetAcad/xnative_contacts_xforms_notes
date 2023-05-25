@@ -9,6 +9,38 @@ namespace NotesForms.ViewModels
 {
 	public class NoteDetailViewModel:BaseVM
 	{
+        #region attributes;
+        string _title;
+
+        string _content;
+
+        readonly INoteService _noteService;
+
+        readonly INavigation _navigation;
+        #endregion attributes
+
+        #region properties
+
+        public Note NoteSelected { get; set; }
+
+        public ICommand SaveCommand { get; private set; }
+
+        public ICommand DeleteCommand { get; private set; }
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+
+        public string Content
+        {
+            get => _content;
+            set => SetProperty(ref _content, value);
+        }
+
+        #endregion properties
+
         #region constructor
         public NoteDetailViewModel(Note note, INoteService noteService, INavigation navigation)
 		{
@@ -16,8 +48,8 @@ namespace NotesForms.ViewModels
             _navigation     = navigation;
             NoteSelected    = note;
 
-            Console.WriteLine($"Title {note.Title}");
-            Console.WriteLine($"Content {note.Content}");
+            Title  = note?.Title;
+            Content = note?.Content;
 
             SaveCommand     = new Command( OnSaveCommand );
             DeleteCommand   = new Command( OnDeleteCommand );
@@ -33,6 +65,9 @@ namespace NotesForms.ViewModels
             NoteSelected.Content    = Content;
 
             _noteService.SaveNote( NoteSelected );
+
+            MessagingCenter.Instance.Send( this,"upsert",NoteSelected );
+
             _navigation.PopAsync();
         }
 
@@ -53,37 +88,6 @@ namespace NotesForms.ViewModels
 
         #endregion +methods
 
-        #region properties
-
-        public Note NoteSelected { get; set; }
-
-        public ICommand SaveCommand { get; private set; }
-
-        public ICommand DeleteCommand { get; private set; }
-
-        public string Title
-        {
-            get => _title;
-            set => SetProperty( ref _title, value );
-        }
-
-        public string Content
-        {
-            get => _content;
-            set => SetProperty(ref _content, value);
-        }
-
-        #endregion properties
-
-        #region attributes;
-        string _title;
-
-        string _content;
-
-        readonly INoteService _noteService;
-
-        readonly INavigation _navigation;
-        #endregion attributes
     }
 }
 

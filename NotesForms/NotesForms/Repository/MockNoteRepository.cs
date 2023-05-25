@@ -4,11 +4,23 @@ using ContactApp.Core.Entities;
 using NotesForms.Services;
 namespace NotesForms.Repository
 {
-	public class MockNoteRepository : INoteService
-	{
+    public class MockNoteRepository : INoteService
+    {
         #region attributes
-        IList<Note> _notes;
+        IList<Note> _notes = new List<Note>();
         #endregion attributes
+
+        public MockNoteRepository()
+        {
+            for (int i = 0; i<11; i++)
+            {
+                _notes.Add(new Note
+                {
+                    Title = $"Note {i}",
+                    Content = $"Content {i}"
+                });
+            }
+        }
 
         public void DeleteNote(Note note)
         {
@@ -17,22 +29,12 @@ namespace NotesForms.Repository
 
         public IList<Note> GetNotes()
         {
-            _notes = new List<Note>();
-
-            for ( int i = 0; i<11; i++)
-            {
-                _notes.Add(new Note
-                {
-                    Title = $"Note {i}",
-                    Content = $"Content {i}"
-                });
-            }
-
             return _notes;
         }
 
         public void SaveNote(Note note)
         {
+            Console.WriteLine($"inserting in repo { note.Title }");
             _notes.Add( note );
         }
     }

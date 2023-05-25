@@ -5,12 +5,41 @@
     x:Class="NotesForms.Pages.ProfilesPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="True"
-    Title="Profile"
+    Title="{Binding Username}"
 >
       <StackLayout>
             <Label x:Name="lblProfile" Text="Profile"/>
             <Button Text="Back" Clicked="OnBack" />
-            <Button Text="Sign Out" Clicked="OnSignOut" />
+
+            <Entry Text="{Binding Text}" />
+            <Button Text="Speak" Command="{Binding ReadAndSpeakCommand}" />
+
+            <Button Text="Sign Out" Command="{Binding SignOutCommand}"/>
+
+            <Entry
+                Text="{Binding PhoneNumber}"
+                Placeholder="Phone number"
+                Keyboard="Numeric"/>
+            <Button
+                    Text="Make Call"
+                    Command="{Binding MakeCallCommand}">
+
+                    <Button.IsVisible>
+
+                    
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="iOS" Value="false" />
+                            <On Platform="Android" Value="true" />
+                        </OnPlatform>
+                    
+                        <!--
+                        <OnIdiom x:TypeArguments="x:Boolean"
+                                 Phone="True"
+                                 Tablet="False" />
+                        -->
+                    </Button.IsVisible>
+
+            </Button>
         </StackLayout>
 </ContentPage>
 

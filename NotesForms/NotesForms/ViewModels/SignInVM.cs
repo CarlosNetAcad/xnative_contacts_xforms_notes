@@ -2,20 +2,28 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using NotesForms.ViewModels.Base;
+using NotesForms.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace NotesForms.ViewModels
 {
 	public class SignInVM : BaseVM
 	{
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Attributes
 
-        private string _username;
+        string _username;
 
-        private string _password;
+        string _password;
 
+        //->Declared in parent
+        //public event PropertyChangedEventHandler PropertyChanged;
+        #endregion attributes
+
+        #region Properties
         public ICommand SignInCommand { get; private set; }
-
+        public ICommand SignUpCommand { get; private set; }
+        
         public string Username
         {
             get => _username;
@@ -27,18 +35,34 @@ namespace NotesForms.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
+        #endregion Properties
 
+        #region constructors
+        
         public SignInVM()
         {
             SignInCommand = new Command(SignInPlus);
         }
+        #endregion constructors
 
-        private void OnSignInCommand()
+        #region private methods
+        void OnSignInCommand()
         {
-            Console.WriteLine($"OnSignInCommand...");
+            var app = App.Current as App;
+
+            app.SignIn();
         }
 
+        void OnSignUpCommand()
+        {
+
+        }
+
+        #endregion private methods
+
+        #region public methods
         public void SignIn()
+
         {
             Console.WriteLine($"Username: {Username}");
             Console.WriteLine($"Password: {Password}");
@@ -50,6 +74,7 @@ namespace NotesForms.ViewModels
             app.SetUsername(Username);
             app.SignIn();
         }
+        #endregion public methods
     }
 }
 

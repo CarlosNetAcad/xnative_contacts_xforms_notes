@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using NotesForms.Services;
+using NotesForms.ViewModels;
 using Xamarin.Forms;
 
 namespace NotesForms.Pages
@@ -13,19 +14,16 @@ namespace NotesForms.Pages
 
 			var app = App.Current as App;
 
-			lblProfile.Text = $"Welcome {app.GetUsername()}";
+            var phoneDialer = DependencyService.Resolve<IPhoneDialer>();
+
+            BindingContext = new ProfileViewModel( phoneDialer );
+            //lblProfile.Text = $"Welcome {app.GetUsername()}";
 		}
 
         void OnBack(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
 
-        }
-
-        void OnSignOut(System.Object sender, System.EventArgs e)
-        {
-            var app = App.Current as App;
-            app.SignOut();
         }
     }
 }

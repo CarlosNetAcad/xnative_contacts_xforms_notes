@@ -2,8 +2,10 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="NotesForms.Pages.SignInPage">
-
+    x:Class="NotesForms.Pages.SignInPage"
+    Title="Home"
+    >
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="MyColor">purple</Color>
@@ -23,9 +25,9 @@
         <Button
             Text    ="Sign In"
             Command ="{Binding SignInCommand}"/>
-
-
-        <Button Text="Sign Up" Clicked="SignUpHandler"/>
+        <!--
+        <Button Text="Sign Up" Command="{Binding SignOutCommand}"/>
+        -->
     </StackLayout>
 </ContentPage>
 

@@ -48,7 +48,14 @@ namespace NotesForms.ViewModels
             CmdShow     = new Command<Note>( OnShowHandler );
             CmdDelete   = new Command<Note>( OnDeleteHandler );
             CmdSelect   = new Command<Note>( OnSelectHandler );
+
+            MessagingCenter.Instance.Subscribe<NoteDetailPage,Note>(this,"upsert",OnUpsertHandler);
 		}
+
+        private void OnUpsertHandler(NoteDetailPage sender, Note note)
+        {
+            OnStoreHandler( note );
+        }
 
         private void OnCreateHandler()
         {
@@ -75,9 +82,8 @@ namespace NotesForms.ViewModels
 
         private void OnStoreHandler( Note note )
         {
-            Console.WriteLine($"OnSaving...");
+            _noteService.SaveNote(note);
             OCNotes.Add( note );
-            Connection.Instance.Insert( note );
         }
 
         private void OnShowHandler( Note note )
@@ -89,10 +95,21 @@ namespace NotesForms.ViewModels
         {
             IsRefreshing = true;
 
+            /*
             OCNotes.Add( new Note()
             {
                 Title = "Test",
-            });
+            });*/
+
+            var notes = _noteService.GetNotes();
+
+            OCNotes.Clear();
+
+            foreach (var note in notes)
+            {
+                OCNotes.Add(note);
+            }
+
 
             await Task.Delay( TimeSpan.FromSeconds( 1.5 ) );
 
