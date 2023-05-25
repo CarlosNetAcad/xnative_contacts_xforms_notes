@@ -64,6 +64,8 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Services\PhoneDialerService.cs" />
     <Compile Include="Services\SMSService.cs" />
+    <Compile Include="Services\TextToSpeechService.cs" />
+    <Compile Include="Services\EmailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

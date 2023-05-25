@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NotesForms.Services;
@@ -14,9 +15,12 @@ namespace NotesForms.ViewModels
         string _username;
         string _text;
         string _phoneNumber;
+        string _emailAddress;
+
         readonly IPhoneDialer _phoneDialer;
         readonly ISMS _sMS;
         readonly IEmail _eMail;
+        readonly ITextToSpeech _textToSpeech;
 
         #endregion attributes
 
@@ -48,22 +52,33 @@ namespace NotesForms.ViewModels
             get => _phoneNumber;
             set => SetProperty( ref _phoneNumber, value );
         }
+
+        public string EmailAddress
+        {
+            get => _emailAddress;
+            set => SetProperty( ref _emailAddress, value );
+        }
+
         #endregion Properties
 
         #region constructor
         public ProfileViewModel(
             IPhoneDialer phoneDialer,
             ISMS sMS,
-            IEmail eMail
+            IEmail eMail,
+            ITextToSpeech textToSpeech
         )
 		{
-            _phoneDialer = phoneDialer;
-            _sMS = sMS;
-            _eMail = eMail;
+            _phoneDialer    = phoneDialer;
+            _sMS            = sMS;
+            _eMail          = eMail;
+            _textToSpeech   = textToSpeech;
 
-            SignOutCommand = new Command( OnSignOutCommand );
-            MakeCallCommand = new Command( OnMakeCallCommand );
-            ReadAndSpeakCommand = new Command(async () => await OnSpeakCommand());
+            SignOutCommand      = new Command( OnSignOutCommand );
+            MakeCallCommand     = new Command( OnMakeCallCommand );
+            ReadAndSpeakCommand = new Command( SpeakingText );
+            SendSMSCommand      = new Command( SendingSMS );
+            SendEmailCommand    = new Command( SendingEmail );
         }
         #endregion constructor
 
@@ -82,7 +97,10 @@ namespace NotesForms.ViewModels
             Console.WriteLine($"Dialing to: {PhoneNumber}");
             _phoneDialer.MakeCall(PhoneNumber);
         }
-
+        /// <summary>
+        /// @recommended by Xamarin use a concrete class to implement a essential feature
+        /// </summary>
+        /// <returns></returns>
         async Task OnSpeakCommand()
         {
             await TextToSpeech.SpeakAsync(Text);
@@ -102,6 +120,22 @@ namespace NotesForms.ViewModels
             catch( Exception ex ) { }
         }
 
+        void SpeakingText()
+        {
+            string textToSpeak = Text;
+
+            _textToSpeech.SpeakAsync( textToSpeak );
+
+        }
+
+        void SendingEmail()
+        {
+            string subject  = "This is a test";
+            string body     = Text;
+            List<string> to = new List<string>() { EmailAddress } ;
+
+            _eMail.SendEmailMessage( subject, body, to );
+        }
         #endregion private methods
 
 

@@ -10,16 +10,26 @@
       <StackLayout>
             <Label x:Name="lblProfile" Text="Profile"/>
 
-            <Entry Text="{Binding Text}" />
-            <Button Text="Speak" Command="{Binding ReadAndSpeakCommand}" />
+            <Entry Text="{Binding Text}" Placeholder="Message"/>
 
+            <Button
+                Text="Speak Message"
+                Command="{Binding ReadAndSpeakCommand}" />
+
+            <Entry Text="{Binding EmailAddress}" Placeholder="E-mail Address"/>
+            
+            <Button
+                Text="Send Email Message"
+                Command="{Binding SendEmailCommand}"
+                />
             
             <Entry
                 Text="{Binding PhoneNumber}"
                 Placeholder="Phone number"
                 Keyboard="Numeric"/>
+
             <Button
-                    Text="Make Call"
+                    Text="Call"
                     Command="{Binding MakeCallCommand}">
 
                     <Button.IsVisible>
@@ -38,6 +48,10 @@
                     </Button.IsVisible>
 
             </Button>
+          <Button
+              Text="Send MSN"
+              Command="{Binding SendSMSCommand}">
+          </Button>
             <Button Text="Back" Clicked="OnBack" />
             <Button Text="Sign Out" Command="{Binding SignOutCommand}"/>
         </StackLayout>
