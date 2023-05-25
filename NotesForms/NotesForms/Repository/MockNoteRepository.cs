@@ -17,7 +17,8 @@ namespace NotesForms.Repository
                 _notes.Add(new Note
                 {
                     Title = $"Note {i}",
-                    Content = $"Content {i}"
+                    Content = $"Content {i}",
+                    CreatedAt = DateTime.Now.AddDays(i)
                 });
             }
         }

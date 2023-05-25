@@ -21,6 +21,7 @@
     <None Remove="ViewModels\Base\" />
     <None Remove="Services\" />
     <None Remove="Repository\" />
+    <None Remove="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -29,6 +30,7 @@
     <Folder Include="ViewModels\Base\" />
     <Folder Include="Services\" />
     <Folder Include="Repository\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />

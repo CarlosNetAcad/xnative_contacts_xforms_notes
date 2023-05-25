@@ -26,7 +26,7 @@
                 
                 <TextCell
                     Text="{Binding Title}"
-                    Detail="{Binding Content}">
+                    Detail="{Binding CreatedAt,Converter={StaticResource DateToStringConverter},ConverterParameter='YYYY-mm-dd'}">
 
                     <TextCell.ContextActions>
 
