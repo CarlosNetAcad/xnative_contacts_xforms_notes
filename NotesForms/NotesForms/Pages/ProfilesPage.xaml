@@ -47,13 +47,14 @@
 
                     <Button.IsVisible>
 
-                    
+                        <!-- What platform -->
                         <OnPlatform x:TypeArguments="x:Boolean">
                             <On Platform="iOS" Value="false" />
                             <On Platform="Android" Value="true" />
                         </OnPlatform>
                     
                         <!--
+                        What kind device of?
                         <OnIdiom x:TypeArguments="x:Boolean"
                                  Phone="True"
                                  Tablet="False" />
