@@ -14,6 +14,7 @@
     </ContentPage.Resources>
 
     <StackLayout Margin="20">
+        <!--====username input====-->
         <Entry
             x:Name="usernameEntry"
             Text="{Binding Username}"
@@ -22,20 +23,20 @@
                 <behaviors:EmailValidationBehavior/>
             </Entry.Behaviors>
         </Entry>
-
+        <!--====password input====-->
         <Entry
             IsPassword="True"
             Text="{Binding Password}"
             Placeholder="Password">
-
         </Entry>
-
+        <!--==== Sign In Button ====-->
         <Button
             Text    ="Sign In"
             Command ="{Binding SignInCommand}"/>
-        <!--
-        <Button Text="Sign Up" Command="{Binding SignOutCommand}"/>
-        -->
+        <!--==== Sign Up Button ====-->
+        <Button
+            Text="Sign Up"
+            Command="{Binding SignUpCommand}"/>
     </StackLayout>
 </ContentPage>
 

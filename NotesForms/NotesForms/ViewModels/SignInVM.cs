@@ -5,6 +5,7 @@ using NotesForms.ViewModels.Base;
 using NotesForms.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using NotesForms.Pages;
 
 namespace NotesForms.ViewModels
 {
@@ -16,8 +17,8 @@ namespace NotesForms.ViewModels
 
         string _password;
 
-        //->Declared in parent
-        //public event PropertyChangedEventHandler PropertyChanged;
+        readonly INavigation _navigation;
+
         #endregion attributes
 
         #region Properties
@@ -39,9 +40,13 @@ namespace NotesForms.ViewModels
 
         #region constructors
         
-        public SignInVM()
+        public SignInVM( INavigation navigation )
         {
+            _navigation = navigation;
+
             SignInCommand = new Command(SignInPlus);
+
+            SignUpCommand = new Command(OnSignUpCommand);
         }
         #endregion constructors
 
@@ -55,7 +60,8 @@ namespace NotesForms.ViewModels
 
         void OnSignUpCommand()
         {
-
+            var signUpPage = new SignUpPage();
+            _navigation.PushAsync( signUpPage );
         }
 
         #endregion private methods

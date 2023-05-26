@@ -16,6 +16,7 @@ namespace NotesForms.ViewModels
         string _text;
         string _phoneNumber;
         string _emailAddress;
+        string _welcomeText;
 
         readonly IPhoneDialer _phoneDialer;
         readonly ISMS _sMS;
@@ -59,6 +60,12 @@ namespace NotesForms.ViewModels
             set => SetProperty( ref _emailAddress, value );
         }
 
+        public string WelcomeText
+        {
+            get => _welcomeText;
+            set => SetProperty( ref _welcomeText, value);
+        }
+
         #endregion Properties
 
         #region constructor
@@ -73,6 +80,11 @@ namespace NotesForms.ViewModels
             _sMS            = sMS;
             _eMail          = eMail;
             _textToSpeech   = textToSpeech;
+
+            var app = App.Current as App;
+            Username = app.GetUsername();
+
+            WelcomeText = $"Welcome {Username}";
 
             SignOutCommand      = new Command( OnSignOutCommand );
             MakeCallCommand     = new Command( OnMakeCallCommand );

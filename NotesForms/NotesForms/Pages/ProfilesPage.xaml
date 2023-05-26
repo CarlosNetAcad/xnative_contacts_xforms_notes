@@ -4,19 +4,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="NotesForms.Pages.ProfilesPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
     ios:Page.UseSafeArea="True"
-    Title="{Binding Username}"
+    Title="{Binding WelcomeText}"
 >
       <StackLayout>
+            <!--
             <Label x:Name="lblProfile" Text="Profile"/>
+            -->
 
-            <Entry Text="{Binding Text}" Placeholder="Message"/>
+
+            <Entry
+                Text="{Binding Text}"
+                Placeholder="Message"/>
 
             <Button
                 Text="Speak Message"
                 Command="{Binding ReadAndSpeakCommand}" />
 
-            <Entry Text="{Binding EmailAddress}" Placeholder="E-mail Address"/>
+            <Entry
+                Text="{Binding EmailAddress}"
+                Placeholder="E-mail Address"/>
             
             <Button
                 Text="Send Email Message"
@@ -26,7 +34,12 @@
             <Entry
                 Text="{Binding PhoneNumber}"
                 Placeholder="Phone number"
-                Keyboard="Numeric"/>
+                Keyboard="Numeric">
+                <Entry.Behaviors>
+                    <behaviors:PhoneNumberValidationBehavior/>
+                </Entry.Behaviors>
+
+            </Entry>
 
             <Button
                     Text="Call"
@@ -52,8 +65,14 @@
               Text="Send MSN"
               Command="{Binding SendSMSCommand}">
           </Button>
-            <Button Text="Back" Clicked="OnBack" />
-            <Button Text="Sign Out" Command="{Binding SignOutCommand}"/>
+
+          <Button
+              Text="Back"
+              Clicked="OnBack" />
+
+          <Button
+              Text="Sign Out"
+              Command="{Binding SignOutCommand}"/>
         </StackLayout>
 </ContentPage>
 

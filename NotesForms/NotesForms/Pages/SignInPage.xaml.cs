@@ -15,7 +15,7 @@ namespace NotesForms.Pages
 		{
             InitializeComponent();
 
-            BindingContext = new SignInVM();
+            BindingContext = new SignInVM( Navigation );
 
             //MessagingCenter.Instance.Subscribe<SignUpPage, User>(this, "storeUser", storeUser);
 
