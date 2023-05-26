@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using ContactApp.Core.Entities;
 using ContactApp.Core.Repository;
 using NotesForms.ViewModels.Base;
@@ -21,6 +22,8 @@ namespace NotesForms.ViewModels
         #endregion Attr
 
         #region Prop
+        public ICommand CmdStore { get; private set; }
+
         public string UserName
         {
             get => _userName;
@@ -44,16 +47,33 @@ namespace NotesForms.ViewModels
             get => _canCreateAccount;
             set => SetProperty( ref _canCreateAccount,value );
         }
+
+        
         #endregion Prop
 
         #region __constructors
-        public SignUpViewModel()
+        public SignUpViewModel( INavigation navigation )
 		{
+            _navigation = navigation;
+
+            CmdStore = new Command( StoringUser );
 		}
         #endregion __constructors
 
         #region methods
+        void StoringUser()
+        {
+            var User = new User()
+            {
+                UserName = this.UserName,
+                PassWord = this.PassWord,
+                FullName = this.FullName
+            };
 
+            //-> Store in repo
+            Console.WriteLine( $"The user {UserName} was stored" );
+            _navigation.PopAsync();
+        }
         #endregion methods
     }
 }
