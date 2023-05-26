@@ -34,6 +34,14 @@ namespace NotesForms.ViewModels.Base
             return Task.FromResult(true);
         }
 
+        /// <summary>
+        ///     @desc Setter to a ViewModel attribute.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        /// <param name="propertyName"></param>
+        /// <returns> {bool} If was set or not</returns>
         protected bool SetProperty<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = null)
         {
             if (!EqualityComparer<T>.Default.Equals(oldValue, newValue))
