@@ -32,11 +32,14 @@
         <!--==== Sign In Button ====-->
         <Button
             Text    ="Sign In"
-            Command ="{Binding SignInCommand}"/>
+            Command ="{Binding SignInCommand}"
+            Style="{StaticResource btn-accented}"/>
         <!--==== Sign Up Button ====-->
         <Button
             Text="Sign Up"
-            Command="{Binding SignUpCommand}"/>
+            Command="{Binding SignUpCommand}"
+            Style="{StaticResource btn-accented}"
+            />
     </StackLayout>
 </ContentPage>
 

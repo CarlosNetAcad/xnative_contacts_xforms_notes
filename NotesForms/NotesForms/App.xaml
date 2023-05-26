@@ -56,8 +56,8 @@
         <!-- Explicit Styles -->
         <Style x:Key="btn-accented" TargetType="Button">
             <Setter Property="FontFamily" Value="SemiBold" />
-            <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
-            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
         </Style>
 
         <!-- Classes Styles -->
