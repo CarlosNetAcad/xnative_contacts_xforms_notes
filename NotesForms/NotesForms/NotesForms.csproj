@@ -23,6 +23,8 @@
     <None Remove="Repository\" />
     <None Remove="Converters\" />
     <None Remove="Behaviors\" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -33,6 +35,8 @@
     <Folder Include="Repository\" />
     <Folder Include="Converters\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />
