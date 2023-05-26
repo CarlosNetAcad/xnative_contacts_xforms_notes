@@ -105,7 +105,6 @@ namespace NotesForms
             MainPage = new MenuTabbedPage();
         }
 
-
         public void SignOut()
         {
             SetIsLogin(false);
