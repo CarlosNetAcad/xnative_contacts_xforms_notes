@@ -1,12 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NotesForms.App"
              xmlns:converters="clr-namespace:NotesForms.Converters"
              xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
+             x:Class="NotesForms.App"
              >
     <Application.Resources>
-        <!-- converters -->
-      <converters:DateToStringConverter x:Key="DateToStringConverter" />
+        <!-- App Colors -->
+        <Color x:Key="PrimaryColor">#4DC227</Color>
+        <Color x:Key="DarkColor">#2BAB35</Color>
+        <Color x:Key="AccentColor">#7CB825</Color>
+        <Color x:Key="PageBGColor">#F5F5F5</Color>
+
+        <!-- Behaviors-->
+
+        <!-- Converters -->
+        <converters:DateToStringConverter x:Key="DateToStringConverter" />
+
+        <!-- Implicit Styles -->
+        <Style TargetType="NavigationPage">
+            <Setter
+                Property="BarBackgroundColor"
+                Value="{StaticResource DarkColor}" />
+            <Setter
+                Property="BarTextColor"
+                Value="White" />
+        </Style>
+
+        <Style TargetType="ContentPage"
+            ApplyToDerivedTypes="True">
+            <Setter
+                Property="BackgroundColor"
+                Value="{StaticResource PageBGColor}" />
+        </Style>
+
+        <Style TargetType="StackLayout">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Regular" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource AccentColor}" />
+         </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Regular" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="FontFamily" Value="Regular" />
+        </Style>
+
+        <!-- Explicit Styles -->
+        <Style x:Key="btn-accented" TargetType="Button">
+            <Setter Property="FontFamily" Value="SemiBold" />
+            <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+
+        <!-- Classes Styles -->
     </Application.Resources>
 </Application>
