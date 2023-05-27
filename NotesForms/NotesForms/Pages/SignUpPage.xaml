@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
     xmlns:trigers="clr-namespace:NotesForms.Triggers"
+    xmlns:converters="clr-namespace:NotesForms.Converters"
     x:Class="NotesForms.Pages.SignUpPage">
     <StackLayout>
         <!--==== User Name Entry ===-->
@@ -31,15 +32,48 @@
 
         <!--==== Full Name Entry ===-->
         <Entry
-            x:Name="{Binding FullName}"
-            Placeholder="Fullname"
+            x:Name="txtFullName"
+            Placeholder="Full Name"
+            Text="{Binding FullName}"
         />
 
         <!--==== Store User Button ===-->
         <Button
             IsEnabled="False"
             x:Name="btnStoreUser"
-            Text="Save"
-            Command="{Binding CmdStore}"/>
+            Text="Save">
+            <Button.Triggers>
+                <!--
+                <DataTrigger
+                    Binding="{Binding CanCreateAccount}"
+                    Value="True"
+                    TargetType="Button">
+
+                    <Setter Property="BackgroundColor" Value="Green" />
+                    <Setter Property="TextColor" Value="White" />
+
+
+                </DataTrigger>
+                -->
+                 <MultiTrigger TargetType="Button">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition
+                            Value="true"
+                            Binding="{Binding CanCreateAccount}"/>
+                        <BindingCondition
+                            Value="true"
+                            Binding="{Binding Source={x:Reference txtPassword}, Path=Text, Converter={StaticResource StringToBoolConverter}}"/>
+                         <BindingCondition
+                            Value="true"
+                            Binding="{Binding Source={x:Reference txtUserName}, Path=Text, Converter={StaticResource StringToBoolConverter}}"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BackgroundColor" Value="Teal" />
+                    <Setter Property="TextColor" Value="White" />
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Setter Property="Command" Value="{Binding CmdStore}" />
+
+                </MultiTrigger>
+            </Button.Triggers>
+        </Button>
     </StackLayout>
 </ContentPage>

@@ -16,7 +16,7 @@
 
         <!-- Converters -->
         <converters:DateToStringConverter x:Key="DateToStringConverter" />
-
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <!-- Implicit Styles -->
         <Style TargetType="NavigationPage">
             <Setter
