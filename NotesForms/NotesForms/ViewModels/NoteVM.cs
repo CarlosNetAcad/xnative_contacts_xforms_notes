@@ -27,6 +27,7 @@ namespace NotesForms.ViewModels
         public ICommand CmdSelect   { get; private set; }
         public ICommand CmdShow     { get; private set; }
         public ICommand CmdDelete   { get; private set; }
+        public ICommand CmdLogOut   { get; private set; }
 
         /// <summary>
         /// This is the constructor
@@ -42,13 +43,13 @@ namespace NotesForms.ViewModels
 
             OCNotes = new ObservableCollection<Note>( notes );
 
-            CmdCreate      = new Command( OnCreateHandler );
-
+            CmdCreate   = new Command( OnCreateHandler );
+            CmdLogOut   = new Command( LogginOut );
             CmdStore    = new Command<Note>( OnStoreHandler );
             CmdShow     = new Command<Note>( OnShowHandler );
             CmdDelete   = new Command<Note>( OnDeleteHandler );
             CmdSelect   = new Command<Note>( OnSelectHandler );
-
+            
             MessagingCenter.Instance.Subscribe<NoteDetailPage,Note>(this,"upsert",OnUpsertHandler);
 		}
 
@@ -89,6 +90,12 @@ namespace NotesForms.ViewModels
         private void OnShowHandler( Note note )
         {
             Console.WriteLine($"OnShowing...");
+        }
+
+        void LogginOut()
+        {
+            var app = App.Current as App;
+            app.SignOut();
         }
 
         protected async override Task Refreshing()

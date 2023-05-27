@@ -9,6 +9,7 @@
     x:Name="page">
   <ContentPage.ToolbarItems>
       <ToolbarItem Text="New" Command="{Binding CmdCreate}"/>
+      <ToolbarItem Text="LogOut" Command="{Binding CmdLogOut}"/>
   </ContentPage.ToolbarItems>
 
   <ListView

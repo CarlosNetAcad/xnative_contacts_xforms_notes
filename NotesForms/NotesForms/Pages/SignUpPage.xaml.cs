@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 using ContactApp.Core.Entities;
+using NotesForms.ViewModels;
 
 namespace NotesForms.Pages
 {	
@@ -13,21 +14,9 @@ namespace NotesForms.Pages
 		public SignUpPage ()
 		{
 			InitializeComponent ();
+
+			BindingContext = new SignUpViewModel( Navigation );
 		}
-
-		void StoreUserHandler( System.Object sender, System.EventArgs e )
-		{
-			User = new User();
-
-			User.UserName = txtUserName.Text;
-			User.PassWord = txtPassword.Text;
-			User.FullName = txtFullName.Text;
-
-			MessagingCenter.Instance.Send(this, "storeUser", User);
-
-			Navigation.PopAsync();
-		}
-
     }
 }
 
