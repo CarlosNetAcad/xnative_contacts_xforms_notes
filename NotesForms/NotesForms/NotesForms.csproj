@@ -26,6 +26,7 @@
     <None Remove="Resources\" />
     <None Remove="Resources\Fonts\" />
     <None Remove="Triggers\" />
+    <None Remove="Effects\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -39,6 +40,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Triggers\" />
+    <Folder Include="Effects\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />
