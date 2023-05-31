@@ -5,13 +5,18 @@
     x:Class="NotesForms.Pages.ProfilesPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
+    xmlns:effects="clr-namespace:NotesForms.Effects"
     ios:Page.UseSafeArea="True"
     Title="{Binding WelcomeText}"
 >
       <StackLayout>
-            <!--
-            <Label x:Name="lblProfile" Text="Profile"/>
-            -->
+            
+            <Label x:Name="lblProfile" Text="Profile">
+                <Label.Effects>
+                    <effects:TextShadow />
+                </Label.Effects>
+            </Label>
+           
 
 
             <Entry

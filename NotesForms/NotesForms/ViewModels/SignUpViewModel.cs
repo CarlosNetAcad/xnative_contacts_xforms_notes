@@ -7,8 +7,8 @@ using Xamarin.Forms;
 
 namespace NotesForms.ViewModels
 {
-	public class SignUpViewModel:BaseVM
-	{
+    public class SignUpViewModel : BaseVM
+    {
         #region Attr
         string _userName;
 
@@ -23,41 +23,45 @@ namespace NotesForms.ViewModels
 
         #region Prop
         public ICommand CmdStore { get; private set; }
+        public ICommand CmdLongPress { get; private set; }
+        public ICommand CmdLong2Pres { get; private set; }
 
         public string UserName
         {
             get => _userName;
-            set => SetProperty( ref _userName,value );
+            set => SetProperty(ref _userName, value);
         }
 
         public string PassWord
         {
             get => _passWord;
-            set => SetProperty( ref _passWord,value );
+            set => SetProperty(ref _passWord, value);
         }
 
         public string FullName
         {
             get => _fullName;
-            set => SetProperty( ref _fullName, value );
+            set => SetProperty(ref _fullName, value);
         }
 
         public bool CanCreateAccount
         {
             get => _canCreateAccount;
-            set => SetProperty( ref _canCreateAccount,value );
+            set => SetProperty(ref _canCreateAccount, value);
         }
 
-        
+
         #endregion Prop
 
         #region __constructors
-        public SignUpViewModel( INavigation navigation )
-		{
+        public SignUpViewModel(INavigation navigation)
+        {
             _navigation = navigation;
 
-            CmdStore = new Command( StoringUser );
-		}
+            CmdStore        = new Command( StoringUser );
+            CmdLongPress    = new Command( PressingLong );
+            CmdLong2Pres    = new Command( PressingLongTwo );
+        }
         #endregion __constructors
 
         #region methods
@@ -71,8 +75,18 @@ namespace NotesForms.ViewModels
             };
 
             //-> Store in repo
-            Console.WriteLine( $"The user {UserName} was stored" );
+            Console.WriteLine($"The user {UserName} was stored");
             _navigation.PopAsync();
+        }
+
+        void PressingLong()
+        {
+            Console.WriteLine("Long press from view model");
+        }
+
+        void PressingLongTwo()
+        {
+            Console.WriteLine("Long press from view model 2")
         }
         #endregion methods
     }

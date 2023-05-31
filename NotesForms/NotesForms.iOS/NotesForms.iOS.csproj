@@ -72,6 +72,9 @@
     <Compile Include="Services\SMSService.cs" />
     <Compile Include="Services\TextToSpeechService.cs" />
     <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Effects\IOSTextShadow.cs" />
+    <Compile Include="Effects\IOSEntryColor.cs" />
+    <Compile Include="Effects\UnderlineLabelEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -103,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Effects\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
