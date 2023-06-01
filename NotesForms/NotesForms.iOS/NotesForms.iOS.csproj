@@ -77,6 +77,8 @@
     <Compile Include="Effects\UnderlineLabelEffect.cs" />
     <Compile Include="Renderers\IOSEntryBorderColor.cs" />
     <Compile Include="Renderers\IOSLongPressButton.cs" />
+    <Compile Include="Renderers\IOSSegmentView.cs" />
+    <Compile Include="Renderers\IOSColorPickerView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

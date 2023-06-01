@@ -67,6 +67,7 @@
     <Compile Include="Services\TextToSpeechService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Effects\DroidTextShadow.cs" />
+    <Compile Include="Renderers\DroidSegmentView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -190,6 +191,7 @@
     <Folder Include="Resources\layout\" />
     <Folder Include="Services\" />
     <Folder Include="Effects\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotesForms\NotesForms.csproj">

@@ -46,4 +46,3 @@ namespace NotesForms.iOS.Renderers
         #endregion protected method
     }
 }
-
