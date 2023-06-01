@@ -86,7 +86,7 @@ namespace NotesForms.ViewModels
 
         void PressingLongTwo()
         {
-            Console.WriteLine("Long press from view model 2")
+            Console.WriteLine("Long press from view model 2");
         }
         #endregion methods
     }

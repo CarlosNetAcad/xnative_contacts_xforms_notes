@@ -5,8 +5,19 @@
     xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
     xmlns:trigers="clr-namespace:NotesForms.Triggers"
     xmlns:converters="clr-namespace:NotesForms.Converters"
+    xmlns:effects="clr-namespace:NotesForms.Effects"
+    xmlns:renderers="clr-namespace:NotesForms.Renderers"
+
     x:Class="NotesForms.Pages.SignUpPage">
     <StackLayout>
+        <!--==== Renderers ===-->
+        <renderers:ColorPickerView x:Name="colorPickerView" />
+        <renderers:SegmentView />
+        <!--renderers:LongPressButton x:Name="longpressbutton"
+            LongPressCommand="{Binding LongCommand}"
+            Text="Long Pressed" /-->
+        <renderers:MyEntryBordered Placeholder="Renderer" />
+
         <!--==== User Name Entry ===-->
         <Entry
             x:Name="txtUserName"
