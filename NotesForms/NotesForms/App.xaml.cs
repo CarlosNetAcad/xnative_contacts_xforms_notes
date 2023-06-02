@@ -36,7 +36,7 @@ namespace NotesForms
             InitializeComponent();
 
             //-> Register services
-            DependencyService.RegisterSingleton<INoteService>( new MockNoteRepository() );
+            DependencyService.RegisterSingleton<INoteService>( new SQLiteRepository() );
 
             MainPage = new NavigationPage( new SignInPage() );
         }

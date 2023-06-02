@@ -68,6 +68,7 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Effects\DroidTextShadow.cs" />
     <Compile Include="Renderers\DroidSegmentView.cs" />
+    <Compile Include="Effects\UnderlineLabelEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

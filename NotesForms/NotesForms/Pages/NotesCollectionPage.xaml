@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this"
+    x:Class="NotesForms.Pages.NotesCollectionPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="New"
+            Command="{Binding NewCommand}" />
+        <ToolbarItem
+            Text="Delete All"
+            Command="{Binding CmdDeleteAll}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView
+       IsRefreshing="{Binding IsRefreshing}"
+       Command="{Binding RefreshCommand}">
+
+       <CollectionView
+            SelectionMode="Single"
+            SelectedItems="{Binding OCNotesSelected}"
+            SelectedItem="{Binding SelectedNote}"
+            SelectionChangedCommand="{Binding CmdSelectionNoteChanged}"
+            ItemsSource="{Binding OCNotes}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <StackLayout Margin="16">
+                            <Label Text="{Binding Title}" />
+                            <Label Text="{Binding CreatedAt, Converter={StaticResource DateToStringConverter}, ConverterParameter='dd/MM/yy'}" />
+                        </StackLayout>
+                        <!--
+                        <SwipeView>
+                            <StackLayout Margin="16">
+                                <Label Text="{Binding Title}" />
+                                <Label Text="{Binding CreateAt, Converter={StaticResource DateToStringConverter}, ConverterParameter='dd/MM/yy'}" />
+                            </StackLayout>
+
+                            <SwipeView.LeftItems>
+                                <SwipeItem
+                                    Text="Show"
+                                    BackgroundColor="Blue"
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.ShowCommand}"/>
+                            </SwipeView.LeftItems>
+
+                            <SwipeView.RightItems>
+                                <SwipeItemView
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.DeleteCommand}">
+                                    <StackLayout>
+                                        <Image>
+                                            <Image.Source>
+                                                <FontImageSource
+                                                    FontFamily="Icons"
+                                                    Size="10"
+                                                    Glyph="&#xe745;"
+                                                    Color="{DynamicResource MyColor}" />
+                                            </Image.Source>
+                                        </Image>
+                                        <Label Text="remove" />
+                                        <Label Text="Becareful"/>
+                                    </StackLayout>
+                                </SwipeItemView>
+                            </SwipeView.RightItems>
+                        </SwipeView>
+                        -->
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Image VerticalOptions="EndAndExpand" HeightRequest="100" Source="ic_action_settings" />
+                    <Label VerticalOptions="StartAndExpand" HorizontalTextAlignment="Center" Text="You don't have any notes yet!" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+
+   </RefreshView>
+
+</ContentPage>
+

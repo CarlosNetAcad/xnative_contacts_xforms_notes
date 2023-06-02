@@ -10,10 +10,28 @@
         -->
         <ToolbarItem Text="Delete" Command="{Binding  DeleteCommand}"/>
     </ContentPage.ToolbarItems>
-    <!--FIXME: Does not show the note select-->
+    
     <StackLayout Margin="16">
-        <Entry x:Name="titleEntry" Text="{Binding Title}" />
-        <Editor x:Name="contentEditor" Text="{Binding Content}" />
+        <!--=== Input Title ===-->
+        <Entry
+            x:Name="titleEntry"
+            Placeholder="Title"
+            Text="{Binding Title}" />
+
+        <!--=== Input Content ===-->
+        <Editor
+            x:Name="contentEditor"
+            Placeholder="Content"
+            Text="{Binding Content}" />
+
+        <!--=== Input Note Type ===-->
+        <Picker
+            x:Name="slcNoteType"
+            Title="Note Type:"
+            ItemDisplayBinding="{Binding .}"
+            ItemsSource="{Binding NoteTypes}"
+            SelectedItem="{Binding SelectedNoteType}"
+            />
 
         <!--
         <Button Text="Delete" Clicked="DeleteNoteHandler"/>

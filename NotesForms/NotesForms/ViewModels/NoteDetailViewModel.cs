@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using ContactApp.Core.Entities;
 using NotesForms.Services;
@@ -9,19 +10,23 @@ namespace NotesForms.ViewModels
 {
 	public class NoteDetailViewModel:BaseVM
 	{
-        #region attributes;
+        #region Flds;
         string _title;
 
         string _content;
 
+        NoteType _selectedNoteType;
+
         readonly INoteService _noteService;
 
         readonly INavigation _navigation;
-        #endregion attributes
+        #endregion Flds
 
-        #region properties
+        #region Prop
 
         public Note NoteSelected { get; set; }
+
+        public IList<NoteType> NoteTypes { get; set; }
 
         public ICommand SaveCommand { get; private set; }
 
@@ -39,30 +44,41 @@ namespace NotesForms.ViewModels
             set => SetProperty(ref _content, value);
         }
 
-        #endregion properties
+        public NoteType SelectedNoteType
+        {
+            get => _selectedNoteType;
+            set => SetProperty( ref _selectedNoteType, value );
+        }
+        #endregion Prop
 
-        #region constructor
+        #region __constructor
         public NoteDetailViewModel(Note note, INoteService noteService, INavigation navigation)
 		{
             _noteService    = noteService;
             _navigation     = navigation;
             NoteSelected    = note;
 
+            SetNoteTypesOptions();
+
             Title  = note?.Title;
             Content = note?.Content;
+            SelectedNoteType = note?.NoteType ?? NoteType.Default;
+
 
             SaveCommand     = new Command( OnSaveCommand );
             DeleteCommand   = new Command( OnDeleteCommand );
 		}
-        #endregion constructor
+        #endregion __constructor
 
-        #region -methods
+        #region - methods
         void OnSaveCommand()
         {
             NoteSelected = NoteSelected ?? new Note();
 
             NoteSelected.Title      = Title;
             NoteSelected.Content    = Content;
+            NoteSelected.CreatedAt  = DateTime.Now;
+            NoteSelected.iNoteType  = (int)SelectedNoteType;
 
             _noteService.SaveNote( NoteSelected );
 
@@ -77,8 +93,16 @@ namespace NotesForms.ViewModels
             _navigation.PopAsync();
         }
 
+        void SetNoteTypesOptions()
+        {
+            NoteTypes = new List<NoteType>();
 
-        #endregion -methods
+            NoteTypes.Add(NoteType.Default);
+            NoteTypes.Add(NoteType.Image);
+            NoteTypes.Add(NoteType.Music);
+            NoteTypes.Add(NoteType.Video);
+        }
+        #endregion - methods
 
         #region #methods
 

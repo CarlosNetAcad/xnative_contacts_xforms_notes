@@ -10,7 +10,7 @@ android:TabbedPage.ToolbarPlacement="Bottom"
 >
     <NavigationPage Title="Notes">
         <x:Arguments>
-            <pages:NotesPage/>
+            <pages:NotesCollectionPage/>
         </x:Arguments>
     </NavigationPage>
 

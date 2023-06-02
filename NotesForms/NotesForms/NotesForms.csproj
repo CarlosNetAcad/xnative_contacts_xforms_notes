@@ -29,6 +29,7 @@
     <None Remove="Effects\" />
     <None Remove="Constants\" />
     <None Remove="Renderers\" />
+    <None Remove="TemplateSelector\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -45,6 +46,7 @@
     <Folder Include="Effects\" />
     <Folder Include="Constants\" />
     <Folder Include="Renderers\" />
+    <Folder Include="TemplateSelector\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />
