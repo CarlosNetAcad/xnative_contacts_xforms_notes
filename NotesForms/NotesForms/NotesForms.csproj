@@ -34,6 +34,7 @@
     <None Remove="TemplateSelector\" />
     <None Remove="Views\" />
     <None Remove="Views\NoteTypeTmpl\" />
+    <None Remove="Services\CRUD\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -53,6 +54,7 @@
     <Folder Include="TemplateSelector\" />
     <Folder Include="Views\" />
     <Folder Include="Views\NoteTypeTmpl\" />
+    <Folder Include="Services\CRUD\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />

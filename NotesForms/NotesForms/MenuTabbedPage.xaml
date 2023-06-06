@@ -35,5 +35,11 @@ android:TabbedPage.ToolbarPlacement="Bottom"
             <pages:MapsPage/>
         </x:Arguments>
     </NavigationPage>
-  
+
+    <!--=== News ===-->
+    <NavigationPage Title="News">
+        <x:Arguments>
+            <pages:ArticlesPage/>
+        </x:Arguments>
+    </NavigationPage>
 </TabbedPage>

@@ -8,11 +8,13 @@
     <None Remove="Entities\" />
     <None Remove="Repository\" />
     <None Remove="Repository\SQLite\" />
+    <None Remove="Repository\API\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Repository\" />
     <Folder Include="Repository\SQLite\" />
+    <Folder Include="Repository\API\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />

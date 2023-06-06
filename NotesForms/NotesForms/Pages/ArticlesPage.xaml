@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NotesForms.Pages.ArticlesPage"
+    Title="Articles">
+
+    <!--====Articles List===-->
+    <ListView
+        ItemsSource="{Binding Articles}"
+        IsPullToRefreshEnabled="True"
+        RefreshCommand="{Binding Refreshing}"
+        IsRefreshing="{Binding IsRefreshing}"
+        HasUnevenRows="True"
+        x:Name="listview">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <!--==== Main Image===-->
+                        <Image
+                            HeightRequest="180"
+                            Aspect="AspectFill"
+                            Source="{Binding UrlToImage}" />
+                        <!--==== Abstract ===-->
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding Title}" />
+                        <!--==== Content ===-->
+                         <Label
+                            FontSize="Micro"
+                            Text="{Binding Description}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+</ContentPage>
+
