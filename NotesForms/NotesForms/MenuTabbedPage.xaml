@@ -6,30 +6,34 @@
     xmlns:root="clr-namespace:NotesForms"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
 android:TabbedPage.ToolbarPlacement="Bottom"
-    x:Class="NotesForms.MenuTabbedPage"
->
+    x:Class="NotesForms.MenuTabbedPage">
+
+    <!--=== Notes list ===-->
     <NavigationPage Title="Notes">
         <x:Arguments>
             <pages:NotesCollectionPage/>
         </x:Arguments>
     </NavigationPage>
 
+    <!--=== Profile ===-->
     <NavigationPage Title="Profile">
         <x:Arguments>
             <pages:ProfilesPage/>
         </x:Arguments>
     </NavigationPage>
 
+    <!--=== Settings ===-->
     <NavigationPage Title="Settings">
         <x:Arguments>
             <pages:SettingsPage />
         </x:Arguments>
     </NavigationPage>
-    <!--
-    <NavigationPage Title="Main">
+
+    <!--=== Maps ===-->
+    <NavigationPage Title="Map">
         <x:Arguments>
-            <root:MainPage/>
+            <pages:MapsPage/>
         </x:Arguments>
     </NavigationPage>
-    -->
+  
 </TabbedPage>

@@ -14,7 +14,7 @@ namespace NotesForms.ViewModels
 {
 	public class NoteVM :BaseVM
 	{
-        #region Fld
+        #region Flds
         /// <summary>
         /// @field {Note} Used when we select a single note from the Collection View
         /// ID string generated is "F:NotesForms.ViewModels._selectedNote"
@@ -38,7 +38,7 @@ namespace NotesForms.ViewModels
         /// </summary>
         //public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion Fld
+        #endregion Flds
 
         #region Props
         

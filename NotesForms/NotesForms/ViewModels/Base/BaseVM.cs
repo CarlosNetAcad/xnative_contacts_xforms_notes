@@ -11,24 +11,30 @@ namespace NotesForms.ViewModels.Base
 {
 	public class BaseVM : INotifyPropertyChanged
 	{
-        
+        #region Flds
         bool _isRefreshing;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion Flds
+
+        #region Props
+        public ICommand CmdRefresh { get; private set; }
 
         public bool IsRefreshing
         {
             get => _isRefreshing;
-            set => SetProperty( ref _isRefreshing,value );
+            set => SetProperty(ref _isRefreshing, value);
         }
+        #endregion Props
 
-        public ICommand CmdRefresh { get; private set; }
-
+        #region __constructor
         public BaseVM()
 		{
             CmdRefresh = new Command( async () => await Refreshing() );
 		}
+        #endregion __constructor
 
+        #region # methods
         protected virtual Task Refreshing()
         {
             return Task.FromResult(true);
@@ -55,6 +61,7 @@ namespace NotesForms.ViewModels.Base
                 return false;
             }
         }
+        #endregion # methods
     }
 }
 

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+ <ContentView
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     BackgroundColor="Black"
+    x:Class="NotesForms.Views.NoteTypeTmpl.Default">
+     <ContentView.Resources>
+         <Style TargetType="Label">
+             <Setter Property="TextColor" Value="White" />
+         </Style>
+     </ContentView.Resources>
+     <StackLayout>
+         <Label Text="{Binding Title}" />
+         <Label Text="{Binding Content}" />
+         <Label Text="Image" FontSize="Medium" />
+     </StackLayout>
+ </ContentView>

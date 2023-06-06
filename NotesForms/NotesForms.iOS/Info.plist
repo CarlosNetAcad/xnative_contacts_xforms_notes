@@ -38,5 +38,7 @@
 	<array>
 		<string>mailto</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescriptionNSLocationWhenInUseUsageDescription</key>
+	<string>We need to track your current location for a better user experience</string>
 </dict>
 </plist>

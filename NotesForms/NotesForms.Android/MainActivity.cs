@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using NotesForms.Droid.Services;
 using NotesForms.Services;
 using Xamarin.Essentials;
+using Xamarin;
 
 namespace NotesForms.Droid
 {
@@ -43,6 +44,9 @@ namespace NotesForms.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            FormsMaps.Init( this, savedInstanceState );
+
             LoadApplication(new App());
         }
 

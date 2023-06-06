@@ -13,6 +13,8 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2196" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Pages\" />
@@ -30,6 +32,8 @@
     <None Remove="Constants\" />
     <None Remove="Renderers\" />
     <None Remove="TemplateSelector\" />
+    <None Remove="Views\" />
+    <None Remove="Views\NoteTypeTmpl\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -47,6 +51,8 @@
     <Folder Include="Constants\" />
     <Folder Include="Renderers\" />
     <Folder Include="TemplateSelector\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\NoteTypeTmpl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />

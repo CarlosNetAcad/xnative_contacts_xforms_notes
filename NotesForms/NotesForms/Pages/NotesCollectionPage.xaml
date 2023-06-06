@@ -2,13 +2,43 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:NotesForms.Views.NoteTypeTmpl"
+    xmlns:templates="clr-namespace:NotesForms.TemplateSelector"
     x:Name="this"
     x:Class="NotesForms.Pages.NotesCollectionPage">
+    <ContentPage.Resources>
+
+        <DataTemplate x:Key="Default">
+            <views:Default/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Image">
+            <views:Image/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Music">
+            <views:Music/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Video">
+            <views:Video/>
+        </DataTemplate>
+
+        <templates:NoteTmplSelector
+            TmplDefault="{StaticResource Default}"
+            TmplImage="{StaticResource Image}"
+            TmplMusic="{StaticResource Music}"
+            TmplVideo="{StaticResource Video}"
+            x:Key="NoteTmplSelector"
+            />
+    </ContentPage.Resources>
+    
+   
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Text="New"
-            Command="{Binding NewCommand}" />
+            Command="{Binding CmdCreate}" />
         <ToolbarItem
             Text="Delete All"
             Command="{Binding CmdDeleteAll}" />
@@ -23,16 +53,17 @@
             SelectedItems="{Binding OCNotesSelected}"
             SelectedItem="{Binding SelectedNote}"
             SelectionChangedCommand="{Binding CmdSelectionNoteChanged}"
-            ItemsSource="{Binding OCNotes}">
-
-            <CollectionView.ItemTemplate>
+            ItemsSource="{Binding OCNotes}"
+            ItemTemplate="{StaticResource NoteTmplSelector}"
+           >
+            <!--CollectionView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
                         <StackLayout Margin="16">
                             <Label Text="{Binding Title}" />
                             <Label Text="{Binding CreatedAt, Converter={StaticResource DateToStringConverter}, ConverterParameter='dd/MM/yy'}" />
                         </StackLayout>
-                        <!--
+                        <!-
                         <SwipeView>
                             <StackLayout Margin="16">
                                 <Label Text="{Binding Title}" />
@@ -67,10 +98,10 @@
                                 </SwipeItemView>
                             </SwipeView.RightItems>
                         </SwipeView>
-                        -->
+                        ->
                     </ContentView>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
+            </CollectionView.ItemTemplate-->
 
             <CollectionView.EmptyView>
                 <StackLayout>
