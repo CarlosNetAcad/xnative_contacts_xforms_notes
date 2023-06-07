@@ -19,11 +19,16 @@ namespace NotesForms.Pages
             var eMail       = DependencyService.Resolve<IEmail>();
             var textToSpeech= DependencyService.Resolve<ITextToSpeech>();
 
+            var authService = DependencyService.Resolve<IAuthService>();
+            var userService = DependencyService.Resolve<IUserService>();
+
             BindingContext  = new ProfileViewModel(
                 phoneDialer,
                 sMS,
                 eMail,
-                textToSpeech
+                textToSpeech,
+                authService,
+                userService
             );
             //lblProfile.Text = $"Welcome {app.GetUsername()}";
 		}

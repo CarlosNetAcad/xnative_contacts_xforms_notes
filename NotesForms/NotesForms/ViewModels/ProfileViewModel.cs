@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ContactApp.Core.Entities;
 using NotesForms.Services;
 using NotesForms.ViewModels.Base;
 using Xamarin.Essentials;
@@ -12,16 +13,22 @@ namespace NotesForms.ViewModels
 	public class ProfileViewModel:BaseVM
 	{
         #region attributes
-        string _username;
+        string _userName;
+        string _password;
+        string _fullName;
         string _text;
         string _phoneNumber;
         string _emailAddress;
         string _welcomeText;
+        //string _user;
+        User   _user;
 
         readonly IPhoneDialer _phoneDialer;
         readonly ISMS _sMS;
         readonly IEmail _eMail;
         readonly ITextToSpeech _textToSpeech;
+        readonly IAuthService _authService;
+        readonly IUserService _userService;
 
         #endregion attributes
 
@@ -36,10 +43,24 @@ namespace NotesForms.ViewModels
 
         public ICommand SendEmailCommand { get; private set; }
 
-        public string Username
+        public ICommand UpdateUserCmd { get; private set; }
+
+        public string UserName
         {
-            get => _username;
-            set => SetProperty( ref _username, value );
+            get => _userName;
+            set => SetProperty( ref _userName, value );
+        }
+
+        public string FullName
+        {
+            get => _fullName;
+            set => SetProperty(ref _fullName, value);
+        }
+
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
         }
 
         public string Text
@@ -73,29 +94,46 @@ namespace NotesForms.ViewModels
             IPhoneDialer phoneDialer,
             ISMS sMS,
             IEmail eMail,
-            ITextToSpeech textToSpeech
+            ITextToSpeech textToSpeech,
+            IAuthService authService,
+            IUserService userService
         )
 		{
+            //-> Init props
             _phoneDialer    = phoneDialer;
             _sMS            = sMS;
             _eMail          = eMail;
             _textToSpeech   = textToSpeech;
+            _authService    = authService;
+            _userService    = userService;
 
+            //-> Set User session
             var app = App.Current as App;
-            Username = app.GetUsername();
+            //UserName = app.GetUsername();
+            _user = _authService.CurrentUser;
 
-            WelcomeText = $"Welcome {Username}";
+            SetUser( _user );
 
-            SignOutCommand      = new Command( OnSignOutCommand );
+            WelcomeText = $"Welcome {UserName}";
+
+            //-> Auth Cmds
+            SignOutCommand      = new Command( async () => await SigningOut() );
+
+            //-> App Essentials services Cmds
             MakeCallCommand     = new Command( OnMakeCallCommand );
             ReadAndSpeakCommand = new Command( SpeakingText );
             SendSMSCommand      = new Command( SendingSMS );
             SendEmailCommand    = new Command( SendingEmail );
+
+            //-> Manage User Cmds
+            UpdateUserCmd       = new Command( UpdatingUser );
         }
         #endregion constructor
 
         #region private methods
-
+        /// <summary>
+        /// @deprecated by async method
+        /// </summary>
         void OnSignOutCommand()
         {
             var app = App.Current as App;
@@ -109,6 +147,7 @@ namespace NotesForms.ViewModels
             Console.WriteLine($"Dialing to: {PhoneNumber}");
             _phoneDialer.MakeCall(PhoneNumber);
         }
+
         /// <summary>
         /// @recommended by Xamarin use a concrete class to implement a essential feature
         /// </summary>
@@ -147,6 +186,29 @@ namespace NotesForms.ViewModels
             List<string> to = new List<string>() { EmailAddress } ;
 
             _eMail.SendEmailMessage( subject, body, to );
+        }
+
+        void UpdatingUser()
+        {
+            _user.UserName = UserName;
+            _user.PassWord = Password;
+            _user.FullName = FullName;
+
+            _userService.Update( _user );
+        }
+
+        void SetUser( User user )
+        {
+            UserName = user.UserName;
+            Password = user.PassWord;
+            FullName = user.FullName;
+        }
+
+        async Task SigningOut()
+        {
+            var app = App.Current as App;
+            await _authService.SignOutAsync();
+            app.SignOut();
         }
         #endregion private methods
 

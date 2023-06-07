@@ -47,6 +47,12 @@ namespace NotesForms.Repository
 
             return new List<Article>();
         }
+
+        /*public Article GetByID(string profileID)
+        {
+            //throw new NotImplementedException();
+            return new Article();
+        }*/
     }
 }
 

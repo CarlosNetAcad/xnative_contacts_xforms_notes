@@ -7,8 +7,9 @@ namespace NotesForms.Services
     public interface IAuthService
     {
         User CurrentUser { get; }
-
+        
         Task<bool> SignInAsync( string userName, string password);
         Task<bool> SignOutAsync();
+        Task<bool> RefreshAuth();
     }
 }

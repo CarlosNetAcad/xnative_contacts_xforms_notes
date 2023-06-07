@@ -33,7 +33,8 @@
         <Entry
             x:Name="txtPassword"
             Placeholder="Password"
-            IsPassword="True">
+            IsPassword="True"
+            Text="{Binding PassWord}">
             <Entry.Triggers>
                 <EventTrigger Event="TextChanged">
                     <trigers:PasswordEventTrigger/>

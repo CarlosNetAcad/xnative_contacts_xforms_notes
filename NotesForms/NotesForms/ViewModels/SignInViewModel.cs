@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 
 namespace NotesForms.ViewModels
 {
-	public class SignInVM : BaseVM
+	public class SignInViewModel : BaseVM
 	{
         #region Attributes
 
         string _username;
-
         string _password;
 
         readonly INavigation _navigation;
@@ -42,12 +41,12 @@ namespace NotesForms.ViewModels
 
         #region constructors
         
-        public SignInVM( INavigation navigation, IAuthService auth )
+        public SignInViewModel( INavigation navigation, IAuthService auth )
         {
             _navigation = navigation;
             _auth       = auth;
 
-            SignInCommand = new Command(SignInPlus);
+            SignInCommand = new Command( async () => await OnSignInCommand() );
 
             SignUpCommand = new Command(OnSignUpCommand);
         }
@@ -56,7 +55,11 @@ namespace NotesForms.ViewModels
         #region private methods
         async Task OnSignInCommand()
         {
+            Console.WriteLine($"Params: {Username} {Password}");
+
             var isLogin = await _auth.SignInAsync(Username,Password);
+
+            Console.WriteLine($"Log resutl: {isLogin}");
 
             if (isLogin)
             {
@@ -81,7 +84,9 @@ namespace NotesForms.ViewModels
             Console.WriteLine($"Username: {Username}");
             Console.WriteLine($"Password: {Password}");
         }
-
+        /// <summary>
+        /// @deprecated by async method
+        /// </summary>
         public void SignInPlus()
         {
             var app = App.Current as App;

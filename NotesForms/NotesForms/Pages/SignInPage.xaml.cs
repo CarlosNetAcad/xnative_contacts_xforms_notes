@@ -9,7 +9,7 @@ namespace NotesForms.Pages
 {	
 	public partial class SignInPage : ContentPage
 	{
-        SignInVM _viewModel;
+        SignInViewModel _viewModel;
 
 		public SignInPage ()
 		{
@@ -17,7 +17,7 @@ namespace NotesForms.Pages
 
             var authService = DependencyService.Resolve<IAuthService>();
 
-            _viewModel = new SignInVM( Navigation,authService );
+            _viewModel = new SignInViewModel( Navigation,authService );
 
             BindingContext = _viewModel;
 

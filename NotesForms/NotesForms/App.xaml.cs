@@ -38,7 +38,8 @@ namespace NotesForms
             //-> Register services
             DependencyService.RegisterSingleton<INoteService>( new SQLiteRepository() );
             DependencyService.RegisterSingleton<IArticleService>( new APIRepository() );
-            DependencyService.RegisterSingleton<IAuthService>( new AuthRepository() );
+            DependencyService.RegisterSingleton<IAuthService>( new AuthService() );
+            DependencyService.RegisterSingleton<IUserService>( new UserService() );
 
             MainPage = new NavigationPage( new SignInPage() );
         }
@@ -47,7 +48,7 @@ namespace NotesForms
         /// App lifecycle, used when the app starts.
         /// ID string generated is "M:NotesForms.App.OnStart"
         /// </summary>
-        protected override void OnStart ()
+        /*protected override void OnStart ()
         {
             if (this.Properties.ContainsKey("isLoggedIn"))
             {
@@ -60,7 +61,7 @@ namespace NotesForms
             }
             else
                 SignOut();
-        }
+        }*/
 
         /// <summary>
         /// App lifecycle, used when the app go to the background.
@@ -103,13 +104,13 @@ namespace NotesForms
 
         public void SignIn()
         {
-            SetIsLogin(true);
+            //SetIsLogin(true);
             MainPage = new MenuTabbedPage();
         }
 
         public void SignOut()
         {
-            SetIsLogin(false);
+            //SetIsLogin(false);
             MainPage = new NavigationPage( new SignInPage() );
         }
     }

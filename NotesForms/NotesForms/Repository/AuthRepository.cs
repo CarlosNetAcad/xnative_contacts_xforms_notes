@@ -22,6 +22,11 @@ namespace NotesForms.Repository
             private set;
         }
 
+        public Task<bool> RefreshAuth()
+        {
+            return Task.FromResult( false );
+        }
+
         public async Task<bool> SignInAsync( string userName, string password)
         {
 
@@ -63,7 +68,7 @@ namespace NotesForms.Repository
 
                 return true;
             }
-            else return false;
+            else return true;
         }
 
         public async Task<bool> SignOutAsync()

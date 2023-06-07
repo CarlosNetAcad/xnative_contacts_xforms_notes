@@ -7,18 +7,55 @@
     xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
     xmlns:effects="clr-namespace:NotesForms.Effects"
     ios:Page.UseSafeArea="True"
-    Title="{Binding WelcomeText}"
->
+    Title="{Binding WelcomeText}">
+      <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Size="24"
+                    Glyph="&#xe9ba;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+      </ContentPage.ToolbarItems>
       <StackLayout>
-            
+        <TableView HasUnevenRows="True" Intent="Form">
+            <TableRoot>
+                <TableSection Title="User Details">
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="Full Name" />
+                            <Entry Text="{Binding FullName}"
+                                   Placeholder="Enter your full name." />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="User Name" />
+                            <Entry Text="{Binding UserName}"
+                                   Placeholder="Enter your user name." />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout> 
+                            <Label Text="Password" />
+                            <Entry IsPassword="True"
+                                   Text="{Binding Password}"
+                                   Placeholder="Enter your password" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button Margin="8" Text="Update" Command="{Binding UpdateUserCmd}"  />
+
+            <!--
             <Label x:Name="lblProfile" Text="Profile">
                 <Label.Effects>
                     <effects:TextShadow />
                 </Label.Effects>
             </Label>
            
-
-
             <Entry
                 Text="{Binding Text}"
                 Placeholder="Message"/>
@@ -43,42 +80,45 @@
                 <Entry.Behaviors>
                     <behaviors:PhoneNumberValidationBehavior/>
                 </Entry.Behaviors>
-
             </Entry>
-
+            -->
+            <!--
             <Button
                     Text="Call"
                     Command="{Binding MakeCallCommand}">
-
+            
                     <Button.IsVisible>
 
-                        <!-- What platform -->
+                        <!- What platform ->
                         <OnPlatform x:TypeArguments="x:Boolean">
                             <On Platform="iOS" Value="false" />
                             <On Platform="Android" Value="true" />
                         </OnPlatform>
                     
-                        <!--
+                        <!-
                         What kind device of?
                         <OnIdiom x:TypeArguments="x:Boolean"
                                  Phone="True"
                                  Tablet="False" />
-                        -->
+                        ->
                     </Button.IsVisible>
 
             </Button>
-          <Button
-              Text="Send MSN"
-              Command="{Binding SendSMSCommand}">
-          </Button>
+            -->
+            <!--
+            <Button
+                Text="Send MSN"
+                Command="{Binding SendSMSCommand}">
+            </Button>
 
-          <Button
-              Text="Back"
-              Clicked="OnBack" />
+            <Button
+                Text="Back"
+                Clicked="OnBack" />
 
-          <Button
-              Text="Sign Out"
-              Command="{Binding SignOutCommand}"/>
+            <Button
+                Text="Sign Out"
+                Command="{Binding SignOutCommand}"/>
+            -->
         </StackLayout>
 </ContentPage>
 

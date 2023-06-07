@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace NotesForms.Services.CRUD
 {
-	public interface ICreate
+	public interface ICreate<T>
 	{
-		Task Store();
+		bool Store(T Entity);
 	}
 }
 

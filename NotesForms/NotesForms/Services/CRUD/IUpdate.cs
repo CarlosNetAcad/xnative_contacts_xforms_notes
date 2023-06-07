@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 
 namespace NotesForms.Services.CRUD
 {
-	public interface IUpdate
+	public interface IUpdate<T>
 	{
-		Task Update();
+		bool Update( T entity );
 	}
 }
-

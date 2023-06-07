@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ContactApp.Core.Entities;
 using ContactApp.Core.Repository;
+using NotesForms.Services;
 using NotesForms.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -19,6 +20,7 @@ namespace NotesForms.ViewModels
         bool _canCreateAccount;
 
         readonly INavigation _navigation;
+        readonly IUserService _userService;
         #endregion Attr
 
         #region Prop
@@ -41,7 +43,15 @@ namespace NotesForms.ViewModels
         public string FullName
         {
             get => _fullName;
-            set => SetProperty(ref _fullName, value);
+            set
+            {
+                SetProperty(ref _fullName, value);
+
+                if (!string.IsNullOrEmpty(_fullName) && _fullName.Length >= 5)
+                    CanCreateAccount = true;
+                else
+                    CanCreateAccount = false;
+            }
         }
 
         public bool CanCreateAccount
@@ -54,9 +64,10 @@ namespace NotesForms.ViewModels
         #endregion Prop
 
         #region __constructors
-        public SignUpViewModel(INavigation navigation)
+        public SignUpViewModel(INavigation navigation,IUserService userService)
         {
-            _navigation = navigation;
+            _navigation  = navigation;
+            _userService = userService;
 
             CmdStore        = new Command( StoringUser );
             CmdLongPress    = new Command( PressingLong );
@@ -75,7 +86,8 @@ namespace NotesForms.ViewModels
             };
 
             //-> Store in repo
-            Console.WriteLine($"The user {UserName} was stored");
+            var result = _userService.Store(User);
+            Console.WriteLine($"The user {UserName} was stored {result}");
             _navigation.PopAsync();
         }
 

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using NotesCarlos.Core.Models.API;
 
 namespace NotesForms.Services.CRUD
 {
-	public interface IRead
+	public interface IRead<T>
 	{
-		Task<IList<Article>> GetAllAsync();
+		IList<T> GetAllAsync();
+		T GetByID( string profileID );
 	}
 }
 
