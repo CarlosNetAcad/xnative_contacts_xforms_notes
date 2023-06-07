@@ -38,6 +38,8 @@ namespace NotesForms
             //-> Register services
             DependencyService.RegisterSingleton<INoteService>( new SQLiteRepository() );
             DependencyService.RegisterSingleton<IArticleService>( new APIRepository() );
+            DependencyService.RegisterSingleton<IAuthService>( new AuthRepository() );
+
             MainPage = new NavigationPage( new SignInPage() );
         }
 

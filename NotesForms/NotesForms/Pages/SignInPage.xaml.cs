@@ -15,7 +15,11 @@ namespace NotesForms.Pages
 		{
             InitializeComponent();
 
-            BindingContext = new SignInVM( Navigation );
+            var authService = DependencyService.Resolve<IAuthService>();
+
+            _viewModel = new SignInVM( Navigation,authService );
+
+            BindingContext = _viewModel;
 
             //MessagingCenter.Instance.Subscribe<SignUpPage, User>(this, "storeUser", storeUser);
 

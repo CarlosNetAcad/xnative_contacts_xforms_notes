@@ -6,6 +6,7 @@ using NotesForms.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using NotesForms.Pages;
+using System.Threading.Tasks;
 
 namespace NotesForms.ViewModels
 {
@@ -18,6 +19,7 @@ namespace NotesForms.ViewModels
         string _password;
 
         readonly INavigation _navigation;
+        readonly IAuthService _auth;
 
         #endregion attributes
 
@@ -40,9 +42,10 @@ namespace NotesForms.ViewModels
 
         #region constructors
         
-        public SignInVM( INavigation navigation )
+        public SignInVM( INavigation navigation, IAuthService auth )
         {
             _navigation = navigation;
+            _auth       = auth;
 
             SignInCommand = new Command(SignInPlus);
 
@@ -51,11 +54,16 @@ namespace NotesForms.ViewModels
         #endregion constructors
 
         #region private methods
-        void OnSignInCommand()
+        async Task OnSignInCommand()
         {
-            var app = App.Current as App;
+            var isLogin = await _auth.SignInAsync(Username,Password);
 
-            app.SignIn();
+            if (isLogin)
+            {
+                var app = App.Current as App;
+                app.SignIn();
+            }
+            else Console.WriteLine("Err ");
         }
 
         void OnSignUpCommand()
