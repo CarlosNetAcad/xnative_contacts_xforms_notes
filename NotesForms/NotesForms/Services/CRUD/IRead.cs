@@ -6,8 +6,7 @@ namespace NotesForms.Services.CRUD
 {
 	public interface IRead<T>
 	{
-		IList<T> GetAllAsync();
+		IList<T> GetAll();
 		T GetByID( string profileID );
 	}
 }
-

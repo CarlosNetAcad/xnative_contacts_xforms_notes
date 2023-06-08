@@ -15,6 +15,8 @@ namespace ContactApp.Core.Entities
 		public string Content		{ get; set; }
         public DateTime CreatedAt	{ get; set; } = DateTime.Now;
 		public int iNoteType		{ get; set; }
+		public double Longitude		{ get; set; }
+		public double Latitude		{ get; set; }
 
 		[Ignore]
 		public NoteType NoteType

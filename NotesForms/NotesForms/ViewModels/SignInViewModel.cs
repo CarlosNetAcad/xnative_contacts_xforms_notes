@@ -64,6 +64,7 @@ namespace NotesForms.ViewModels
             if (isLogin)
             {
                 var app = App.Current as App;
+                app.SetUsername( Username );
                 app.SignIn();
             }
             else Console.WriteLine("Err ");

@@ -19,8 +19,13 @@ namespace NotesForms.Pages
 
             //->Resolve Dependency
             var noteService = DependencyService.Resolve<INoteService>();
+            var geoLocation = DependencyService.Resolve<IGeolocation>();
 
-            BindingContext = new NoteDetailViewModel( note, noteService, Navigation );
+            BindingContext = new NoteDetailViewModel(
+                note,
+                noteService,
+                Navigation,
+                geoLocation);
         }
 	}
 }

@@ -9,10 +9,12 @@ using NotesForms.Pages;
 using NotesForms.ViewModels.Base;
 using NotesForms.Services;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace NotesForms.ViewModels
 {
-	public class NoteVM :BaseVM
+	public class NoteViewModel :BaseVM
 	{
         #region Flds
         /// <summary>
@@ -72,7 +74,7 @@ namespace NotesForms.ViewModels
         /// </summary>
         /// <param name="noteService">{INoteService}</param>
         /// <param name="navigation">{INavigation}</param>
-        public NoteVM( INoteService noteService, INavigation navigation )
+        public NoteViewModel( INoteService noteService, INavigation navigation )
 		{
             _noteService = noteService;
 
@@ -147,7 +149,7 @@ namespace NotesForms.ViewModels
         /// <param name="note"></param>
         void OnStoreHandler( Note note )
         {
-            //_noteService.SaveNote(note);
+            _noteService.SaveNote(note);
             OCNotes.Add( note );
         }
 
@@ -188,7 +190,6 @@ namespace NotesForms.ViewModels
             // var noteDetailPage = new NoteDetailPage(SelectedNote);
             //_navigation.PushAsync(noteDetailPage);
         }
-
         #endregion - methods
 
         #region # methods
@@ -201,6 +202,8 @@ namespace NotesForms.ViewModels
         {
             IsRefreshing = true;
 
+            await Task.Delay( TimeSpan.FromSeconds( 1.6 ) );
+
             /*
             OCNotes.Add( new Note()
             {
@@ -211,13 +214,15 @@ namespace NotesForms.ViewModels
 
             OCNotes.Clear();
 
-            foreach (var note in notes)
-            {
+            foreach (var note in notes) { 
+
+                Debug.WriteLine(note);
+
                 OCNotes.Add(note);
             }
 
 
-            await Task.Delay( TimeSpan.FromSeconds( 1.5 ) );
+            
 
             IsRefreshing = false;
         }

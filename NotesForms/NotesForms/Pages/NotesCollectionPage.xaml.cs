@@ -9,7 +9,7 @@ namespace NotesForms.Pages
 	public partial class NotesCollectionPage : ContentPage
 	{
         #region Attr
-        NoteVM _noteVM = null;
+        NoteViewModel _noteVM = null;
         #endregion Attr
 
         #region Props
@@ -22,7 +22,7 @@ namespace NotesForms.Pages
 
             var noteService = DependencyService.Resolve<INoteService>();
 
-            BindingContext = _noteVM = new NoteVM( noteService, Navigation);
+            BindingContext = _noteVM = new NoteViewModel( noteService, Navigation);
 		}
         #endregion __constructor
     }

@@ -117,7 +117,7 @@ namespace NotesForms.ViewModels
             WelcomeText = $"Welcome {UserName}";
 
             //-> Auth Cmds
-            SignOutCommand      = new Command( async () => await SigningOut() );
+            SignOutCommand      = new Command( async () => await SigningOutAsync() );
 
             //-> App Essentials services Cmds
             MakeCallCommand     = new Command( OnMakeCallCommand );
@@ -199,15 +199,16 @@ namespace NotesForms.ViewModels
 
         void SetUser( User user )
         {
-            UserName = user.UserName;
-            Password = user.PassWord;
-            FullName = user.FullName;
+            UserName = user?.UserName;
+            Password = user?.PassWord;
+            FullName = user?.FullName;
         }
 
-        async Task SigningOut()
+        async Task SigningOutAsync()
         {
             var app = App.Current as App;
             await _authService.SignOutAsync();
+            app.__UnSet("username");
             app.SignOut();
         }
         #endregion private methods

@@ -9,7 +9,7 @@ namespace NotesForms.Repository
 {
     public class UserService : IUserService
     {
-        public IList<User> GetAllAsync()
+        public IList<User> GetAll()
         {
             return new List<User>();
         }

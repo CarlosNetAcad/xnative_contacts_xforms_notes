@@ -5,28 +5,13 @@ using NotesForms;
 using NotesForms.Pages;
 using NotesForms.Services;
 using NotesForms.Repository;
+using System.Diagnostics;
 
 namespace NotesForms
 {
-    public partial class App : Application
+    public partial class App : Application, IPreferenceService
     {
-        /// <summary>
-        /// The <c>isLoggedIn</c> is ised to know the logged user state and the data persist on the app
-        /// ID string
-        /// </summary>
-        /// <param  name="isLoggedIn"></param>
-        void SetIsLogin(bool isLoggedIn)
-        {
-            if (this.Properties.ContainsKey("isLoggedIn"))
-            {
-                this.Properties["isLoggedIn"] = isLoggedIn;
-            }
-            else
-            {
-                this.Properties.Add("isLoggedIn", isLoggedIn);
-            }
-        }
-
+        #region __constructor
         /// <summary>
         /// This is the constructor
         /// ID string generated is "M:NotesForms.App.#ctor"
@@ -40,79 +25,108 @@ namespace NotesForms
             DependencyService.RegisterSingleton<IArticleService>( new APIRepository() );
             DependencyService.RegisterSingleton<IAuthService>( new AuthService() );
             DependencyService.RegisterSingleton<IUserService>( new UserService() );
+            DependencyService.RegisterSingleton<IGeolocation>( new GeoLocationService() );
 
             MainPage = new NavigationPage( new SignInPage() );
         }
+        #endregion __constructor
 
+        #region - methods
+        /// <summary>
+        /// The <c>isLoggedIn</c> is ised to know the logged user state and the data persist on the app
+        /// ID string
+        /// </summary>
+        /// <param  name="isLoggedIn"></param>
+        /*void SetIsLogin(bool isLoggedIn)
+        {
+            if (this.Properties.ContainsKey("isLoggedIn"))
+            {
+                this.Properties["isLoggedIn"] = isLoggedIn;
+            }
+            else
+            {
+                this.Properties.Add("isLoggedIn", isLoggedIn);
+            }
+        }*/
+        #endregion - methods
+
+        #region # methods
         /// <summary>
         /// App lifecycle, used when the app starts.
         /// ID string generated is "M:NotesForms.App.OnStart"
         /// </summary>
-        /*protected override void OnStart ()
+        protected override void OnStart ()
         {
-            if (this.Properties.ContainsKey("isLoggedIn"))
-            {
-                var isLoggedIn = (bool)this.Properties["isLoggedIn"];
+            var isLoggedIn = GetUsername();
+            Console.WriteLine( "OnStart...." );
+            Debug.WriteLine( isLoggedIn );
+            if (String.IsNullOrEmpty(isLoggedIn)) SignOut();
+            else SignIn();
 
-                if (isLoggedIn)
-                    SignIn();
-                else
-                    SignOut();
-            }
-            else
-                SignOut();
-        }*/
+        }
 
         /// <summary>
         /// App lifecycle, used when the app go to the background.
         /// ID string generated is "M:NotesForms.App.OnSleep"
         /// </summary>
-        protected override void OnSleep ()
-        {
-        }
+        protected override void OnSleep () {}
 
         /// <summary>
         /// App lifecycle, used when the app return from de background
         /// ID string generated is "M:NotesForms.App.OnResume"
         /// </summary>
-        protected override void OnResume()
-        {
-        }
+        protected override void OnResume() {}
+        #endregion # methods
 
-        public void SetUsername(string username)
+        #region + methods
+        
+        public void __Set(string key, string value)
         {
-            if (this.Properties.ContainsKey("username"))
+            if (this.Properties.ContainsKey( key ))
             {
-                this.Properties["username"] = username;
+                this.Properties[key] = value;
             }
             else
             {
-                this.Properties.Add("username", username);
+                this.Properties.Add( key, value );
             }
         }
 
-        public string GetUsername()
+        public string __Get(string key)
         {
-            if (this.Properties.ContainsKey("username"))
-            {
-                var username = (string)this.Properties["username"];
-                return username;
-            }
+            var existKey = Properties.TryGetValue( key, out object value );
+
+            if (existKey) return value as string;
 
             return string.Empty;
         }
 
+        public void __UnSet(string key)
+        {
+            Properties.Remove( key );
+        }
+
+        public void SetUsername(string username)
+        {
+            __Set("username", username);
+        }
+
+        public string GetUsername()
+        {
+            return __Get("username");
+        }
+
         public void SignIn()
         {
-            //SetIsLogin(true);
             MainPage = new MenuTabbedPage();
         }
 
         public void SignOut()
         {
-            //SetIsLogin(false);
-            MainPage = new NavigationPage( new SignInPage() );
+            MainPage = new NavigationPage(new SignInPage());
         }
+
+        #endregion + methods
     }
 }
 

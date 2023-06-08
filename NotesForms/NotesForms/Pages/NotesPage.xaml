@@ -28,7 +28,7 @@
                 <TextCell
                     Text="{Binding Title}"
                     Detail="{Binding CreatedAt,Converter={StaticResource DateToStringConverter},ConverterParameter='yyyy-MM-dd'}">
-
+                    
                     <TextCell.ContextActions>
 
                         <MenuItem
