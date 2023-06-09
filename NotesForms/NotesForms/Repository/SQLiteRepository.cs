@@ -36,6 +36,11 @@ namespace NotesForms.Repository
         {
             Connection.Instance.Insert( note );
         }
+
+        public void UpdateNote(Note note)
+        {
+            Connection.Instance.Update( note );
+        }
     }
 }
 

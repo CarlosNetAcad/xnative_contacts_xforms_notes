@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ContactApp.Core.Entities;
 using NotesForms.Services;
+using NotesForms.Constants;
 using NotesForms.ViewModels.Base;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -20,6 +21,7 @@ namespace NotesForms.ViewModels
         NoteType _selectedNoteType;
         double _longitude;
         double _latitude;
+        bool _exist;
 
         readonly INoteService _noteService;
         readonly INavigation  _navigation;
@@ -68,6 +70,11 @@ namespace NotesForms.ViewModels
             set => SetProperty( ref _latitude, value );
         }
 
+        public bool Exist
+        {
+            get => _exist;
+            set => SetProperty( ref _exist, value );
+        }
         #endregion Prop
 
         #region __constructor
@@ -81,21 +88,23 @@ namespace NotesForms.ViewModels
             Note note,
             INoteService noteService,
             INavigation navigation,
-            IGeolocation geolocation)
+            IGeolocation geolocation,
+            bool exist = false)
 		{
-            //->MARK: Set Props
-            _noteService    = noteService;
-            _navigation     = navigation;
-            _geolocation    = geolocation;
-
+            //->#SubRegion Set Props
             NoteSelected    = note;
+            Exist           = exist;
+
+            _noteService = noteService;
+            _navigation = navigation;
+            _geolocation = geolocation;
 
             SetNoteTypesOptions();
 
             LoadEntity( note );
 
-            //->MARK: Commands
-            SaveCommand     = new Command( async () => await StoringNoteAsync() );
+            //->#SubRegion Commands
+            SaveCommand = new Command( async () => await StoringNoteAsync() );
             DeleteCommand   = new Command( OnDeleteCommand );
 		}
         #endregion __constructor
@@ -154,22 +163,45 @@ namespace NotesForms.ViewModels
 
         async Task StoringNoteAsync()
         {
-            Location location = await _geolocation.GetCurrentLocation();
+            try
+            {
+                Location location = await _geolocation.GetCurrentLocation();
 
-            NoteSelected = NoteSelected ?? new Note();
+                NoteSelected = NoteSelected ?? new Note();
 
-            NoteSelected.Title      = Title;
-            NoteSelected.Content    = Content;
-            NoteSelected.CreatedAt  = DateTime.Now;
-            NoteSelected.iNoteType  = (int)SelectedNoteType;
-            NoteSelected.Longitude  = location.Longitude;
-            NoteSelected.Latitude   = location.Latitude;
+                NoteSelected.Title      = Title;
+                NoteSelected.Content    = Content;
+                NoteSelected.CreatedAt  = DateTime.Now;
+                NoteSelected.iNoteType  = (int)SelectedNoteType;
+                NoteSelected.Longitude  = location.Longitude;
+                NoteSelected.Latitude   = location.Latitude;
 
-            //_noteService.SaveNote( NoteSelected );
+                //->NOTE: @deprecated, save by Messaging center
+                //_noteService.SaveNote( NoteSelected );
 
-            MessagingCenter.Instance.Send( this, "upsert", NoteSelected );
+                if (Exist)
+                    MessagingCenter.Instance.Send(this, Messages.NoteUpdated, NoteSelected);
+                else
+                    MessagingCenter.Instance.Send(this, Messages.NoteSaved, NoteSelected);
 
-            await _navigation.PopAsync();
+                await _navigation.PopAsync();
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
         }
         #endregion - methods
 

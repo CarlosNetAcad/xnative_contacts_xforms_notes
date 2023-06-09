@@ -1,6 +1,12 @@
 ﻿using System;
 using Xamarin.Forms;
 using NotesForms.ViewModels.Base;
+using NotesForms.Services;
+using System.Collections.Generic;
+using ContactApp.Core.Entities;
+using System.Diagnostics;
+using System.Collections;
+using System.Threading.Tasks;
 
 namespace NotesForms.ViewModels
 {
@@ -9,8 +15,13 @@ namespace NotesForms.ViewModels
         #region Flds
 
         string _title;
-        readonly INavigation _nav;
+        int _altitude;
+        IList<Note> _lstNotes;
+        Xamarin.Forms.Maps.Map _map;
 
+        readonly INavigation _nav;
+        readonly INoteService _noteService;
+        readonly IGeolocation _geolocation;
         #endregion Flds
 
         #region Props
@@ -20,19 +31,76 @@ namespace NotesForms.ViewModels
             get => _title;
             set => SetProperty(ref _title, value);
         }
+        public int Altitude
+        {
+            get => _altitude;
+            set => SetProperty( ref _altitude, value);
+        }
 
+        public Xamarin.Forms.Maps.Map Map
+        {
+            get => _map;
+            set => SetProperty( ref _map, value);
+        }
         #endregion Props
 
         #region __constructor
-
-        public MapViewModel( INavigation navigation )
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="navigation"></param>
+        /// <param name="noteService"></param>
+        public MapViewModel(
+            INavigation navigation,
+            INoteService noteService,
+            IGeolocation geolocation,
+            Xamarin.Forms.Maps.Map map
+            )
 		{
-            _nav = navigation;
-            Title = "Maps";
+            _nav            = navigation;
+            _noteService    = noteService;
+            _geolocation    = geolocation;
+            Map         = map;
 
+            SetListNotes();
+
+            //dd( _lstNotes, "BP:MapsVM:48....." );
+
+            Title = "Maps";
 		}
 
         #endregion __constructor
+
+        #region - methods
+
+        void SetListNotes()
+        {
+            _lstNotes = _noteService.GetNotes();
+        }
+
+        void dd(IEnumerable obj, string title = "BP" )
+        {
+            Console.WriteLine( title );
+
+            foreach(var item in obj) 
+                Debug.WriteLine( obj );
+        }
+        #endregion - methods
+
+        #region # methods
+        #endregion # methods
+
+        #region + methods
+        public Task SetPinsOnTheMapAsync()
+        {
+            //if (_lstNotes == null ||
+            //    _lstNotes.Count < 1) return Task.CompletedTask;
+
+          _geolocation.SetPinsOnTheMapAsync(_lstNotes, _map);
+
+            return Task.CompletedTask;
+        }
+        #endregion + methods
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NotesForms.Services;
 using NotesForms.ViewModels;
 
 using Xamarin.Essentials;
@@ -10,14 +11,19 @@ namespace NotesForms.Pages
 {	
 	public partial class MapsPage : ContentPage
 	{
-
+        #region Flds
+        MapViewModel VMMap;
+        #endregion Flds
         #region __constructor
 
-		public MapsPage ()
+        public MapsPage ()
 		{
 			InitializeComponent ();
 
-			BindingContext = new MapViewModel( Navigation );
+            var noteService = DependencyService.Resolve<INoteService>();
+            var geoLocation = DependencyService.Resolve<IGeolocation>();
+
+			BindingContext = VMMap = new MapViewModel( Navigation, noteService, geoLocation, map );
 		}
 
         #endregion __constructor
@@ -30,26 +36,29 @@ namespace NotesForms.Pages
 
             try
             {
+                await VMMap.SetPinsOnTheMapAsync();
+
                 var location = await Geolocation.GetLocationAsync();
 
-                if ( location != null )
+                if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}" );
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                 }
 
-                var position = new Position( location.Latitude,location.Longitude );
+                var position = new Position(location.Latitude, location.Longitude);
 
-                var distance = new Distance( 1000 );
+                var distance = new Distance(1000);
 
-                var mapSpan  = MapSpan.FromCenterAndRadius( position, distance);
+                var mapSpan = MapSpan.FromCenterAndRadius(position, distance);
 
-                var currentPosition = new Pin() {
-                    Label    = "You are here!",
+                var currentPosition = new Pin()
+                {
+                    Label = "You are here!",
                     Position = position
                 };
 
-                map.Pins.Add( currentPosition );
-                map.MoveToRegion( mapSpan );
+                map.Pins.Add(currentPosition);
+                map.MoveToRegion(mapSpan);
 
             }
             catch (FeatureNotSupportedException fnsEx)

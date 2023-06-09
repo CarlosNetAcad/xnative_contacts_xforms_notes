@@ -17,7 +17,7 @@ namespace NotesForms.Pages
 		{
 			InitializeComponent ();
 
-            //->Resolve Dependency
+            //->Resolve Dependencies
             var noteService = DependencyService.Resolve<INoteService>();
             var geoLocation = DependencyService.Resolve<IGeolocation>();
 
@@ -25,7 +25,8 @@ namespace NotesForms.Pages
                 note,
                 noteService,
                 Navigation,
-                geoLocation);
+                geoLocation,
+                exist);
         }
 	}
 }

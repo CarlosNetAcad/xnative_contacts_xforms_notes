@@ -23,6 +23,12 @@ namespace NotesForms.Services
 		/// </summary>
 		/// <param name="note"></param>
 		void DeleteNote( Note note);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="note"></param>
+		void UpdateNote( Note note);
 	}
 }
 

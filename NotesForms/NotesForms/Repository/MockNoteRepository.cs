@@ -35,8 +35,13 @@ namespace NotesForms.Repository
 
         public void SaveNote(Note note)
         {
-            Console.WriteLine($"inserting in repo { note.Title }");
             _notes.Add( note );
+        }
+
+        public void UpdateNote(Note note)
+        {
+            var position        = _notes.IndexOf(note);
+            _notes[position]    = note;
         }
     }
 }

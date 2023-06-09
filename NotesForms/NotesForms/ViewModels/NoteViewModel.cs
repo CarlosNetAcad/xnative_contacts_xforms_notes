@@ -11,6 +11,7 @@ using NotesForms.Services;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Diagnostics;
+using NotesForms.Constants;
 
 namespace NotesForms.ViewModels
 {
@@ -46,10 +47,10 @@ namespace NotesForms.ViewModels
         
         public ObservableCollection<Note> OCNotes { get; private set; }
 
-        public ICommand CmdStore    { get; private set; }
+        public ICommand CmdSave     { get; private set; }
         public ICommand CmdCreate   { get; private set; }
         public ICommand CmdSelect   { get; private set; }
-        public ICommand CmdShow     { get; private set; }
+        public ICommand CmdUpdate   { get; private set; }
         public ICommand CmdDelete   { get; private set; }
         public ICommand CmdLogOut   { get; private set; }
 
@@ -86,14 +87,16 @@ namespace NotesForms.ViewModels
             OCNotesSelected = new ObservableCollection<object>();
 
             CmdDeleteAll    = new Command( DeletingAll );
-            CmdCreate       = new Command( OnCreateHandler );
+            CmdCreate       = new Command( CreatingNote );
             CmdLogOut       = new Command( LogginOut );
-            CmdStore        = new Command<Note>( OnStoreHandler );
-            CmdShow         = new Command<Note>( OnShowHandler );
-            CmdDelete       = new Command<Note>( OnDeleteHandler );
-            CmdSelect       = new Command<Note>( OnSelectHandler );
+            CmdSave         = new Command<Note>( SavingNote );
+            CmdUpdate       = new Command<Note>( UpdatingNote );
+            CmdDelete       = new Command<Note>( DeletingNote );
+            CmdSelect       = new Command<Note>( SelectingNote );
             
-            MessagingCenter.Instance.Subscribe<NoteDetailPage,Note>(this,"upsert",OnUpsertHandler);
+            MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteSaved, OnSaveNote );
+            MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteUpdated, OnUpdateNote );
+            
 		}
         #endregion __constructor
 
@@ -102,22 +105,9 @@ namespace NotesForms.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="note"></param>
-        void OnUpsertHandler(NoteDetailPage sender, Note note)
+        void CreatingNote()
         {
-            OnStoreHandler( note );
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        void OnCreateHandler()
-        {
-            //Console.WriteLine($"OnCreating...");
-
             var noteDetailPage = new NoteDetailPage( null );
-
             _navigation.PushAsync( noteDetailPage );
         }
 
@@ -125,11 +115,9 @@ namespace NotesForms.ViewModels
         /// 
         /// </summary>
         /// <param name="note"></param>
-        void OnSelectHandler( Note note )
+        void SelectingNote( Note note )
         {
-            //Console.WriteLine( $"Selecting..." );
             var noteDetailPage = new NoteDetailPage( note, true );
-
             _navigation.PushAsync( noteDetailPage );
         }
 
@@ -137,9 +125,9 @@ namespace NotesForms.ViewModels
         /// 
         /// </summary>
         /// <param name="note"></param>
-        void OnDeleteHandler( Note note )
+        void DeletingNote( Note note )
         {
-            Console.WriteLine($"OnDeleting...");
+            _noteService.DeleteNote(note);
             OCNotes.Remove( note );
         }
 
@@ -147,7 +135,7 @@ namespace NotesForms.ViewModels
         /// 
         /// </summary>
         /// <param name="note"></param>
-        void OnStoreHandler( Note note )
+        void SavingNote( Note note )
         {
             _noteService.SaveNote(note);
             OCNotes.Add( note );
@@ -157,9 +145,12 @@ namespace NotesForms.ViewModels
         /// 
         /// </summary>
         /// <param name="note"></param>
-        void OnShowHandler( Note note )
+        void UpdatingNote( Note note )
         {
-            Console.WriteLine($"OnShowing...");
+            _noteService.UpdateNote(note);
+
+            var position        = OCNotes.IndexOf(note);
+            OCNotes[position]   = note;
         }
 
         /// <summary>
@@ -189,6 +180,27 @@ namespace NotesForms.ViewModels
         {
             // var noteDetailPage = new NoteDetailPage(SelectedNote);
             //_navigation.PushAsync(noteDetailPage);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="note"></param>
+        void OnSaveNote(NoteDetailViewModel sender, Note note)
+        {
+            SavingNote(note);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnUpdateNote(NoteDetailViewModel sender, Note note)
+        {
+            UpdatingNote(note);
         }
         #endregion - methods
 

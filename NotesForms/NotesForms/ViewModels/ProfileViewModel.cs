@@ -208,7 +208,7 @@ namespace NotesForms.ViewModels
         {
             var app = App.Current as App;
             await _authService.SignOutAsync();
-            app.__UnSet("username");
+            app.UnSet("username");
             app.SignOut();
         }
         #endregion private methods

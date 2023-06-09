@@ -58,8 +58,6 @@ namespace NotesForms
         protected override void OnStart ()
         {
             var isLoggedIn = GetUsername();
-            Console.WriteLine( "OnStart...." );
-            Debug.WriteLine( isLoggedIn );
             if (String.IsNullOrEmpty(isLoggedIn)) SignOut();
             else SignIn();
 
@@ -80,7 +78,7 @@ namespace NotesForms
 
         #region + methods
         
-        public void __Set(string key, string value)
+        public void Set(string key, string value)
         {
             if (this.Properties.ContainsKey( key ))
             {
@@ -92,7 +90,7 @@ namespace NotesForms
             }
         }
 
-        public string __Get(string key)
+        public string Get(string key)
         {
             var existKey = Properties.TryGetValue( key, out object value );
 
@@ -101,19 +99,19 @@ namespace NotesForms
             return string.Empty;
         }
 
-        public void __UnSet(string key)
+        public void UnSet(string key)
         {
             Properties.Remove( key );
         }
 
         public void SetUsername(string username)
         {
-            __Set("username", username);
+            Set("username", username);
         }
 
         public string GetUsername()
         {
-            return __Get("username");
+            return Get("username");
         }
 
         public void SignIn()
