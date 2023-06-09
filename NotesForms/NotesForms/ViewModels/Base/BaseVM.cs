@@ -27,12 +27,12 @@ namespace NotesForms.ViewModels.Base
         }
         #endregion Props
 
-        #region __constructor
+        #region Ctors
         public BaseVM()
 		{
             CmdRefresh = new Command( async () => await Refreshing() );
 		}
-        #endregion __constructor
+        #endregion Ctors
 
         #region # methods
         protected virtual Task Refreshing()

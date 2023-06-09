@@ -44,7 +44,7 @@ namespace NotesForms.ViewModels
         }
         #endregion Props
 
-        #region __constructor
+        #region Ctors
         /// <summary>
         /// 
         /// </summary>
@@ -64,26 +64,16 @@ namespace NotesForms.ViewModels
 
             SetListNotes();
 
-            //dd( _lstNotes, "BP:MapsVM:48....." );
-
             Title = "Maps";
 		}
 
-        #endregion __constructor
+        #endregion Ctors
 
         #region - methods
 
         void SetListNotes()
         {
             _lstNotes = _noteService.GetNotes();
-        }
-
-        void dd(IEnumerable obj, string title = "BP" )
-        {
-            Console.WriteLine( title );
-
-            foreach(var item in obj) 
-                Debug.WriteLine( obj );
         }
         #endregion - methods
 

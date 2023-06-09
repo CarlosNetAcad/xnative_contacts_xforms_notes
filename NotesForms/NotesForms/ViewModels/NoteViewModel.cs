@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Diagnostics;
 using NotesForms.Constants;
+using System.Collections.Generic;
 
 namespace NotesForms.ViewModels
 {
@@ -68,7 +69,7 @@ namespace NotesForms.ViewModels
 
         #endregion Props
 
-        #region __constructor
+        #region Ctors
 
         /// <summary>
         /// This is the constructor
@@ -98,7 +99,7 @@ namespace NotesForms.ViewModels
             MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteUpdated, OnUpdateNote );
             
 		}
-        #endregion __constructor
+        #endregion Ctors
 
         #region - methods
 
@@ -180,6 +181,14 @@ namespace NotesForms.ViewModels
         {
             // var noteDetailPage = new NoteDetailPage(SelectedNote);
             //_navigation.PushAsync(noteDetailPage);
+        }
+
+        void debug(IList<Note> obj, string title = "BP")
+        {
+            Console.WriteLine(title);
+
+            foreach (var item in obj)
+                Debug.WriteLine($"{item.Latitude} {item.Longitude}");
         }
 
         /// <summary>

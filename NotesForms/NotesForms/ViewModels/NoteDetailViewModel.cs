@@ -77,7 +77,7 @@ namespace NotesForms.ViewModels
         }
         #endregion Prop
 
-        #region __constructor
+        #region Ctors
         /// <summary>
         /// 
         /// </summary>
@@ -107,7 +107,7 @@ namespace NotesForms.ViewModels
             SaveCommand = new Command( async () => await StoringNoteAsync() );
             DeleteCommand   = new Command( OnDeleteCommand );
 		}
-        #endregion __constructor
+        #endregion Ctors
 
         #region - methods
         void SetNoteTypesOptions()
@@ -173,11 +173,13 @@ namespace NotesForms.ViewModels
                 NoteSelected.Content    = Content;
                 NoteSelected.CreatedAt  = DateTime.Now;
                 NoteSelected.iNoteType  = (int)SelectedNoteType;
-                NoteSelected.Longitude  = location.Longitude;
-                NoteSelected.Latitude   = location.Latitude;
-
+                NoteSelected.Latitude = 37.785834;// location.Latitude;
+                NoteSelected.Longitude = -122.406417;// location.Longitude;
                 //->NOTE: @deprecated, save by Messaging center
                 //_noteService.SaveNote( NoteSelected );
+
+                Console.WriteLine("Location:::::::");
+                Debug.WriteLine($"{NoteSelected.Latitude} {NoteSelected.Longitude}");
 
                 if (Exist)
                     MessagingCenter.Instance.Send(this, Messages.NoteUpdated, NoteSelected);

@@ -23,14 +23,14 @@ namespace NotesForms.ViewModels
         public ObservableCollection<Article> Articles { get; set; }
         #endregion Props
 
-        #region __constructor
+        #region Ctors
         public ArticleViewModel( IArticleService articleService)
 		{
             _articleService = articleService;
 
             Articles = new ObservableCollection<Article>();
 		}
-        #endregion __constructor
+        #endregion Ctors
 
         #region -  methods
         #endregion - methods

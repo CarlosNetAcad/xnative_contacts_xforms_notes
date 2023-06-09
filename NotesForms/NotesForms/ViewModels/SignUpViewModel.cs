@@ -63,7 +63,7 @@ namespace NotesForms.ViewModels
 
         #endregion Prop
 
-        #region __constructors
+        #region Ctors
         public SignUpViewModel(INavigation navigation,IUserService userService)
         {
             _navigation  = navigation;
@@ -73,7 +73,7 @@ namespace NotesForms.ViewModels
             CmdLongPress    = new Command( PressingLong );
             CmdLong2Pres    = new Command( PressingLongTwo );
         }
-        #endregion __constructors
+        #endregion Ctors
 
         #region methods
         void StoringUser()

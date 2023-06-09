@@ -11,7 +11,7 @@ namespace NotesForms
 {
     public partial class App : Application, IPreferenceService
     {
-        #region __constructor
+        #region Ctors
         /// <summary>
         /// This is the constructor
         /// ID string generated is "M:NotesForms.App.#ctor"
@@ -29,7 +29,7 @@ namespace NotesForms
 
             MainPage = new NavigationPage( new SignInPage() );
         }
-        #endregion __constructor
+        #endregion Ctors
 
         #region - methods
         /// <summary>

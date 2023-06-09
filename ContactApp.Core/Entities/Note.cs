@@ -25,9 +25,9 @@ namespace ContactApp.Core.Entities
 		}
 		#endregion Props
 
-        #region __constructor
+        #region Ctors
 		public Note() {}
-        #endregion __constructor
+        #endregion Ctors
     }
 
     public enum NoteType

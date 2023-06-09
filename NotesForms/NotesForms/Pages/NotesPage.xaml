@@ -34,7 +34,7 @@
                         <MenuItem
                             CommandParameter="{Binding .}"
                             Text="Show"
-                            Command="{Binding Source={x:Reference page}, Path=BindingContext.CmdShow}" />
+                            Command="{Binding Source={x:Reference page}, Path=BindingContext.CmdSelect}" />
                         <MenuItem
                             CommandParameter="{Binding .}"
                             IsDestructive="True"

@@ -14,7 +14,7 @@ namespace NotesForms.Pages
         #region Flds
         MapViewModel VMMap;
         #endregion Flds
-        #region __constructor
+        #region Ctors
 
         public MapsPage ()
 		{
@@ -26,7 +26,7 @@ namespace NotesForms.Pages
 			BindingContext = VMMap = new MapViewModel( Navigation, noteService, geoLocation, map );
 		}
 
-        #endregion __constructor
+        #endregion Ctors
 
         #region # method
 

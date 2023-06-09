@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using ContactApp.Core.Entities;
 using ContactApp.Core.Repository.SQLite;
 using NotesForms.Services;
@@ -37,6 +39,10 @@ namespace NotesForms.Repository
             Connection.Instance.Insert( note );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="note"></param>
         public void UpdateNote(Note note)
         {
             Connection.Instance.Update( note );

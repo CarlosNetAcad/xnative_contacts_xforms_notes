@@ -42,14 +42,14 @@ namespace ContactApp.Core.Repository.API
 
         #endregion Props
 
-        #region __constructor
+        #region Ctors
         /// <summary>
         /// Private constructor necessary to the singleton pattern.
         /// </summary>
         private Connection()
         {
         }
-        #endregion __constructor
+        #endregion Ctors
 
         #region - methods
         /// <summary>

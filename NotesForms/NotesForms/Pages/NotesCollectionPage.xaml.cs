@@ -15,7 +15,7 @@ namespace NotesForms.Pages
         #region Props
         #endregion Props
 
-        #region __constructor
+        #region Ctors
         public NotesCollectionPage ()
 		{
 			InitializeComponent ();
@@ -24,7 +24,7 @@ namespace NotesForms.Pages
 
             BindingContext = _noteVM = new NoteViewModel( noteService, Navigation);
 		}
-        #endregion __constructor
+        #endregion Ctors
     }
 }
 
