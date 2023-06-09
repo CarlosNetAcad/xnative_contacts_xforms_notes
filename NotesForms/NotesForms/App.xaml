@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:NotesForms.Converters"
              xmlns:behaviors="clr-namespace:NotesForms.Behaviors"
              x:Class="NotesForms.App"
              >
-    <Application.Resources>
+    <prism:PrismApplication.Resources>
         <!-- App Colors -->
         <Color x:Key="PrimaryColor">#4DC227</Color>
         <Color x:Key="DarkColor">#2BAB35</Color>
@@ -61,5 +61,5 @@
         </Style>
 
         <!-- Classes Styles -->
-    </Application.Resources>
-</Application>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>
