@@ -6,6 +6,20 @@
     x:Class="NotesForms.Pages.MapsPage"
     Title="{Binding Title}">
 
-    <maps:Map x:Name="map"/>
+    <maps:Map
+        x:Name="map"
+        HasZoomEnabled="True"
+        IsShowingUser="True"
+        ItemsSource="{Binding Pins}"
+        >
+        <maps:Map.ItemTemplate>
+            <DataTemplate>
+                <maps:Pin
+                    Label="{Binding Title}"
+                    Position="{Binding Position}"
+                    />
+            </DataTemplate>
+        </maps:Map.ItemTemplate>
+    </maps:Map>
 
 </ContentPage>

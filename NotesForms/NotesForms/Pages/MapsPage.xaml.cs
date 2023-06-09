@@ -12,8 +12,9 @@ namespace NotesForms.Pages
 	public partial class MapsPage : ContentPage
 	{
         #region Flds
-        MapViewModel VMMap;
+        MapViewModel _vMMap;
         #endregion Flds
+
         #region Ctors
 
         public MapsPage ()
@@ -23,7 +24,7 @@ namespace NotesForms.Pages
             var noteService = DependencyService.Resolve<INoteService>();
             var geoLocation = DependencyService.Resolve<IGeolocation>();
 
-			BindingContext = VMMap = new MapViewModel( Navigation, noteService, geoLocation, map );
+			BindingContext = _vMMap = new MapViewModel( Navigation, noteService, geoLocation, map );
 		}
 
         #endregion Ctors
@@ -34,49 +35,17 @@ namespace NotesForms.Pages
         {
             base.OnAppearing();
 
-            try
-            {
-                await VMMap.SetPinsOnTheMapAsync();
+            await _vMMap.SetPinsOnTheMapAsync();
 
-                var location = await Geolocation.GetLocationAsync();
+            var currentLocation = await _vMMap.GetCurrentLocationAsync();
 
-                if (location != null)
-                {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                }
+            var position = new Position( currentLocation.Item1,currentLocation.Item2 );
 
-                var position = new Position(location.Latitude, location.Longitude);
+            var distance = new Distance(1000);
 
-                var distance = new Distance(1000);
+            var mapSpan = MapSpan.FromCenterAndRadius(position,distance);
 
-                var mapSpan = MapSpan.FromCenterAndRadius(position, distance);
-
-                var currentPosition = new Pin()
-                {
-                    Label = "You are here!",
-                    Position = position
-                };
-
-                map.Pins.Add(currentPosition);
-                map.MoveToRegion(mapSpan);
-
-            }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                // Handle not supported on device exception
-            }
-            catch (FeatureNotEnabledException fneEx)
-            {
-                // Handle not enabled on device exception
-            }
-            catch (PermissionException pEx)
-            {
-                // Handle permission exception
-            }
-            catch (Exception ex)
-            {
-                // Unable to get location
-            }
+            map.MoveToRegion( mapSpan);
         }
 
         #endregion # region

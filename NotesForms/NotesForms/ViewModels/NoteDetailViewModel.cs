@@ -173,8 +173,8 @@ namespace NotesForms.ViewModels
                 NoteSelected.Content    = Content;
                 NoteSelected.CreatedAt  = DateTime.Now;
                 NoteSelected.iNoteType  = (int)SelectedNoteType;
-                NoteSelected.Latitude = 37.785834;// location.Latitude;
-                NoteSelected.Longitude = -122.406417;// location.Longitude;
+                NoteSelected.Latitude   = location.Latitude; //37.785834;
+                NoteSelected.Longitude  = location.Longitude; //-122.406417;
                 //->NOTE: @deprecated, save by Messaging center
                 //_noteService.SaveNote( NoteSelected );
 
