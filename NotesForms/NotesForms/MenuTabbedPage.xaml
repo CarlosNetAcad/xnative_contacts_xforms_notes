@@ -13,6 +13,13 @@ android:TabbedPage.ToolbarPlacement="Bottom"
         <x:Arguments>
             <pages:NotesPage/>
         </x:Arguments>
+        <NavigationPage.IconImageSource>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Size="24"
+                    Glyph="&#xe745;" />
+
+        </NavigationPage.IconImageSource>
     </NavigationPage>
 
     <!--=== Profile ===-->
@@ -20,6 +27,12 @@ android:TabbedPage.ToolbarPlacement="Bottom"
         <x:Arguments>
             <pages:ProfilesPage/>
         </x:Arguments>
+        <NavigationPage.IconImageSource>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Size="22"
+                    Glyph="&#xf02e;" />
+        </NavigationPage.IconImageSource>
     </NavigationPage>
 
     <!--=== Settings ===-->
@@ -27,6 +40,12 @@ android:TabbedPage.ToolbarPlacement="Bottom"
         <x:Arguments>
             <pages:SettingsPage />
         </x:Arguments>
+         <NavigationPage.IconImageSource>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Size="22"
+                    Glyph="&#xe8b8;" />
+        </NavigationPage.IconImageSource>
     </NavigationPage>
 
     <!--=== Maps ===-->
@@ -34,6 +53,12 @@ android:TabbedPage.ToolbarPlacement="Bottom"
         <x:Arguments>
             <pages:MapsPage/>
         </x:Arguments>
+        <NavigationPage.IconImageSource>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Size="22"
+                    Glyph="&#xe55e;" />
+        </NavigationPage.IconImageSource>
     </NavigationPage>
 
     <!--=== News ===-->
@@ -41,5 +66,11 @@ android:TabbedPage.ToolbarPlacement="Bottom"
         <x:Arguments>
             <pages:ArticlesPage/>
         </x:Arguments>
+         <NavigationPage.IconImageSource>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Size="22"
+                    Glyph="&#xeb81;" />
+        </NavigationPage.IconImageSource>
     </NavigationPage>
 </TabbedPage>
