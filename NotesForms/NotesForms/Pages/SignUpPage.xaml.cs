@@ -10,15 +10,9 @@ namespace NotesForms.Pages
 {	
 	public partial class SignUpPage : ContentPage
 	{
-		public User User { get; set; }
-
 		public SignUpPage ()
 		{
 			InitializeComponent ();
-
-			var userService = DependencyService.Resolve<IUserService>();
-
-			BindingContext = new SignUpViewModel( Navigation, userService );
 		}
     }
 }

@@ -5,6 +5,8 @@ using System.Windows.Input;
 using ContactApp.Core.Entities;
 using NotesForms.Services;
 using NotesForms.ViewModels.Base;
+using Prism.Commands;
+using Prism.Navigation;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -29,7 +31,7 @@ namespace NotesForms.ViewModels
         readonly ITextToSpeech _textToSpeech;
         readonly IAuthService _authService;
         readonly IUserService _userService;
-
+        readonly INavigationService _navigationService;
         #endregion attributes
 
         #region Properties
@@ -96,37 +98,41 @@ namespace NotesForms.ViewModels
             IEmail eMail,
             ITextToSpeech textToSpeech,
             IAuthService authService,
-            IUserService userService
-        )
+            IUserService userService,
+            INavigationService navigationService)
 		{
             //-> Init props
-            _phoneDialer    = phoneDialer;
-            _sMS            = sMS;
-            _eMail          = eMail;
-            _textToSpeech   = textToSpeech;
-            _authService    = authService;
-            _userService    = userService;
-
-            //-> Set User session
-            var app = App.Current as App;
-            //UserName = app.GetUsername();
-            _user = _authService.CurrentUser;
+            _phoneDialer        = phoneDialer;
+            _sMS                = sMS;
+            _eMail              = eMail;
+            _textToSpeech       = textToSpeech;
+            _authService        = authService;
+            _userService        = userService;
+            _navigationService  = navigationService;
 
             SetUser( _user );
-
             WelcomeText = $"Welcome {UserName}";
 
             //-> Auth Cmds
-            SignOutCommand      = new Command( async () => await SigningOutAsync() );
+            //SignOutCommand      = new Command( async () => await SigningOutAsync() );
+            SignOutCommand = new DelegateCommand( async () => await SigningOutAsync() );
 
             //-> App Essentials services Cmds
-            MakeCallCommand     = new Command( OnMakeCallCommand );
-            ReadAndSpeakCommand = new Command( SpeakingText );
-            SendSMSCommand      = new Command( SendingSMS );
-            SendEmailCommand    = new Command( SendingEmail );
+            //MakeCallCommand     = new Command( OnMakeCallCommand );
+            MakeCallCommand     = new DelegateCommand( OnMakeCallCommand );
+
+            //ReadAndSpeakCommand = new Command( SpeakingText );
+            ReadAndSpeakCommand = new DelegateCommand( async () => await OnSpeakCommand() );
+
+            //SendSMSCommand      = new Command( SendingSMS );
+            SendSMSCommand      = new DelegateCommand( SendingSMS );
+
+            //SendEmailCommand    = new Command( SendingEmail );
+            SendEmailCommand    = new DelegateCommand( SendingEmail );
 
             //-> Manage User Cmds
-            UpdateUserCmd       = new Command( UpdatingUser );
+            //UpdateUserCmd       = new Command( UpdatingUser );
+            UpdateUserCmd       = new DelegateCommand( UpdatingUser );
         }
         #endregion constructor
 
@@ -136,9 +142,8 @@ namespace NotesForms.ViewModels
         /// </summary>
         void OnSignOutCommand()
         {
-            var app = App.Current as App;
-
-            app.SignOut();
+            //var app = App.Current as App;
+            //app.SignOut();
         }
 
         void OnMakeCallCommand()
@@ -206,10 +211,14 @@ namespace NotesForms.ViewModels
 
         async Task SigningOutAsync()
         {
+            /*
             var app = App.Current as App;
             await _authService.SignOutAsync();
             app.UnSet("username");
             app.SignOut();
+            */
+            await _authService.SignOutAsync();
+            await _navigationService.NavigateAsync($"root:///NavigationPage/{nameof(SignInViewModel)}");
         }
         #endregion private methods
 

@@ -7,11 +7,14 @@ using ContactApp.Core.Entities;
 using System.Diagnostics;
 using System.Collections;
 using System.Threading.Tasks;
+using Prism.Navigation;
+using Xamarin.Essentials;
+using Xamarin.Forms.Maps;
 
 namespace NotesForms.ViewModels
 {
-	public class MapViewModel:BaseVM
-	{
+    public class MapViewModel : BaseVM
+    {
         #region Flds
 
         string _title;
@@ -19,7 +22,7 @@ namespace NotesForms.ViewModels
         IList<Note> _lstNotes;
         Xamarin.Forms.Maps.Map _map;
 
-        readonly INavigation _nav;
+        readonly INavigationService _nav;
         readonly INoteService _noteService;
         readonly IGeolocation _geolocation;
         #endregion Flds
@@ -34,13 +37,13 @@ namespace NotesForms.ViewModels
         public int Altitude
         {
             get => _altitude;
-            set => SetProperty( ref _altitude, value);
+            set => SetProperty(ref _altitude, value);
         }
 
         public Xamarin.Forms.Maps.Map Map
         {
             get => _map;
-            set => SetProperty( ref _map, value);
+            set => SetProperty(ref _map, value);
         }
         #endregion Props
 
@@ -56,16 +59,25 @@ namespace NotesForms.ViewModels
             IGeolocation geolocation,
             Xamarin.Forms.Maps.Map map
             )
-		{
-            _nav            = navigation;
-            _noteService    = noteService;
-            _geolocation    = geolocation;
-            Map         = map;
+        {
+            var _nav = navigation;
+            _noteService = noteService;
+            _geolocation = geolocation;
+            Map = map;
 
             SetListNotes();
 
-            Title = "Maps";
-		}
+            PageTitle = "Maps";
+        }
+        /// <summary>
+        /// Ctor used to Prism
+        /// </summary>
+        /// <param name="navigationService"></param>
+        public MapViewModel(INavigationService navigationService)
+        {
+            _nav = navigationService;
+            PageTitle = "Maps";
+        }
 
         #endregion Ctors
 
@@ -86,11 +98,51 @@ namespace NotesForms.ViewModels
             //if (_lstNotes == null ||
             //    _lstNotes.Count < 1) return Task.CompletedTask;
 
-          _geolocation.SetPinsOnTheMapAsync(_lstNotes, _map);
+            _geolocation.SetPinsOnTheMapAsync(_lstNotes, _map);
 
             return Task.CompletedTask;
         }
-        #endregion + methods
+
+        public override async void OnNavigatedTo(
+            INavigationParameters parameters )
+        {
+            try
+            {
+                var location = await Geolocation.GetLocationAsync();
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                }
+
+                var position = new Position(location.Latitude, location.Longitude);
+                var distance = new Distance(1000);
+                var mapSpan = MapSpan.FromCenterAndRadius(position, distance);
+                var yourPosition = new Pin()
+                {
+                    Label = "You are here",
+                    Position = position
+                };
+                //map.Pins.Add(yourPosition);
+                //map.MoveToRegion(mapSpan);
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                // Handle not enabled on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
+            #endregion + methods
+        }
     }
 }
-

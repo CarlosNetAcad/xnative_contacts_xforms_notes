@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using NotesForms.Services;
+using NotesForms.ViewModels;
 
 using Xamarin.Forms;
 
-using NotesForms.ViewModels;
-using NotesForms.Services;
-
 namespace NotesForms.Pages
 {	
-	public partial class ArticlesPage : ContentPage
-	{
-		public ArticlesPage ()
+	public partial class AppLoadingPage : ContentPage
+	{	
+		public AppLoadingPage ()
 		{
 			InitializeComponent ();
-
 		}
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (BindingContext is ArticleViewModel vm)
+            if (BindingContext is AppLoadingViewModel vm)
             {
-                vm.CmdRefresh.Execute(null);
+                vm.CheckUserSessionCommand.Execute(null);
             }
         }
     }

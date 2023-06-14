@@ -13,6 +13,11 @@ using Xamarin.Essentials;
 using System.Diagnostics;
 using NotesForms.Constants;
 using System.Collections.Generic;
+using Prism.Events;
+using Prism.Navigation;
+using NotesForms.Events;
+using NavigationMode = Prism.Navigation.NavigationMode;
+using Prism.Commands;
 
 namespace NotesForms.ViewModels
 {
@@ -35,12 +40,12 @@ namespace NotesForms.ViewModels
         /// @field {INavigation} _navigation
         /// ID string generated is "F:NotesForms.ViewModels._navigation"
         /// </summary>
-        readonly INavigation _navigation;
+        readonly INavigationService _navigation;
 
         /// <summary>
         /// PropertyChanged declared in parent class
         /// </summary>
-        //public event PropertyChangedEventHandler PropertyChanged;
+        readonly IEventAggregator _eventAggregator;
 
         #endregion Flds
 
@@ -76,32 +81,54 @@ namespace NotesForms.ViewModels
         /// </summary>
         /// <param name="noteService">{INoteService}</param>
         /// <param name="navigation">{INavigation}</param>
-        public NoteViewModel( INoteService noteService, INavigation navigation )
+        public NoteViewModel( INoteService noteService,
+            INavigationService navigation,
+            IEventAggregator eventAggregator)
 		{
-            _noteService = noteService;
-
-            _navigation = navigation;
+            _noteService    = noteService;
+            _navigation     = navigation;
+            _eventAggregator= eventAggregator;
+            PageTitle       = "My Notes";
 
             var notes   = _noteService.GetNotes();
 
             OCNotes         = new ObservableCollection<Note>( notes );
             OCNotesSelected = new ObservableCollection<object>();
 
-            CmdDeleteAll    = new Command( DeletingAll );
-            CmdCreate       = new Command( CreatingNote );
-            CmdLogOut       = new Command( LogginOut );
-            CmdSave         = new Command<Note>( SavingNote );
-            CmdUpdate       = new Command<Note>( UpdatingNote );
-            CmdDelete       = new Command<Note>( DeletingNote );
-            CmdSelect       = new Command<Note>( SelectingNote );
-            
-            MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteSaved, OnSaveNote );
-            MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteUpdated, OnUpdateNote );
-            
+            //->FIXME: Why uses a delegate here?
+
+            //CmdDeleteAll    = new Command( DeletingAll );
+            CmdDeleteAll    = new DelegateCommand( DeletingAll );
+
+            //CmdCreate       = new Command( CreatingNote );
+            CmdCreate       = new DelegateCommand( CreatingNote );
+
+            //CmdLogOut       = new Command( LogginOut );
+            //CmdSave         = new Command<Note>( SavingNote );
+            //CmdUpdate       = new Command<Note>( UpdatingNote );
+
+            //CmdDelete       = new Command<Note>( DeletingNote );
+            CmdDelete       = new DelegateCommand<Note>( DeletingNote );
+           
+            //CmdSelect       = new Command<Note>( SelectingNote );
+            CmdSelect       = new DelegateCommand<Note>( SelectingNote );
+
+            //MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteSaved, OnSaveNote );
+            //MessagingCenter.Instance.Subscribe<NoteDetailViewModel,Note>(this, Messages.NoteUpdated, OnUpdateNote );
+            _eventAggregator.GetEvent<NoteEvent>().Subscribe(SavingNoteEvent);
 		}
         #endregion Ctors
 
         #region - methods
+        private void SavingNoteEvent(NoteEventPayload payload)
+        {
+            switch (payload.Action)
+            {
+                case NoteEventAction.Save:
+                    SavingNote( payload.Note );
+                break;
+            }
+        }
 
         /// <summary>
         /// 
@@ -109,7 +136,7 @@ namespace NotesForms.ViewModels
         void CreatingNote()
         {
             var noteDetailPage = new NoteDetailPage( null );
-            _navigation.PushAsync( noteDetailPage );
+            _navigation.NavigateAsync(nameof(NoteDetailViewModel));
         }
 
         /// <summary>
@@ -118,8 +145,9 @@ namespace NotesForms.ViewModels
         /// <param name="note"></param>
         void SelectingNote( Note note )
         {
-            var noteDetailPage = new NoteDetailPage( note, true );
-            _navigation.PushAsync( noteDetailPage );
+            var parameters = new NavigationParameters();
+            parameters.Add("SelectedNote", SelectedNote);
+            _navigation.NavigateAsync(nameof(NoteDetailViewModel), parameters);
         }
 
         /// <summary>
@@ -149,7 +177,6 @@ namespace NotesForms.ViewModels
         void UpdatingNote( Note note )
         {
             _noteService.UpdateNote(note);
-
             var position        = OCNotes.IndexOf(note);
             OCNotes[position]   = note;
         }
@@ -159,8 +186,8 @@ namespace NotesForms.ViewModels
         /// </summary>
         void LogginOut()
         {
-            var app = App.Current as App;
-            app.SignOut();
+            //var app = App.Current as App;
+            //app.SignOut();
         }
 
         void DeletingAll()
@@ -211,6 +238,11 @@ namespace NotesForms.ViewModels
         {
             UpdatingNote(note);
         }
+
+        private void OnShowCommand(Note note)
+        {
+            Debug.WriteLine( $"note: {note.Title}" );
+        }
         #endregion - methods
 
         #region # methods
@@ -248,6 +280,22 @@ namespace NotesForms.ViewModels
             IsRefreshing = false;
         }
         #endregion #methods
+
+        #region + methods
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.GetNavigationMode() == NavigationMode.Back)
+            {
+                var action  = parameters.GetValue<String>("Action");
+                var note    = parameters.GetValue<Note>("Note");
+
+                Console.WriteLine($"Action: {action}");
+                Console.WriteLine($"Note: {note.ID}");
+            }
+        }
+        #endregion + methods
     }
 }
 

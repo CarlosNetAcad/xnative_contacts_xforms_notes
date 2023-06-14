@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ContactApp.Core.Entities;
 using ContactApp.Core.Repository;
 using NotesForms.Services;
 using NotesForms.ViewModels.Base;
+using Prism.Commands;
+using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace NotesForms.ViewModels
@@ -19,7 +22,7 @@ namespace NotesForms.ViewModels
 
         bool _canCreateAccount;
 
-        readonly INavigation _navigation;
+        readonly INavigationService _navigation;
         readonly IUserService _userService;
         #endregion Attr
 
@@ -60,18 +63,19 @@ namespace NotesForms.ViewModels
             set => SetProperty(ref _canCreateAccount, value);
         }
 
-
         #endregion Prop
 
         #region Ctors
-        public SignUpViewModel(INavigation navigation,IUserService userService)
+        public SignUpViewModel(
+            INavigationService navigation,
+            IUserService userService)
         {
             _navigation  = navigation;
             _userService = userService;
 
-            CmdStore        = new Command( StoringUser );
-            CmdLongPress    = new Command( PressingLong );
-            CmdLong2Pres    = new Command( PressingLongTwo );
+            CmdStore        = new DelegateCommand( async () => await OnCreateCommand() );
+            CmdLongPress    = new DelegateCommand( PressingLong );
+            CmdLong2Pres    = new DelegateCommand( PressingLongTwo );
         }
         #endregion Ctors
 
@@ -88,7 +92,7 @@ namespace NotesForms.ViewModels
             //-> Store in repo
             var result = _userService.Store(User);
             Console.WriteLine($"The user {UserName} was stored {result}");
-            _navigation.PopAsync();
+            _navigation.GoBackAsync();
         }
 
         void PressingLong()
@@ -99,6 +103,18 @@ namespace NotesForms.ViewModels
         void PressingLongTwo()
         {
             Console.WriteLine("Long press from view model 2");
+        }
+
+        private async Task OnCreateCommand()
+        {
+            var User = new User()
+            {
+                UserName = this.UserName,
+                PassWord = this.PassWord,
+                FullName = this.FullName
+            };
+            var result = _userService.Store(User);
+            await _navigation.GoBackAsync();
         }
         #endregion methods
     }

@@ -79,6 +79,7 @@
     <Compile Include="Renderers\IOSLongPressButton.cs" />
     <Compile Include="Renderers\IOSSegmentView.cs" />
     <Compile Include="Renderers\IOSColorPickerView.cs" />
+    <Compile Include="IOSInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

@@ -9,6 +9,8 @@ using NotesForms.Constants;
 using NotesForms.ViewModels.Base;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Prism.Navigation;
+using Prism.Events;
 
 namespace NotesForms.ViewModels
 {
@@ -24,8 +26,9 @@ namespace NotesForms.ViewModels
         bool _exist;
 
         readonly INoteService _noteService;
-        readonly INavigation  _navigation;
+        readonly INavigationService  _navigation;
         readonly IGeolocation _geolocation;
+        readonly IEventAggregator _eventAggregator;
         #endregion Flds
 
         #region Prop
@@ -85,23 +88,20 @@ namespace NotesForms.ViewModels
         /// <param name="noteService"></param>
         /// <param name="navigation"></param>
         public NoteDetailViewModel(
-            Note note,
             INoteService noteService,
-            INavigation navigation,
+            INavigationService navigation,
             IGeolocation geolocation,
-            bool exist = false)
+            IEventAggregator eventAggregator)
 		{
             //->#SubRegion Set Props
-            NoteSelected    = note;
-            Exist           = exist;
+            PageTitle = "Note Details";
 
             _noteService = noteService;
             _navigation = navigation;
             _geolocation = geolocation;
+            _eventAggregator = eventAggregator;
 
             SetNoteTypesOptions();
-
-            LoadEntity( note );
 
             //->#SubRegion Commands
             SaveCommand = new Command( async () => await StoringNoteAsync() );
@@ -141,19 +141,18 @@ namespace NotesForms.ViewModels
             NoteSelected.Content    = Content;
             NoteSelected.CreatedAt  = DateTime.Now;
             NoteSelected.iNoteType  = (int)SelectedNoteType;
-            
 
             _noteService.SaveNote(NoteSelected);
 
             MessagingCenter.Instance.Send(this, "upsert", NoteSelected);
 
-            _navigation.PopAsync();
+            _navigation.GoBackAsync();
         }
 
         void OnDeleteCommand()
         {
             _noteService.DeleteNote(NoteSelected);
-            _navigation.PopAsync();
+            _navigation.GoBackAsync();
         }
 
         async Task<Location> GetCurrentLocation()
@@ -173,20 +172,18 @@ namespace NotesForms.ViewModels
                 NoteSelected.Content    = Content;
                 NoteSelected.CreatedAt  = DateTime.Now;
                 NoteSelected.iNoteType  = (int)SelectedNoteType;
-                NoteSelected.Latitude = 37.785834;// location.Latitude;
-                NoteSelected.Longitude = -122.406417;// location.Longitude;
-                //->NOTE: @deprecated, save by Messaging center
-                //_noteService.SaveNote( NoteSelected );
+                NoteSelected.Latitude   = location.Latitude;
+                NoteSelected.Longitude  = location.Longitude;
 
-                Console.WriteLine("Location:::::::");
-                Debug.WriteLine($"{NoteSelected.Latitude} {NoteSelected.Longitude}");
+                var parameters = new NavigationParameters();
+                parameters.Add("Note", NoteSelected);
 
                 if (Exist)
-                    MessagingCenter.Instance.Send(this, Messages.NoteUpdated, NoteSelected);
+                    parameters.Add("Action", Messages.NoteUpdated);
                 else
-                    MessagingCenter.Instance.Send(this, Messages.NoteSaved, NoteSelected);
+                    parameters.Add("Action", Messages.NoteSaved);
 
-                await _navigation.PopAsync();
+                await _navigation.GoBackAsync();
             }
             catch (FeatureNotSupportedException fnsEx)
             {

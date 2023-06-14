@@ -13,21 +13,10 @@ namespace NotesForms.Pages
 {	
 	public partial class NotesPage : ContentPage
 	{
-		NoteViewModel _vMNote;
-
 		public NotesPage()
 		{
 			InitializeComponent();
-
-			var noteService = DependencyService.Resolve<INoteService>();
-			
-			BindingContext = _vMNote = new NoteViewModel( noteService, Navigation );
 		}
-
-        void OnNoteTapped( System.Object sender, Xamarin.Forms.ItemTappedEventArgs e )
-        {
-            _vMNote.CmdSelect.Execute( e.Item );
-        }
     }
 }
 

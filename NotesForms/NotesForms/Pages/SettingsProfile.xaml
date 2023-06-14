@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding PageTitle}"
+    x:Class="NotesForms.Pages.SettingsProfile">
+    <ContentPage.IconImageSource>
+
+        <FontImageSource
+                    FontFamily="Icons"
+                    Size="22"
+                    Glyph="&#xe8b8;" />
+
+    </ContentPage.IconImageSource>
+    <TableView Intent="Form">
+        <TableRoot>
+            <TableSection Title="App Information">
+                <TextCell Text="Version" Detail="{Binding Version}" />
+                <TextCell Text="Package" Detail="{Binding PackageName}" />
+                <TextCell Text="Build" Detail="{Binding Build}" />
+                <TextCell Text="App Settings" Detail="Tap for details" Command="{Binding GoSettingsCommand}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

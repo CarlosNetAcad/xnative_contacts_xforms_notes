@@ -31,7 +31,7 @@ namespace NotesForms.iOS
 
             FormsMaps.Init();
 
-            LoadApplication(new App() );
+            LoadApplication(new App( new IOSInitializer()) );
 
             return base.FinishedLaunching(app, options);
         }

@@ -9,6 +9,7 @@ using NotesForms.Droid.Services;
 using NotesForms.Services;
 using Xamarin.Essentials;
 using Xamarin;
+using NotesFormsCarlos.Droid;
 
 namespace NotesForms.Droid
 {
@@ -27,27 +28,10 @@ namespace NotesForms.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            var dialer      = new PhoneDialerService();
-            var smsSender   = new SMSService();
-            var textSpeaker = new TextToSpeechService();
-            var emailSender = new EmailService();
-
-            dialer.Context      = this;
-            smsSender.Context   = this;
-            textSpeaker.Context = this;
-            emailSender.Context = this;
-
-            DependencyService.RegisterSingleton<IPhoneDialer>(dialer);
-            DependencyService.RegisterSingleton<ISMS>(smsSender);
-            DependencyService.RegisterSingleton<ITextToSpeech>(textSpeaker);
-            DependencyService.RegisterSingleton<IEmail>(emailSender);
-
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-            FormsMaps.Init( this, savedInstanceState );
-
-            LoadApplication(new App());
+            FormsMaps.Init(this, savedInstanceState);
+            LoadApplication(new App(new DroidInitializer(this)));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

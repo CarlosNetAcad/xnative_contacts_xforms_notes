@@ -7,6 +7,8 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using NotesForms.Pages;
 using System.Threading.Tasks;
+using Prism.Services;
+using Prism.Navigation;
 
 namespace NotesForms.ViewModels
 {
@@ -17,8 +19,9 @@ namespace NotesForms.ViewModels
         string _username;
         string _password;
 
-        readonly INavigation _navigation;
+        readonly INavigationService _navigation;
         readonly IAuthService _auth;
+        readonly IPageDialogService _pageDialogService;
 
         #endregion attributes
 
@@ -37,43 +40,52 @@ namespace NotesForms.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
+
         #endregion Properties
 
         #region constructors
         
-        public SignInViewModel( INavigation navigation, IAuthService auth )
+        public SignInViewModel(
+            INavigationService navigation,
+            IAuthService auth,
+            IPageDialogService dialogPageService)
         {
-            _navigation = navigation;
-            _auth       = auth;
+            _navigation         = navigation;
+            _auth               = auth;
+            _pageDialogService  = dialogPageService;
+
+            PageTitle = "Notes App";
 
             SignInCommand = new Command( async () => await OnSignInCommand() );
 
-            SignUpCommand = new Command(OnSignUpCommand);
+            SignUpCommand = new Command( async () => await OnSignUpCommand() );
         }
         #endregion constructors
 
         #region private methods
         async Task OnSignInCommand()
         {
-            Console.WriteLine($"Params: {Username} {Password}");
-
             var isLogin = await _auth.SignInAsync(Username,Password);
 
-            Console.WriteLine($"Log resutl: {isLogin}");
-
-            if (isLogin)
+            if( isLogin )
             {
-                var app = App.Current as App;
-                app.SetUsername( Username );
-                app.SignIn();
+                await _navigation.NavigateAsync(
+                                     $"root:///{nameof(MenuViewModel)}" +
+                                     $"?createTab=NavigationPage|{nameof(NoteViewModel)}" +
+                                     $"&createTab=NavigationPage|{nameof(MapViewModel)}" +
+                                     $"&createTab=NavigationPage|{nameof(ArticleViewModel)}" +
+                                     $"&createTab=NavigationPage|{nameof(ProfileViewModel)}" +
+                                     $"&createTab=NavigationPage|{nameof(SettingsViewModel)}");
             }
-            else Console.WriteLine("Err ");
+            else
+            {
+                await _pageDialogService.DisplayAlertAsync("Ops","Error de auth","OK");
+            }
         }
 
-        void OnSignUpCommand()
+        async Task OnSignUpCommand()
         {
-            var signUpPage = new SignUpPage();
-            _navigation.PushAsync( signUpPage );
+            await _navigation.NavigateAsync( nameof(SignUpViewModel) );
         }
 
         #endregion private methods
@@ -90,9 +102,9 @@ namespace NotesForms.ViewModels
         /// </summary>
         public void SignInPlus()
         {
-            var app = App.Current as App;
+            /*var app = App.Current as App;
             app.SetUsername(Username);
-            app.SignIn();
+            app.SignIn();*/
         }
         #endregion public methods
     }

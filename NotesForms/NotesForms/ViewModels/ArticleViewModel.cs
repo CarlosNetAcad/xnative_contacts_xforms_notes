@@ -6,6 +6,7 @@ using NotesCarlos.Core.Models.API;
 using NotesForms.Services;
 using NotesForms.ViewModels.Base;
 using Xamarin.Forms;
+using Prism.Navigation;
 
 namespace NotesForms.ViewModels
 {
@@ -15,12 +16,10 @@ namespace NotesForms.ViewModels
 
         readonly IArticleService _articleService;
 
-        readonly INavigation _navigation;
-
         #endregion Flds
 
         #region Props
-        public ObservableCollection<Article> Articles { get; set; }
+        public ObservableCollection<Article> Articles { get; private set; }
         #endregion Props
 
         #region Ctors

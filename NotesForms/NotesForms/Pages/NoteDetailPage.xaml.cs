@@ -9,24 +9,9 @@ namespace NotesForms.Pages
 {	
 	public partial class NoteDetailPage : ContentPage
 	{
-        public Note NoteSelected { get; set; }
-
-        public bool Exist { get; set; } = false;
-
         public NoteDetailPage ( Note note, bool exist = false)
 		{
 			InitializeComponent ();
-
-            //->Resolve Dependencies
-            var noteService = DependencyService.Resolve<INoteService>();
-            var geoLocation = DependencyService.Resolve<IGeolocation>();
-
-            BindingContext = new NoteDetailViewModel(
-                note,
-                noteService,
-                Navigation,
-                geoLocation,
-                exist);
         }
 	}
 }

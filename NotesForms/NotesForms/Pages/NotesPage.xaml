@@ -14,7 +14,7 @@
 
   <ListView
         ItemsSource="{Binding OCNotes}"
-        ItemTapped="OnNoteTapped"
+        
         RefreshCommand="{Binding CmdRefresh}"
         IsPullToRefreshEnabled="True"
         IsRefreshing="{Binding IsRefreshing}"
@@ -22,9 +22,7 @@
         x:Name="listView">
 
         <ListView.ItemTemplate>
-
-            <DataTemplate>
-                
+            <DataTemplate>                
                 <TextCell
                     Text="{Binding Title}"
                     Detail="{Binding CreatedAt,Converter={StaticResource DateToStringConverter},ConverterParameter='yyyy-MM-dd'}">

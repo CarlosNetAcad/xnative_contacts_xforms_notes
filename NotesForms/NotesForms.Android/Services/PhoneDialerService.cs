@@ -6,7 +6,12 @@ namespace NotesForms.Droid.Services
 {
 	public class PhoneDialerService:IPhoneDialer
 	{
-        public Context Context { get; set; }
+        public Context Context { get; private set; }
+
+        public PhoneDialerService(Context context)
+        {
+            Context = context;
+        }
 
         public void MakeCall(string phoneNumber)
         {

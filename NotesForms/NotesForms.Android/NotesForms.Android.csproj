@@ -81,6 +81,7 @@
     <Compile Include="Effects\DroidTextShadow.cs" />
     <Compile Include="Renderers\DroidSegmentView.cs" />
     <Compile Include="Effects\UnderlineLabelEffect.cs" />
+    <Compile Include="DroidInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
