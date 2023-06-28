@@ -16,19 +16,19 @@ namespace NotesForms.Services
 		/// 
 		/// </summary>
 		/// <param name="note"></param>
-		void SaveNote( Note note );
+		bool SaveNote( Note note );
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="note"></param>
-		void DeleteNote( Note note);
+		bool DeleteNote( Note note);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="note"></param>
-		void UpdateNote( Note note);
+		bool UpdateNote( Note note);
 	}
 }
 

@@ -23,9 +23,10 @@ namespace NotesForms.Repository
             }
         }
 
-        public void DeleteNote(Note note)
+        public bool DeleteNote(Note note)
         {
             _notes.Remove( note );
+            return true;
         }
 
         public IList<Note> GetNotes()
@@ -33,15 +34,17 @@ namespace NotesForms.Repository
             return _notes;
         }
 
-        public void SaveNote(Note note)
+        public bool SaveNote(Note note)
         {
             _notes.Add( note );
+            return true;
         }
 
-        public void UpdateNote(Note note)
+        public bool UpdateNote(Note note)
         {
             var position        = _notes.IndexOf(note);
             _notes[position]    = note;
+            return true;
         }
     }
 }

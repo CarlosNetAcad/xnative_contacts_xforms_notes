@@ -14,9 +14,11 @@ namespace NotesForms.Repository
         /// 
         /// </summary>
         /// <param name="note"></param>
-        public void DeleteNote(Note note)
+        public bool DeleteNote(Note note)
         {
-            Connection.Instance.Delete( note );
+            int rowAffected = Connection.Instance.Delete( note );
+
+            return rowAffected != 0 ? true : false;
         }
 
         /// <summary>
@@ -34,18 +36,20 @@ namespace NotesForms.Repository
         /// 
         /// </summary>
         /// <param name="note"></param>
-        public void SaveNote(Note note)
+        public bool SaveNote(Note note)
         {
             Connection.Instance.Insert( note );
+            return true;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="note"></param>
-        public void UpdateNote(Note note)
+        public bool UpdateNote(Note note)
         {
             Connection.Instance.Update( note );
+            return true;
         }
     }
 }
