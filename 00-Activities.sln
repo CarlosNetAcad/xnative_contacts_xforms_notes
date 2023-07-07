@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contacts.iOS", "Contacts.iO
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App.Core", "App.Core", "{FED7916B-0466-4DDD-AF85-56885869F7B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.MvvmCross.Core", "MvvmCross.Core\Contacts.MvvmCross.Core.csproj", "{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contacts.MvvmCross.Core", "Contacts.MvvmCross.Core", "{7018EED9-EAD6-4900-9E07-36FD0F688013}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +113,18 @@ Global
 		{2EF53AA9-7F5B-4F0E-80AB-3DFE9B9778B9}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{2EF53AA9-7F5B-4F0E-80AB-3DFE9B9778B9}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{2EF53AA9-7F5B-4F0E-80AB-3DFE9B9778B9}.Release|iPhone.Build.0 = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +140,6 @@ Global
 		{CDEEC168-385D-48E1-8BB8-5A9D36BD2663} = {6B805BD2-9D81-4A61-87E9-EA9081C814F5}
 		{D7CC3E9D-D01D-400E-8854-7CA104DBFF60} = {4224C6B7-D0A2-4B3F-AB87-B02241674B40}
 		{154CA3D2-08C2-4B94-BBB0-F2DCB5066912} = {FED7916B-0466-4DDD-AF85-56885869F7B1}
+		{BF1FE7F2-E76B-4B2B-973B-949A7841F34D} = {7018EED9-EAD6-4900-9E07-36FD0F688013}
 	EndGlobalSection
 EndGlobal
