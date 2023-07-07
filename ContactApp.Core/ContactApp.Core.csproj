@@ -9,15 +9,18 @@
     <None Remove="Repository\" />
     <None Remove="Repository\SQLite\" />
     <None Remove="Repository\API\" />
+    <None Remove="MVVMCross\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Repository\" />
     <Folder Include="Repository\SQLite\" />
     <Folder Include="Repository\API\" />
+    <Folder Include="MVVMCross\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="MvvmCross" Version="8.0.2" />
   </ItemGroup>
 </Project>
