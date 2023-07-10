@@ -5,6 +5,7 @@ using AndroidX.RecyclerView.Widget;
 using _00_Activities.src.Contacts.Domain.Entity;
 using _00_Activities.src.Contacts.App.Presenter.ViewHolders;
 using static System.Net.Mime.MediaTypeNames;
+using ContactApp.Core.Entities;
 
 namespace _00_Activities.src.Contacts.Domain.Service
 {
@@ -18,6 +19,10 @@ namespace _00_Activities.src.Contacts.Domain.Service
 		{
 			_contactList = contacts;
 		}
+
+        public ContactAdapter(List<Contact> contacts)
+        {
+        }
 
         public override int ItemCount => _contactList.Count;
 

@@ -15,4 +15,7 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContactApp.Core\ContactApp.Core.csproj" />
+  </ItemGroup>
 </Project>

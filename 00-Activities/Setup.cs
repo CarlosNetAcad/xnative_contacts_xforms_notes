@@ -10,7 +10,7 @@ using MvvmCross.DroidX.RecyclerView;
 using Serilog.Extensions.Logging;
 using Serilog;
 using Log = Serilog.Log;
-using Contact.MvvmCross.Core;
+using Contacts.MvvmCross.Core;
 
 namespace _00_Activities
 {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,9 +14,8 @@ using Android.Widget;
 using Newtonsoft.Json;
 using SQLite;
 using AndroidX.AppCompat.App;
-using _00_Activities.src.Contacts.Domain.Entity;
-using _00_Activities.src.Contacts.Domain.Repository;
-
+using ContactApp.Core.Entities;
+using ContactApp.Core.Repository;
 
 namespace _00_Activities
 {

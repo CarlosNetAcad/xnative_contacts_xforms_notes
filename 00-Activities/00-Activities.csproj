@@ -71,12 +71,11 @@
     <Compile Include="src\Contacts\App\Presenter\ContactActivity.cs" />
     <Compile Include="src\Contacts\App\Presenter\ViewHolder\ContactVH.cs" />
     <Compile Include="src\Contacts\Domain\Service\ContactAdapter.cs" />
-    <Compile Include="src\Contacts\Domain\Entity\Contact.cs" />
     <Compile Include="src\Contacts\Domain\Entity\Profile.cs" />
-    <Compile Include="src\Contacts\Domain\Repository\Connection.cs" />
     <Compile Include="src\Contacts\App\Presenter\SplashScreen.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="ContactsActivity.cs" />
+    <Compile Include="src\Contacts\App\Presenter\XContactDetailActivity.cs" />
+    <Compile Include="src\Contacts\App\Presenter\XContactActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
