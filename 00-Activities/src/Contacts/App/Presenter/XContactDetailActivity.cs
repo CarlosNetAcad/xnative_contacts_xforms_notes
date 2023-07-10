@@ -24,41 +24,16 @@ using ContactApp.Core.Repository.SQLite;
 namespace _00_Activities
 {
 	[Activity (Label = "Contacts", MainLauncher = false) ]			
-	public class XContactsActivity : MvxActivity<ContactsViewModel>
+	public class XContactDetailActivity : MvxActivity<ContactDetailViewModel>
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		private List<Contact> _contacts = null;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		private ContactAdapter _adapter;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="savedInstanceState"></param>
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
 			// Create your application here
-			SetContentView( Resource.Layout.contact_index_layout);
-
-			var btnFloating		= FindViewById<FloatingActionButton>( Resource.Id.fab_contacts );
-			var recyclerView	= FindViewById<RecyclerView>( Resource.Id.contacts_recyclerView );
-			recyclerView.AddItemDecoration( new DividerItemDecoration(this, DividerItemDecoration.Horizontal) );
-			var layoutManager	= new LinearLayoutManager( this );
-			//var layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.Vertical, false);
-
-			btnFloating.Click += GoContactDetail;
-			recyclerView.SetLayoutManager( layoutManager );
-
-			_contacts	= Connection.Instance.Table<Contact>().ToList();
-			_adapter	= new ContactAdapter( _contacts );
-			_adapter.ItemClicked += OnItemClicked;
+			SetContentView( Resource.Layout.contact_detail_layout);
+            SupportActionBar?.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.Title = "Details";
 		}
 
         protected override void OnResume()
@@ -68,12 +43,6 @@ namespace _00_Activities
 			_adapter.SetData( _contacts );
         }
 
-		private void GoContactDetail( object sender, EventArgs e)
-		{
-			var intent = new Intent( this, typeof( ContactDetailActivity ) );
-			StartActivity(intent);
-		}
-
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -82,24 +51,20 @@ namespace _00_Activities
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            if (item.ItemId == Resource.Id.new_contact)
+            switch (item.ItemId)
             {
-                var intent = new Intent(this, typeof(ContactDetailActivity));
-                StartActivity(intent);
-                return true;
+                case Resource.Id.contact_save:
+                    ViewModel.SaveCommand.Execute();
+                    return true;
+                case Resource.Id.contact_delete:
+                    ViewModel.DeleteCommand.Execute();
+                    return true;
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
             }
-
-            return base.OnOptionsItemSelected(item);
-        }
-
-        private void OnItemClicked(int position)
-        {
-            var contactSelected = _contacts[position];
-            var json = JsonConvert.SerializeObject(contactSelected);
-            Console.WriteLine($"Contact selcted: {contactSelected?.FullName}");
-            var intent = new Intent(this, typeof(ContactDetailActivity));
-            intent.PutExtra("contact", json);
-            StartActivity(intent);
         }
     }
 }

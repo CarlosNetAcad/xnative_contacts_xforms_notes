@@ -1,21 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contacts_recyclerView"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+    <LinearLayout  android:orientation="horizontal"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/contacts"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_contacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/add" />
+            <TextView
+                android:id="@+id/name"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:text="Name"
+                app:MvxBind="Text Fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/phone"
+                app:MvxBind="Text PhoneNumber"
+                style="@style/Base.TextAppearance.AppCompat.Caption"
+                android:layout_marginTop="4dp"
+                android:text="238 232 33 33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
