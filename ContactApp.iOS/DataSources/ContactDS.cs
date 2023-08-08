@@ -47,7 +47,7 @@ namespace ContactApp.iOS.DataSources
             var contact = _contactsList[ indexPath.Row ];
 
             var contactDetailVC     = (ContactDetailVC)_parent.Storyboard.InstantiateViewController( "ContactDetailVC" ) ;
-            contactDetailVC.Contact = contact;
+            //contactDetailVC.Contact = contact;
             contactDetailVC.ExistContact = true;
             _parent.NavigationController.PushViewController( contactDetailVC, true );
         }

@@ -72,6 +72,15 @@
       <PackageReference Include="sqlite-net-pcl">
         <Version>1.8.116</Version>
       </PackageReference>
+      <PackageReference Include="Serilog">
+        <Version>3.0.1</Version>
+      </PackageReference>
+      <PackageReference Include="Serilog.Extensions.Logging">
+        <Version>7.0.0</Version>
+      </PackageReference>
+      <PackageReference Include="Serilog.Sinks.Xamarin">
+        <Version>1.0.0</Version>
+      </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -82,6 +91,7 @@
     <ItemGroup>
         <Folder Include="Resources\" />
         <Folder Include="DataSources\" />
+        <Folder Include="Views\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -99,23 +109,30 @@
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="ContactDetailVC.cs" />
-        <Compile Include="ContactDetailVC.designer.cs">
-          <DependentUpon>ContactDetailVC.cs</DependentUpon>
-        </Compile>
         <Compile Include="ContactsIndexController.cs" />
         <Compile Include="ContactsIndexController.designer.cs">
           <DependentUpon>ContactsIndexController.cs</DependentUpon>
         </Compile>
         <Compile Include="DataSources\ContactDS.cs" />
-        <Compile Include="ContactShowVC.cs" />
-        <Compile Include="ContactShowVC.designer.cs">
+        <Compile Include="Setup.cs" />
+        <Compile Include="DataSources\MvxContactsDataSource.cs" />
+        <Compile Include="Views\ContactDetailVC.cs" />
+        <Compile Include="Views\ContactDetailVC.designer.cs">
+          <DependentUpon>ContactDetailVC.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\ContactShowVC.cs" />
+        <Compile Include="Views\ContactShowVC.designer.cs">
           <DependentUpon>ContactShowVC.cs</DependentUpon>
         </Compile>
+        <Compile Include="Views\ContactDetailViewController.cs" />
+        <Compile Include="Views\IContactDetailViewController.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ContactApp.Core\ContactApp.Core.csproj">
         <Name>ContactApp.Core</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\MvvmCross.Core\Contacts.MvvmCross.Core.csproj">
+        <Name>Contacts.MvvmCross.Core</Name>
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>

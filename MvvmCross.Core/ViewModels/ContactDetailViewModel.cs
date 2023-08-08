@@ -78,6 +78,10 @@ namespace Contacts.MvvmCross.Core.ViewModels
                 _exist      = true;
                 _contact    = parameter;
             }
+
+            FullName = parameter?.FullName;
+            PhoneNumber = parameter?.Phone;
+
         }
 
         #region Props

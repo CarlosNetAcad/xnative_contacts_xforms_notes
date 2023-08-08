@@ -11,18 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2196" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.AppCenter" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.2" />
+    <PackageReference Include="Prism.Forms" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Pages\" />
     <None Remove="ContentViews\" />
     <None Remove="ViewModels\" />
     <None Remove="ViewModels\Base\" />
-    <None Remove="Services\" />
-    <None Remove="Repository\" />
     <None Remove="Converters\" />
     <None Remove="Behaviors\" />
     <None Remove="Resources\" />
@@ -34,15 +34,13 @@
     <None Remove="TemplateSelector\" />
     <None Remove="Views\" />
     <None Remove="Views\NoteTypeTmpl\" />
-    <None Remove="Services\CRUD\" />
+    <None Remove="Implementations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="ContentViews\" />
     <Folder Include="ViewModels\" />
     <Folder Include="ViewModels\Base\" />
-    <Folder Include="Services\" />
-    <Folder Include="Repository\" />
     <Folder Include="Converters\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Resources\" />
@@ -54,9 +52,18 @@
     <Folder Include="TemplateSelector\" />
     <Folder Include="Views\" />
     <Folder Include="Views\NoteTypeTmpl\" />
-    <Folder Include="Services\CRUD\" />
+    <Folder Include="Implementations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ContactApp.Core\ContactApp.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Repository\AuthRepository.cs" />
+    <Compile Remove="Repository\AuthService.cs" />
+    <Compile Remove="Repository\APIRepository.cs" />
+    <Compile Remove="Repository\MockNoteRepository.cs" />
+    <Compile Remove="Repository\UserService.cs" />
+    <Compile Remove="Repository\GeoLocationService.cs" />
+    <Compile Remove="Repository\SQLiteRepository.cs" />
   </ItemGroup>
 </Project>

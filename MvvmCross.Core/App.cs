@@ -4,7 +4,8 @@ using MvvmCross.ViewModels;
 using System.Threading.Tasks;
 using MvvmCross.IoC;
 using Contacts.MvvmCross.Core.ViewModels;
-
+using ContactApp.Core.Interfaces;
+using ContactApp.Core.Services;
 
 namespace Contacts.MvvmCross.Core
 {
@@ -22,7 +23,7 @@ namespace Contacts.MvvmCross.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            //Mvx.IoCProvider.LazyConstructAndRegisterSingleton<INoteService, NoteService>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IArticleService, APIService>();
             RegisterAppStart<ContactsViewModel>();
         }
 

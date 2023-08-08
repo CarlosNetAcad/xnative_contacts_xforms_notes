@@ -59,6 +59,9 @@
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>5.0.0.2196</Version>
     </PackageReference>
+    <PackageReference Include="Prism.Forms">
+      <Version>8.0.0.1909</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Effects\DroidTextShadow.cs" />
     <Compile Include="Renderers\DroidSegmentView.cs" />
     <Compile Include="Effects\UnderlineLabelEffect.cs" />
+    <Compile Include="DroidInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

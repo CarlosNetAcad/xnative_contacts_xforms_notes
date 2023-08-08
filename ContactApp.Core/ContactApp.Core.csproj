@@ -10,6 +10,7 @@
     <None Remove="Repository\SQLite\" />
     <None Remove="Repository\API\" />
     <None Remove="MVVMCross\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -17,10 +18,15 @@
     <Folder Include="Repository\SQLite\" />
     <Folder Include="Repository\API\" />
     <Folder Include="MVVMCross\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="MvvmCross" Version="8.0.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2578" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,17 @@
 ﻿using System;
 using Android.Content;
-using NotesForms.Services;
+using ContactApp.Core.Interfaces;
 
 namespace NotesForms.Droid.Services
 {
 	public class PhoneDialerService:IPhoneDialer
 	{
         public Context Context { get; set; }
+
+        public PhoneDialerService(Context context)
+        {
+            Context = context;
+        }
 
         public void MakeCall(string phoneNumber)
         {

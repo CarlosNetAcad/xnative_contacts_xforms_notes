@@ -1,34 +1,31 @@
 ﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using NotesForms;
-using NotesForms.Pages;
-using NotesForms.Services;
-using NotesForms.Repository;
-using System.Diagnostics;
+using System.Linq;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Analytics;
+using ContactApp.Core.Interfaces;
+using ContactApp.Core.Services;
+using NotesForms.ViewModels;
+using Prism;
+using Prism.Ioc;
+using Prism.DryIoc;
 
 namespace NotesForms
 {
-    public partial class App : Application, IPreferenceService
+    public partial class App : PrismApplication
     {
         #region Ctors
         /// <summary>
         /// This is the constructor
         /// ID string generated is "M:NotesForms.App.#ctor"
         /// </summary>
-        public App ()
-        {
-            InitializeComponent();
+        public App () : this(null) {}
 
-            //-> Register services
-            DependencyService.RegisterSingleton<INoteService>( new SQLiteRepository() );
-            DependencyService.RegisterSingleton<IArticleService>( new APIRepository() );
-            DependencyService.RegisterSingleton<IAuthService>( new AuthService() );
-            DependencyService.RegisterSingleton<IUserService>( new UserService() );
-            DependencyService.RegisterSingleton<IGeolocation>( new GeoLocationService() );
+        public App( IPlatformInitializer initializer)
+            : this(initializer, true) {}
 
-            MainPage = new NavigationPage( new SignInPage() );
-        }
+        public App( IPlatformInitializer initializer, bool setFormsDependencyResolver)
+            : base(initializer, setFormsDependencyResolver) { }
         #endregion Ctors
 
         #region - methods
@@ -51,6 +48,12 @@ namespace NotesForms
         #endregion - methods
 
         #region # methods
+        protected override void OnInitialized()
+        {
+            InitializeComponent();
+            NavigationService.NavigateAsync($"NavigationPage/{nameof(AppL)}");
+        }
+
         /// <summary>
         /// App lifecycle, used when the app starts.
         /// ID string generated is "M:NotesForms.App.OnStart"

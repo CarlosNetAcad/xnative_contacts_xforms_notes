@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace NotesCarlos.Core.Models.API
+namespace ContactApp.Core.Entities
 {
     public class Source
     {
